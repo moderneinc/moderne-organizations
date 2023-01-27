@@ -1,5 +1,8 @@
 type Query {
-    organization(repository: RepositoryInput): Organization
+    """
+    The list of organizations that a repository belongs to.
+    """
+    organizations(repository: RepositoryInput): [Organization!]
 
     """
     This is the default organization that will be selected for a user

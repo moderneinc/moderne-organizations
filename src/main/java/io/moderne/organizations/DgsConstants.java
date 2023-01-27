@@ -8,7 +8,9 @@ public class DgsConstants {
   public static class QUERY {
     public static final String TYPE_NAME = "Query";
 
-    public static final String Organization = "organization";
+    public static final String Organizations = "organizations";
+
+    public static final String DefaultOrganization = "defaultOrganization";
   }
 
   public static class ORGANIZATION {

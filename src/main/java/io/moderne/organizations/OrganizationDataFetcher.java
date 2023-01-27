@@ -26,11 +26,12 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Mono<Organization> organization(@InputArgument RepositoryInput repositoryInput) {
+    Flux<Organization> organizations(@InputArgument RepositoryInput repositoryInput) {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.repositories().contains(repositoryInput))
                 .map(org -> new Organization(org.name(), org.name()))
-                .next();
+//                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
+                ;
     }
 
     @DgsQuery
