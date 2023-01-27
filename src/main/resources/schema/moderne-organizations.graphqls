@@ -1,0 +1,20 @@
+type Query {
+    organization(repository: RepositoryInput): Organization
+
+    """
+    This is the default organization that will be selected for a user
+    that first logs in to Moderne.
+    """
+    defaultOrganization(email: String!): Organization!
+}
+
+type Organization {
+    id: ID!
+    name: String!
+}
+
+input RepositoryInput {
+    path: String!
+    origin: String
+    branch: String
+}

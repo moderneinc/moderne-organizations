@@ -1,0 +1,327 @@
+[
+  {
+    "name": "Default",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "Netflix/astyanax",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/curator",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/dgs-codegen",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/dgs-framework",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/eureka",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/EVCache",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/genie",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/governator",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/hollow",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/mantis",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/ndbench",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/Nicobar",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/photon",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/Priam",
+        "branch": "3.x"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/ribbon",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/servo",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "netflix/spectator",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "Netflix/zuul",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-app-broker",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-aws",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-bindings",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-cloudfoundry",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-common-security-config",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-deployer-kubernetes",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-deployer-local",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-deployer",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-function",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-jenkins-jobs",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-open-service-broker",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-schema-registry",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-security",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-sleuth",
+        "branch": "3.1.x"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-stream-binder-kafka",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-gradle-plugins/dependency-management-plugin",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects-experimental/spring-boot-thin-launcher",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-credhub",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-cassandra",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-commons",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-couchbase",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-elasticsearch",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-gemfire-sts-templates",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-geode",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-jdbc",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-jpa",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-keyvalue",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-ldap",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-mongodb",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-redis",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-relational",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-data-rest",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-graphql",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-guice",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-hateoas-examples",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-mvc-showcase",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-petclinic",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-restdocs",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-security-oauth",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-security-saml",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-session-data-mongodb-examples",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-session-data-mongodb",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-tuple",
+        "branch": "master"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-ws-samples",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-projects/spring-ws",
+        "branch": "main"
+      },
+      {
+        "origin": "github.com",
+        "path": "springdoc/springdoc-openapi-gradle-plugin",
+        "branch": "master"
+      }
+    ]
+  }
+]

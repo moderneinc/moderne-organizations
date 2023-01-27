@@ -1,0 +1,26 @@
+---
+name: Publish to Docker Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: Release scope
+        required: true
+        default: minor
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    uses: moderneinc/gh-automation/.github/workflows/publish-containerized-gradle-app.yml@main
+    with:
+      release_scope: ${{ github.event.inputs.scope }}
+    secrets: inherit
