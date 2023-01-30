@@ -26,9 +26,9 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repositoryInput) {
+    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
-                .filter(org -> org.repositories().contains(repositoryInput))
+                .filter(org -> org.repositories().contains(repository))
                 .map(org -> new Organization(org.name(), org.name()))
 //                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
                 ;
