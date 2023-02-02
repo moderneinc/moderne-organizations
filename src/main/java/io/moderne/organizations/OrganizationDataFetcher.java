@@ -30,7 +30,8 @@ public class OrganizationDataFetcher {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.repositories().contains(repository))
                 .map(org -> new Organization(org.name(), org.name()))
-//                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
+                // Uncomment the following line if you want to see the "ALL" organization
+                // .concatWith(Flux.just(new Organization("ALL", "ALL")))
                 ;
     }
 
