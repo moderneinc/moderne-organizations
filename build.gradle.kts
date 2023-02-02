@@ -11,7 +11,7 @@ plugins {
     id("nebula.release") version "15.3.1"
     id("nebula.maven-nebula-publish") version "18.2.0"
     id("com.bmuschko.docker-spring-boot-application") version "8.0.0"
-    id("com.netflix.dgs.codegen").version("5.1.17").apply(false)
+    id("com.netflix.dgs.codegen").version("5.6.9").apply(false)
     id("org.owasp.dependencycheck") version "latest.release"
 }
 
@@ -60,6 +60,8 @@ dependencies {
 
     implementation("com.graphql-java:graphql-java:18+")
     implementation("com.graphql-java:graphql-java-extended-scalars:18+")
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter:5+") {
         exclude(module = "snakeyaml")
