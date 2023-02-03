@@ -62,6 +62,7 @@ dependencies {
     implementation("com.graphql-java:graphql-java-extended-scalars:18+")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-rsocket")
 
     implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter:5+") {
         exclude(module = "snakeyaml")
@@ -69,6 +70,9 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer:5+") {
         exclude(module = "snakeyaml")
     }
+
+    implementation("io.micrometer:micrometer-core:1.+")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.+")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
