@@ -7,8 +7,6 @@ import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @DgsComponent
-public class OrganizationDataFetcher implements HealthIndicator {
+public class OrganizationDataFetcher {
     List<OrganizationRepositories> ownership;
 
     public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
@@ -42,8 +40,4 @@ public class OrganizationDataFetcher implements HealthIndicator {
                 .map(org -> new Organization(org.name(), org.name()));
     }
 
-    @Override
-    public Health health() {
-        return Health.up().build();
-    }
 }
