@@ -14,10 +14,22 @@ type Query {
 type Organization {
     id: ID!
     name: String!
+
+    """
+    Ordered list of commit options as they should appear in the UI.
+    """
+    commitOptions: [CommitOption!]!
 }
 
 input RepositoryInput {
     path: String!
     origin: String
     branch: String
+}
+
+enum CommitOption {
+    Direct
+    Branch
+    Fork
+    PullRequest
 }

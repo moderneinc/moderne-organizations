@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
+import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
 import reactor.core.publisher.Flux;
@@ -29,7 +30,11 @@ public class OrganizationDataFetcher {
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.repositories().contains(repository))
-                .map(org -> new Organization(org.name(), org.name()))
+                .map(org -> Organization.newBuilder()
+                        .id(org.name())
+                        .name(org.name())
+                        .commitOptions(List.of(CommitOption.values()))
+                        .build())
 //                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
                 ;
     }
@@ -37,7 +42,11 @@ public class OrganizationDataFetcher {
     @DgsQuery
     Mono<Organization> defaultOrganization(@InputArgument String email) {
         return Mono.just(ownership.iterator().next())
-                .map(org -> new Organization(org.name(), org.name()));
+                .map(org -> Organization.newBuilder()
+                        .id(org.name())
+                        .name(org.name())
+                        .commitOptions(List.of(CommitOption.values()))
+                        .build());
     }
 
 }
