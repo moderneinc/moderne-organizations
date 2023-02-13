@@ -23,7 +23,7 @@ dependencyCheck {
     analyzers.assemblyEnabled = false
     failBuildOnCVSS = 9.0F
     suppressionFile = "suppressions.xml"
-    format = ReportGenerator.Format.valueOf(project.properties["dependencyCheckFormat"] as String? ?: "HTML")
+    format = project.properties["dependencyCheckFormat"] as String? ?: "HTML"
 }
 
 group = "io.moderne"

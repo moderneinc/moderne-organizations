@@ -32,4 +32,5 @@ enum CommitOption {
     Branch
     Fork
     PullRequest
+    ForkAndPullRequest
 }

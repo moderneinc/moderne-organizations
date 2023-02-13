@@ -7,5 +7,7 @@ public enum CommitOption {
 
   Fork,
 
-  PullRequest
+  PullRequest,
+
+  ForkAndPullRequest
 }
