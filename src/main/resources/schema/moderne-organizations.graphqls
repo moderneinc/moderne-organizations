@@ -9,6 +9,11 @@ type Query {
     that first logs in to Moderne.
     """
     defaultOrganization(email: String!): Organization!
+
+    """
+    Returns an ordered list of organizations that a user belongs to.
+    """
+    userOrganizations(email: String!): [Organization!]
 }
 
 type Organization {

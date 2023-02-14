@@ -12,6 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @DgsComponent
@@ -30,23 +31,30 @@ public class OrganizationDataFetcher {
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.repositories().contains(repository))
-                .map(org -> Organization.newBuilder()
-                        .id(org.name())
-                        .name(org.name())
-                        .commitOptions(List.of(CommitOption.values()))
-                        .build())
-//                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
+                .map(this::mapOrganization)
+                //.concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
                 ;
     }
 
     @DgsQuery
     Mono<Organization> defaultOrganization(@InputArgument String email) {
         return Mono.just(ownership.iterator().next())
-                .map(org -> Organization.newBuilder()
-                        .id(org.name())
-                        .name(org.name())
-                        .commitOptions(List.of(CommitOption.values()))
-                        .build());
+                .map(this::mapOrganization);
     }
 
+    @DgsQuery
+    Flux<Organization> userOrganizations(@InputArgument String email) {
+        return Flux.fromIterable(ownership)
+                .filter(org -> email != null) // <== Replace with custom filtering logic
+                .sort(Comparator.comparing(OrganizationRepositories::name))  // <== Replace with custom sort logic
+                .map(this::mapOrganization);
+    }
+
+    private Organization mapOrganization(OrganizationRepositories org) {
+        return Organization.newBuilder()
+                .id(org.name())
+                .name(org.name())
+                .commitOptions(List.of(CommitOption.values()))
+                .build();
+    }
 }

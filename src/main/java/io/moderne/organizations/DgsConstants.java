@@ -12,11 +12,17 @@ public class DgsConstants {
 
     public static final String DefaultOrganization = "defaultOrganization";
 
+    public static final String UserOrganizations = "userOrganizations";
+
     public static class ORGANIZATIONS_INPUT_ARGUMENT {
       public static final String Repository = "repository";
     }
 
     public static class DEFAULTORGANIZATION_INPUT_ARGUMENT {
+      public static final String Email = "email";
+    }
+
+    public static class USERORGANIZATIONS_INPUT_ARGUMENT {
       public static final String Email = "email";
     }
   }
