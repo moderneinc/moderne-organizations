@@ -5,67 +5,67 @@
       {
         "origin": "github.com",
         "path": "Netflix/astyanax",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/curator",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/dgs-codegen",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/dgs-framework",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/eureka",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/EVCache",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/genie",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/governator",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/hollow",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/mantis",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/ndbench",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/Nicobar",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/photon",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
@@ -75,252 +75,692 @@
       {
         "origin": "github.com",
         "path": "Netflix/ribbon",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/servo",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "netflix/spectator",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "Netflix/zuul",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-app-broker",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-aws",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-bindings",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-cloudfoundry",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-common-security-config",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-deployer-kubernetes",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-deployer-local",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-deployer",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-function",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-jenkins-jobs",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-open-service-broker",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-schema-registry",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-security",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-sleuth",
-        "branch": "3.1.x"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-cloud/spring-cloud-stream-binder-kafka",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-gradle-plugins/dependency-management-plugin",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects-experimental/spring-boot-thin-launcher",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-credhub",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-cassandra",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-commons",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-couchbase",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-elasticsearch",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-gemfire-sts-templates",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-geode",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-jdbc",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-jpa",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-keyvalue",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-ldap",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-mongodb",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-redis",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-relational",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-data-rest",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-graphql",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-guice",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-hateoas-examples",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-mvc-showcase",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-petclinic",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-restdocs",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-security-oauth",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-security-saml",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-session-data-mongodb-examples",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-session-data-mongodb",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-tuple",
-        "branch": "master"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-ws-samples",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "spring-projects/spring-ws",
-        "branch": "main"
+        "branch": "*"
       },
       {
         "origin": "github.com",
         "path": "springdoc/springdoc-openapi-gradle-plugin",
-        "branch": "master"
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Apache Software Foundation",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "apache/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Amazon",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "aws/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "awslabs/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "opensearch-project/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "AirBnB",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "airbnb/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Alibaba",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "alibaba/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Cloud Foundry",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "cloudfoundry/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Eclipse Foundation",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "eclipse/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-ee4j/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-theia/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-vertx/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Elastic Search",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "elastic/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Facebook",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "facebook/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Google",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "googleapis/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "GoogleCloudPlatform/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "GoogleContainerTools/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "googleapis/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "googlecolab/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "googlemaps/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "google-cloudsearch/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "flutter/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Gradle",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "gradle/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Gradle Plugins",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "nebula-plugins/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "47degrees/hood",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "autonomousapps/dependency-analysis-android-gradle-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "applandinc/appmap-gradle-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "anatawa12/auto-visitor",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "aim42/htmlSanityCheck",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "android-async-http/android-async-http",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "diffplug/spotless",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "diffplug/blowdryer",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "diffplug/spotless-changelog",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "spring-cloud/spring-cloud-contract",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-intellij-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-jps-compiler-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-grammar-kit-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-changelog-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-idea-ext-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-node-envs",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-python-envs",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-ruby-envs",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "JetBrains/gradle-intellij-plugin",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "openrewrite/rewrite-gradle-plugin",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Jenkins CI",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "jenkinsci/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "JetBrains",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "JetBrains/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "kotlin/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "LinkedIn",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "linkedin/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Microsoft",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "microsoft/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "Azure/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Mozilla Foundation",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "mozilla/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "mozilla-mobile/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Netflix",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "Netflix/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "nebula-plugins/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "OpenRewrite",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "openrewrite/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "OpenTracing",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "opentracing/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "opentracing-contrib/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Spinnaker",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "spinnaker/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Spring",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "spring-projects/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Square",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "square/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "US Government",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "CDCgov/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "NationalSecurityAgency/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Wildfly",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "wildfly/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "jbosstools/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "keycloak/*",
+        "branch": "*"
       }
     ]
   }

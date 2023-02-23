@@ -111,5 +111,9 @@ public class Organization {
       this.commitOptions = commitOptions;
       return this;
     }
+
+    public io.moderne.organizations.types.Organization.Builder allCommitOptions() {
+      return commitOptions(List.of(CommitOption.values()));
+    }
   }
 }

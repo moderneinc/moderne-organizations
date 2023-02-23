@@ -29,14 +29,41 @@ public class OrganizationDataFetcher {
     @DgsQuery
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
-                .filter(org -> org.repositories().contains(repository))
+                .filter(org -> org.matches(repository))
                 .map(org -> Organization.newBuilder()
                         .id(org.name())
                         .name(org.name())
-                        .commitOptions(List.of(CommitOption.values()))
+                        .allCommitOptions()
                         .build())
-//                .concatWith(Flux.just(new Organization("ALL", "ALL"))) // if you want an "ALL" group
+                .concatWith(Flux.just(createForOrigin(repository)))
+//                .concatWith(Flux.just(createForOrganizationName(repository))) // if you want a group per organization
+//                .concatWith(Flux.just(Organization.newBuilder().id("ALL").name("ALL").allCommitOptions().build())) // if you want an "ALL" group
                 ;
+    }
+
+    /**
+     * Automatically puts the repository into a group based on the organization name.
+     */
+    private static Organization createForOrganizationName(RepositoryInput repositoryInput) {
+        String organizationName = repositoryInput.getPath().split("/")[0];
+        String id = repositoryInput.getOrigin() + "/" + organizationName;
+        return Organization.newBuilder()
+                .id(id)
+                .name(repositoryInput.getOrigin() + ": " + organizationName)
+                .allCommitOptions()
+                .build();
+    }
+
+    /**
+     * Automatically puts the repository into a group based on the origin.
+     */
+    private static Organization createForOrigin(RepositoryInput repositoryInput) {
+        String id = repositoryInput.getOrigin();
+        return Organization.newBuilder()
+                .id(id)
+                .name(repositoryInput.getOrigin())
+                .allCommitOptions()
+                .build();
     }
 
     @DgsQuery
@@ -45,7 +72,7 @@ public class OrganizationDataFetcher {
                 .map(org -> Organization.newBuilder()
                         .id(org.name())
                         .name(org.name())
-                        .commitOptions(List.of(CommitOption.values()))
+                        .allCommitOptions()
                         .build());
     }
 
