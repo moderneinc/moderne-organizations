@@ -27,6 +27,7 @@ public class OrganizationDataFetcherTest {
                                 .name("Moderne")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
                                 .build()) // From the ownership.json file
+                .expectNext(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
                 .verifyComplete();
     }
 }
