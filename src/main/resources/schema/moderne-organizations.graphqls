@@ -2,13 +2,19 @@ type Query {
     """
     The list of organizations that a repository belongs to.
     """
-    organizations(repository: RepositoryInput): [Organization!]
+    organizations(repository: RepositoryInput!): [Organization!]!
 
     """
-    This is the default organization that will be selected for a user
-    that first logs in to Moderne.
+    The list of organizations that a user belongs to. If it is possible to
+    determine the organizations that a user belonged to at a given time, use the `at`
+    parameter. The "default" organization that is selected for a user is the first organization
+    returned.
     """
-    defaultOrganization(email: String!): Organization!
+    userOrganizations(user: User!, at: DateTime): [Organization!]!
+}
+
+input User {
+    email: String!
 }
 
 type Organization {
@@ -19,6 +25,8 @@ type Organization {
     Ordered list of commit options as they should appear in the UI.
     """
     commitOptions: [CommitOption!]!
+
+    parent: Organization
 }
 
 input RepositoryInput {
@@ -34,3 +42,5 @@ enum CommitOption {
     PullRequest
     ForkAndPullRequest
 }
+
+scalar DateTime

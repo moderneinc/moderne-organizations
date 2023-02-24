@@ -15,13 +15,17 @@ public class Organization {
    */
   private List<CommitOption> commitOptions;
 
+  private Organization _parent;
+
   public Organization() {
   }
 
-  public Organization(String id, String name, List<CommitOption> commitOptions) {
+  public Organization(String id, String name, List<CommitOption> commitOptions,
+      Organization _parent) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
+    this._parent = _parent;
   }
 
   public String getId() {
@@ -51,9 +55,17 @@ public class Organization {
     this.commitOptions = commitOptions;
   }
 
+  public Organization getParent() {
+    return _parent;
+  }
+
+  public void setParent(Organization _parent) {
+    this._parent = _parent;
+  }
+
   @Override
   public String toString() {
-    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'" +"}";
+    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'" +"}";
   }
 
   @Override
@@ -63,12 +75,13 @@ public class Organization {
         Organization that = (Organization) o;
         return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(name, that.name) &&
-                            java.util.Objects.equals(commitOptions, that.commitOptions);
+                            java.util.Objects.equals(commitOptions, that.commitOptions) &&
+                            java.util.Objects.equals(_parent, that._parent);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(id, name, commitOptions);
+    return java.util.Objects.hash(id, name, commitOptions, _parent);
   }
 
   public static io.moderne.organizations.types.Organization.Builder newBuilder() {
@@ -85,11 +98,14 @@ public class Organization {
      */
     private List<CommitOption> commitOptions;
 
+    private Organization _parent;
+
     public Organization build() {
                   io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
                       result.id = this.id;
           result.name = this.name;
           result.commitOptions = this.commitOptions;
+          result._parent = this._parent;
                       return result;
     }
 
@@ -112,8 +128,9 @@ public class Organization {
       return this;
     }
 
-    public io.moderne.organizations.types.Organization.Builder allCommitOptions() {
-      return commitOptions(List.of(CommitOption.values()));
+    public io.moderne.organizations.types.Organization.Builder _parent(Organization _parent) {
+      this._parent = _parent;
+      return this;
     }
   }
 }

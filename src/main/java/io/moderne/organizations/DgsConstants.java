@@ -10,14 +10,16 @@ public class DgsConstants {
 
     public static final String Organizations = "organizations";
 
-    public static final String DefaultOrganization = "defaultOrganization";
+    public static final String UserOrganizations = "userOrganizations";
 
     public static class ORGANIZATIONS_INPUT_ARGUMENT {
       public static final String Repository = "repository";
     }
 
-    public static class DEFAULTORGANIZATION_INPUT_ARGUMENT {
-      public static final String Email = "email";
+    public static class USERORGANIZATIONS_INPUT_ARGUMENT {
+      public static final String User = "user";
+
+      public static final String At = "at";
     }
   }
 
@@ -29,6 +31,14 @@ public class DgsConstants {
     public static final String Name = "name";
 
     public static final String CommitOptions = "commitOptions";
+
+    public static final String Parent = "parent";
+  }
+
+  public static class USER {
+    public static final String TYPE_NAME = "User";
+
+    public static final String Email = "email";
   }
 
   public static class REPOSITORYINPUT {
