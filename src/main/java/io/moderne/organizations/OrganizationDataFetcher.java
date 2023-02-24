@@ -37,27 +37,32 @@ public class OrganizationDataFetcher {
     @DgsQuery
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
+                .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh))
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)
-//                .concatWith(Flux.just(Organization.newBuilder().id("ALL").name("ALL").allCommitOptions().build())) // if you want an "ALL" group
-                ;
+                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" group
     }
 
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
         List<String> moderneTeam = List.of(StringUtils.readFully(getClass().getResourceAsStream("/moderne-team.txt"))
                 .split("\n"));
+        boolean isModerneTeamMember = moderneTeam.contains(user.getEmail());
+        boolean isJonathanLeitschuh = user.getEmail().equalsIgnoreCase("jonathan.leitschuh@gmail.com");
 
         // everybody belongs to every organization, and the "default" organization is listed
         // first in the json that this list is based on, so it will be selected by default in the UI
         return Flux.fromIterable(ownership)
                 // only moderne team members need to see the moderne organization
-                .filter(org -> !org.name().equalsIgnoreCase("moderne") ||
-                               moderneTeam.contains(user.getEmail()))
+                .filter(org -> !org.name().equalsIgnoreCase("moderne") || isModerneTeamMember)
                 .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh)
                         // only Jonathan Leitschuh needs to see certain organizations
-                        .filter(__ -> user.getEmail().equalsIgnoreCase("jonathan.leitschuh@gmail.com")))
-                .map(OrganizationDataFetcher::mapOrganization);
+                        .filter(__ -> isJonathanLeitschuh))
+                .map(OrganizationDataFetcher::mapOrganization)
+                .concatWith(
+                        Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
+                                .filter(__ -> isModerneTeamMember || isJonathanLeitschuh) // only give "ALL" to certain users
+                );
     }
 
     private static Organization mapOrganization(OrganizationRepositories org) {
