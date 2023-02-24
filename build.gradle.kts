@@ -1,9 +1,20 @@
 @file:Suppress("GradlePackageUpdate")
 
-import java.nio.file.Paths
 import com.netflix.graphql.dgs.codegen.CodeGen
 import com.netflix.graphql.dgs.codegen.CodeGenConfig
-import org.owasp.dependencycheck.reporting.ReportGenerator
+import java.nio.file.Paths
+
+
+buildscript {
+    repositories {
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
+        mavenCentral()
+        maven { url = uri("https://plugins.gradle.org/m2") }
+    }
+    dependencies {
+        classpath("io.moderne:moderne-gradle-plugin:latest.integration")
+    }
+}
 
 plugins {
     id("org.springframework.boot") version "2.7.2"
@@ -14,6 +25,8 @@ plugins {
     id("com.netflix.dgs.codegen").version("5.6.9").apply(false)
     id("org.owasp.dependencycheck") version "latest.release"
 }
+
+project.plugins.apply(io.moderne.gradle.ModernePlugin::class.java)
 
 configure<nebula.plugin.release.git.base.ReleasePluginExtension> {
     defaultVersionStrategy = nebula.plugin.release.NetflixOssStrategies.SNAPSHOT(project)
@@ -123,6 +136,26 @@ tasks.register<Copy>("copyGeneratedGraphql") {
 tasks.withType<com.bmuschko.gradle.docker.tasks.image.Dockerfile> {
     instruction("RUN groupadd -r app && useradd --no-log-init -r -m -g app app && chown -R app:app /app")
     user("app")
+}
+
+publishing {
+    repositories {
+        if (project.hasProperty("ast.publish.username") && project.hasProperty("ast.publish.password")) {
+            maven {
+                name = "artifactory"
+                url = uri("https://artifactory.moderne.ninja/artifactory/moderne-private")
+                credentials {
+                    username = project.property("ast.publish.username") as String
+                    password = project.property("ast.publish.password") as String
+                }
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("moderne") {
+            artifact(tasks["moderneJar"])
+        }
+    }
 }
 
 docker {
