@@ -33,7 +33,6 @@ public class OrganizationDataFetcher {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)
-//                .concatWith(Flux.just(createForOrganizationName(repository))) // if you want a group per organization
 //                .concatWith(Flux.just(Organization.newBuilder().id("ALL").name("ALL").allCommitOptions().build())) // if you want an "ALL" group
                 ;
     }
