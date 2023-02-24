@@ -40,7 +40,9 @@
     ],
     "commitOptions": [
       "PullRequest",
-      "Branch"
+      "Branch",
+      "ForkAndPullRequest",
+      "Fork"
     ]
   },
   {
