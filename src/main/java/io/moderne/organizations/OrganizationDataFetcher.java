@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
 import reactor.core.publisher.Flux;
@@ -42,19 +41,6 @@ public class OrganizationDataFetcher {
     }
 
     /**
-     * Automatically puts the repository into a group based on the organization name.
-     */
-    private static Organization createForOrganizationName(RepositoryInput repositoryInput) {
-        String organizationName = repositoryInput.getPath().split("/")[0];
-        String id = repositoryInput.getOrigin() + "/" + organizationName;
-        return Organization.newBuilder()
-                .id(id)
-                .name(repositoryInput.getOrigin() + ": " + organizationName)
-                .allCommitOptions()
-                .build();
-    }
-
-    /**
      * Automatically puts the repository into a group based on the origin.
      */
     private static Organization createForOrigin(RepositoryInput repositoryInput) {
@@ -75,5 +61,4 @@ public class OrganizationDataFetcher {
                         .allCommitOptions()
                         .build());
     }
-
 }
