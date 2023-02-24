@@ -19,10 +19,16 @@ import java.util.List;
 @DgsComponent
 public class OrganizationDataFetcher {
     List<OrganizationRepositories> ownership;
+    List<OrganizationRepositories> ownershipJonathanLeitschuh;
 
     public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
         this.ownership = mapper.readValue(
                 getClass().getResourceAsStream("/ownership.json"),
+                new TypeReference<>() {
+                }
+        );
+        this.ownershipJonathanLeitschuh = mapper.readValue(
+                getClass().getResourceAsStream("/ownership-jonathan-leitschuh.json"),
                 new TypeReference<>() {
                 }
         );
@@ -48,6 +54,9 @@ public class OrganizationDataFetcher {
                 // only moderne team members need to see the moderne organization
                 .filter(org -> !org.name().equalsIgnoreCase("moderne") ||
                                moderneTeam.contains(user.getEmail()))
+                .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh)
+                        // only Jonathan Leitschuh needs to see certain organizations
+                        .filter(__ -> user.getEmail().equalsIgnoreCase("jonathan.leitschuh@gmail.com")))
                 .map(OrganizationDataFetcher::mapOrganization);
     }
 

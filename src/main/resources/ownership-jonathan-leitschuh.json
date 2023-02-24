@@ -1,0 +1,166 @@
+[
+  {
+    "name": "AirBnB",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "airbnb/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Alibaba",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "alibaba/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Cloud Foundry",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "cloudfoundry/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Elastic Search",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "elastic/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Facebook",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "facebook/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "JetBrains",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "JetBrains/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "kotlin/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "LinkedIn",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "linkedin/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Mozilla Foundation",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "mozilla/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "mozilla-mobile/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Netflix",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "Netflix/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "nebula-plugins/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Spinnaker",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "spinnaker/*",
+        "branch": "*"
+      }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
+    ]
+  },
+  {
+    "name": "Square",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "square/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "US Government",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "CDCgov/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "NationalSecurityAgency/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Wildfly",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "wildfly/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "jbosstools/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "keycloak/*",
+        "branch": "*"
+      }
+    ]
+  }
+]
