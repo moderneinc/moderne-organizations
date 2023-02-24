@@ -20,6 +20,30 @@
     ]
   },
   {
+    "name": "OpenRewrite",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "openrewrite/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
+    "name": "Moderne",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "moderneinc/*",
+        "branch": "*"
+      }
+    ],
+    "commitOptions": [
+      "PullRequest",
+      "Branch"
+    ]
+  },
+  {
     "name": "Apache",
     "repositories": [
       {
@@ -27,6 +51,10 @@
         "path": "apache/*",
         "branch": "*"
       }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
     ]
   },
   {
@@ -47,6 +75,10 @@
         "path": "opensearch-project/*",
         "branch": "*"
       }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
     ]
   },
   {
@@ -207,6 +239,12 @@
         "path": "openrewrite/rewrite-gradle-plugin",
         "branch": "*"
       }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork",
+      "Branch",
+      "Direct"
     ]
   },
   {
@@ -217,6 +255,10 @@
         "path": "jenkinsci/*",
         "branch": "*"
       }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
     ]
   },
   {
@@ -237,26 +279,10 @@
         "path": "Azure/*",
         "branch": "*"
       }
-    ]
-  },
-  {
-    "name": "OpenRewrite",
-    "repositories": [
-      {
-        "origin": "github.com",
-        "path": "openrewrite/*",
-        "branch": "*"
-      }
-    ]
-  },
-  {
-    "name": "Moderne",
-    "repositories": [
-      {
-        "origin": "github.com",
-        "path": "moderneinc/*",
-        "branch": "*"
-      }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
     ]
   },
   {
@@ -272,6 +298,10 @@
         "path": "spring-cloud/*",
         "branch": "*"
       }
+    ],
+    "commitOptions": [
+      "ForkAndPullRequest",
+      "Fork"
     ]
   }
 ]
