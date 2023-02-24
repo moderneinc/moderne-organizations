@@ -46,20 +46,6 @@
     ]
   },
   {
-    "name": "Apache",
-    "repositories": [
-      {
-        "origin": "github.com",
-        "path": "apache/*",
-        "branch": "*"
-      }
-    ],
-    "commitOptions": [
-      "ForkAndPullRequest",
-      "Fork"
-    ]
-  },
-  {
     "name": "Amazon",
     "repositories": [
       {
@@ -77,10 +63,45 @@
         "path": "opensearch-project/*",
         "branch": "*"
       }
+    ]
+  },
+  {
+    "name": "Apache",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "apache/*",
+        "branch": "*"
+      }
     ],
     "commitOptions": [
       "ForkAndPullRequest",
       "Fork"
+    ]
+  },
+  {
+    "name": "Eclipse Foundation",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "eclipse/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-ee4j/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-theia/*",
+        "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "eclipse-vertx/*",
+        "branch": "*"
+      }
     ]
   },
   {
@@ -135,7 +156,12 @@
         "origin": "github.com",
         "path": "gradle/*",
         "branch": "*"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Gradle Plugins",
+    "repositories": [
       {
         "origin": "github.com",
         "path": "nebula-plugins/*",
@@ -250,7 +276,7 @@
     ]
   },
   {
-    "name": "Jenkins",
+    "name": "Jenkins CI",
     "repositories": [
       {
         "origin": "github.com",
@@ -281,10 +307,6 @@
         "path": "Azure/*",
         "branch": "*"
       }
-    ],
-    "commitOptions": [
-      "ForkAndPullRequest",
-      "Fork"
     ]
   },
   {
@@ -292,18 +314,14 @@
     "repositories": [
       {
         "origin": "github.com",
-        "path": "spring-projects/*",
+        "path": "spring-cloud/*",
         "branch": "*"
       },
       {
         "origin": "github.com",
-        "path": "spring-cloud/*",
+        "path": "spring-projects/*",
         "branch": "*"
       }
-    ],
-    "commitOptions": [
-      "ForkAndPullRequest",
-      "Fork"
     ]
   }
 ]
