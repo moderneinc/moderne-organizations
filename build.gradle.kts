@@ -56,6 +56,12 @@ java {
 
 configurations {
     all {
+        resolutionStrategy.eachDependency {
+            if(requested.group == "org.yaml" && requested.name == "snakeyaml") {
+                useVersion("1.33")
+                because("snakeyaml 2.0 doesn't work with Spring Boot.")
+            }
+        }
         resolutionStrategy {
             cacheChangingModulesFor(0, TimeUnit.SECONDS)
             cacheDynamicVersionsFor(0, TimeUnit.SECONDS)

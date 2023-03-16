@@ -27,6 +27,13 @@ public class OrganizationDataFetcherTest {
                                 .name("Moderne")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
                                 .build()) // From the ownership.json file
+                .expectNext(
+                        Organization.newBuilder()
+                                .id("GitHub")
+                                .name("GitHub")
+                                .commitOptions(List.of(CommitOption.Direct, CommitOption.Branch, CommitOption.Fork, CommitOption.PullRequest, CommitOption.ForkAndPullRequest))
+                                .build() // from the JL file
+                )
                 .expectNext(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
                 .verifyComplete();
     }

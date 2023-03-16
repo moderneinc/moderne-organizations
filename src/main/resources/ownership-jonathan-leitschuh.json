@@ -50,6 +50,16 @@
     ]
   },
   {
+    "name": "GitHub",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
     "name": "JetBrains",
     "repositories": [
       {
