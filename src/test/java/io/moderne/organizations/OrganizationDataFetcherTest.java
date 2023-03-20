@@ -29,8 +29,8 @@ public class OrganizationDataFetcherTest {
                                 .build()) // From the ownership.json file
                 .expectNext(
                         Organization.newBuilder()
-                                .id("GitHub")
-                                .name("GitHub")
+                                .id("All GitHub")
+                                .name("All GitHub")
                                 .commitOptions(List.of(CommitOption.Direct, CommitOption.Branch, CommitOption.Fork, CommitOption.PullRequest, CommitOption.ForkAndPullRequest))
                                 .build() // from the JL file
                 )
