@@ -10,6 +10,7 @@ import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
 import io.moderne.organizations.types.User;
 import org.openrewrite.internal.StringUtils;
+import org.openrewrite.internal.lang.Nullable;
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;
@@ -35,10 +36,11 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+    Flux<Organization> organizations(@InputArgument RepositoryInput repository,
+                                     @InputArgument @Nullable Integer weight) {
         return Flux.fromIterable(ownership)
                 .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh))
-                .filter(org -> org.matches(repository))
+                .filter(org -> org.matches(repository) && (org.maxWeight() == null || weight == null || org.maxWeight() >= weight))
                 .map(OrganizationDataFetcher::mapOrganization)
                 .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" group
     }

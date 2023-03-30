@@ -20,7 +20,12 @@ public class OrganizationDataFetcherTest {
     @Test
     void organizationForThisRepository() {
         StepVerifier
-                .create(organizationDataFetcher.organizations(new RepositoryInput("moderneinc/moderne-organizations", "github.com", "main")))
+                .create(
+                        organizationDataFetcher.organizations(
+                                new RepositoryInput("moderneinc/moderne-organizations", "github.com", "main"),
+                                10000
+                        )
+                )
                 .expectNext(
                         Organization.newBuilder()
                                 .id("Moderne")

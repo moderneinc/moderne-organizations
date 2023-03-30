@@ -14,6 +14,8 @@ public class DgsConstants {
 
     public static class ORGANIZATIONS_INPUT_ARGUMENT {
       public static final String Repository = "repository";
+
+      public static final String Weight = "weight";
     }
 
     public static class USERORGANIZATIONS_INPUT_ARGUMENT {

@@ -1,8 +1,12 @@
 type Query {
     """
     The list of organizations that a repository belongs to.
+
+    Weight is nullable only temporarily for backwards compatibility. When it becomes non-nullable,
+    it may or may not be used to determine organization ownership, but will always be available for that
+    purpose.
     """
-    organizations(repository: RepositoryInput!): [Organization!]!
+    organizations(repository: RepositoryInput!, weight: Int): [Organization!]!
 
     """
     The list of organizations that a user belongs to. If it is possible to
