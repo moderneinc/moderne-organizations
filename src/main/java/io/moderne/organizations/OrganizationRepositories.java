@@ -10,7 +10,9 @@ import java.util.List;
  * @param name         The name of the organization
  * @param repositories The set of repositories that this organization owns.
  */
-public record OrganizationRepositories(String name, List<OrganizationRepository> repositories,
+public record OrganizationRepositories(String name,
+                                       @Nullable Long maxWeight,
+                                       List<OrganizationRepository> repositories,
                                        @Nullable List<CommitOption> commitOptions) {
 
     boolean matches(RepositoryInput toMatchRepositoryInput) {
