@@ -16,6 +16,11 @@
         "origin": "github.com",
         "path": "alibaba/*",
         "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "aliyun/*",
+        "branch": "*"
       }
     ]
   },
