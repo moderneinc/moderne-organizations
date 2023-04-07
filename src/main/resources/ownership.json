@@ -37,6 +37,21 @@
         "origin": "github.com",
         "path": "moderneinc/*",
         "branch": "*"
+      },
+      {
+        "origin": "bitbucket.org",
+        "path": "moderneinc/*",
+        "branch": "*"
+      },
+      {
+        "origin": "bitbucket.moderne.ninja",
+        "path": "MOD/*",
+        "branch": "*"
+      },
+      {
+        "origin": "gitlab.com",
+        "path": "Moderne",
+        "branch": "*"
       }
     ],
     "commitOptions": [
