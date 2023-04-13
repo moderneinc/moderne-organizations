@@ -177,9 +177,7 @@ docker {
                         "-XX:MaxRAMPercentage=65.0",
                         "-XX:MaxDirectMemorySize=2G",
                         "-XX:+HeapDumpOnOutOfMemoryError",
-                        "-XX:+UseStringDeduplication",
-                        "-XX:+UnlockExperimentalVMOptions",
-                        "-XX:+UseZGC"
+                        "-XX:+UseStringDeduplication"
                 )
         )
     }
