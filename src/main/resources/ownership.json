@@ -1,7 +1,6 @@
 [
   {
     "name": "Default",
-    "maxWeight": 700000,
     "repositories": [
       {
         "origin": "github.com",
