@@ -102,12 +102,6 @@
         "path": "apache/maven*",
         "branch": "*"
       }
-    ],
-    "commitOptions": [
-      "PullRequest",
-      "Branch",
-      "ForkAndPullRequest",
-      "Fork"
     ]
   },
   {
