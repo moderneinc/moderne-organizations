@@ -95,6 +95,16 @@
     ]
   },
   {
+    "name": "Apache Maven",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "apache/maven*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
     "name": "Eclipse Foundation",
     "repositories": [
       {
