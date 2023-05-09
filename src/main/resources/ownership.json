@@ -335,6 +335,16 @@
     ]
   },
   {
+    "name": "Open Liberty",
+    "repositories": [
+      {
+        "origin": "github.com",
+        "path": "openliberty/*",
+        "branch": "*"
+      }
+    ]
+  },
+  {
     "name": "Spring",
     "repositories": [
       {
