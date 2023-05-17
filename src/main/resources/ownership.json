@@ -356,6 +356,11 @@
         "origin": "github.com",
         "path": "spring-projects/*",
         "branch": "*"
+      },
+      {
+        "origin": "github.com",
+        "path": "moderneinc/spring-petclinic",
+        "branch": "2.0"
       }
     ]
   }
