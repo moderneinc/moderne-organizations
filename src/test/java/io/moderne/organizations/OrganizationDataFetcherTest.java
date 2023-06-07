@@ -20,20 +20,13 @@ public class OrganizationDataFetcherTest {
     @Test
     void organizationForThisRepository() {
         StepVerifier
-                .create(organizationDataFetcher.organizations(new RepositoryInput("moderneinc/moderne-organizations", "github.com", "main")))
+                .create(organizationDataFetcher.organizations(new RepositoryInput("openrewrite/rewrite", "github.com", "main")))
                 .expectNext(
                         Organization.newBuilder()
-                                .id("Moderne")
-                                .name("Moderne")
+                                .id("OpenRewrite")
+                                .name("OpenRewrite")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
                                 .build()) // From the ownership.json file
-                .expectNext(
-                        Organization.newBuilder()
-                                .id("All GitHub")
-                                .name("All GitHub")
-                                .commitOptions(List.of(CommitOption.Direct, CommitOption.Branch, CommitOption.Fork, CommitOption.PullRequest, CommitOption.ForkAndPullRequest))
-                                .build() // from the JL file
-                )
                 .expectNext(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
                 .verifyComplete();
     }

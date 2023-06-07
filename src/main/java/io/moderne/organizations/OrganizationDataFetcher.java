@@ -19,16 +19,10 @@ import java.util.List;
 @DgsComponent
 public class OrganizationDataFetcher {
     List<OrganizationRepositories> ownership;
-    List<OrganizationRepositories> ownershipJonathanLeitschuh;
 
     public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
         this.ownership = mapper.readValue(
                 getClass().getResourceAsStream("/ownership.json"),
-                new TypeReference<>() {
-                }
-        );
-        this.ownershipJonathanLeitschuh = mapper.readValue(
-                getClass().getResourceAsStream("/ownership-jonathan-leitschuh.json"),
                 new TypeReference<>() {
                 }
         );
@@ -37,7 +31,6 @@ public class OrganizationDataFetcher {
     @DgsQuery
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
-                .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh))
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)
                 .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" group
@@ -45,23 +38,13 @@ public class OrganizationDataFetcher {
 
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
-        List<String> moderneTeam = List.of(StringUtils.readFully(getClass().getResourceAsStream("/moderne-team.txt"))
-                .split("\n"));
-        boolean isModerneTeamMember = moderneTeam.contains(user.getEmail());
-        boolean isJonathanLeitschuh = user.getEmail().equalsIgnoreCase("jonathan.leitschuh@gmail.com");
-
         // everybody belongs to every organization, and the "default" organization is listed
         // first in the json that this list is based on, so it will be selected by default in the UI
         return Flux.fromIterable(ownership)
-                // only moderne team members need to see the moderne organization
-                .filter(org -> !org.name().equalsIgnoreCase("moderne") || isModerneTeamMember)
-                .concatWith(Flux.fromIterable(ownershipJonathanLeitschuh)
-                        // only Jonathan Leitschuh needs to see certain organizations
-                        .filter(__ -> isJonathanLeitschuh))
                 .map(OrganizationDataFetcher::mapOrganization)
                 .concatWith(
                         Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
-                                .filter(__ -> isModerneTeamMember || isJonathanLeitschuh) // only give "ALL" to certain users
+                                .filter(__ -> true) // give "ALL" organization to all users
                 );
     }
 
