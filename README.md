@@ -1,6 +1,6 @@
 # Organization service for the Moderne platform
 
-This repository template is service that can be run by Moderne customers to inform the platform about the organizational structure of their
+This repository template is service that can be run by [Moderne](https://www.moderne.io/) customers to inform the platform about the organizational structure of their
 repositories. In the reference implementation provided here, the organizations are determined by a hardcoded JSON file
 plus an "ALL" group that contains all repositories. This is meant to be customized per organization.
 
