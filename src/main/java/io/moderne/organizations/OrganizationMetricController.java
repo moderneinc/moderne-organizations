@@ -1,4 +1,4 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import io.prometheus.client.exporter.common.TextFormat;

@@ -1,7 +1,7 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
-import io.moderne.organizations.types.CommitOption;
-import io.moderne.organizations.types.RepositoryInput;
+import io.moderne.orgs.types.CommitOption;
+import io.moderne.orgs.types.RepositoryInput;
 import org.openrewrite.internal.lang.Nullable;
 
 import java.util.List;

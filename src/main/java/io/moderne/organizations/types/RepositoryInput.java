@@ -1,4 +1,4 @@
-package io.moderne.organizations.types;
+package io.moderne.orgs.types;
 
 import java.lang.Object;
 import java.lang.Override;
@@ -64,7 +64,7 @@ public class RepositoryInput {
     return java.util.Objects.hash(path, origin, branch);
   }
 
-  public static io.moderne.organizations.types.RepositoryInput.Builder newBuilder() {
+  public static io.moderne.orgs.types.RepositoryInput.Builder newBuilder() {
     return new Builder();
   }
 
@@ -76,24 +76,24 @@ public class RepositoryInput {
     private String branch;
 
     public RepositoryInput build() {
-                  io.moderne.organizations.types.RepositoryInput result = new io.moderne.organizations.types.RepositoryInput();
+                  io.moderne.orgs.types.RepositoryInput result = new io.moderne.orgs.types.RepositoryInput();
                       result.path = this.path;
           result.origin = this.origin;
           result.branch = this.branch;
                       return result;
     }
 
-    public io.moderne.organizations.types.RepositoryInput.Builder path(String path) {
+    public io.moderne.orgs.types.RepositoryInput.Builder path(String path) {
       this.path = path;
       return this;
     }
 
-    public io.moderne.organizations.types.RepositoryInput.Builder origin(String origin) {
+    public io.moderne.orgs.types.RepositoryInput.Builder origin(String origin) {
       this.origin = origin;
       return this;
     }
 
-    public io.moderne.organizations.types.RepositoryInput.Builder branch(String branch) {
+    public io.moderne.orgs.types.RepositoryInput.Builder branch(String branch) {
       this.branch = branch;
       return this;
     }

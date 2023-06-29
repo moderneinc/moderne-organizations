@@ -1,9 +1,9 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration;
-import io.moderne.organizations.types.CommitOption;
-import io.moderne.organizations.types.Organization;
-import io.moderne.organizations.types.RepositoryInput;
+import io.moderne.orgs.types.CommitOption;
+import io.moderne.orgs.types.Organization;
+import io.moderne.orgs.types.RepositoryInput;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ public class OrganizationDataFetcherTest {
     @Test
     void organizationForThisRepository() {
         StepVerifier
-                .create(organizationDataFetcher.organizations(new RepositoryInput("openrewrite/rewrite", "github.com", "main")))
+                .create(organizationDataFetcher.orgs(new RepositoryInput("openrewrite/rewrite", "github.com", "main")))
                 .expectNext(
                         Organization.newBuilder()
                                 .id("OpenRewrite")

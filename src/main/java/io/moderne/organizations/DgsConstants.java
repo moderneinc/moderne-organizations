@@ -1,4 +1,4 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
 import java.lang.String;
 
@@ -8,7 +8,7 @@ public class DgsConstants {
   public static class QUERY {
     public static final String TYPE_NAME = "Query";
 
-    public static final String Organizations = "organizations";
+    public static final String Organizations = "orgs";
 
     public static final String UserOrganizations = "userOrganizations";
 

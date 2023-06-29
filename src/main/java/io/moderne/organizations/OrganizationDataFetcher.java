@@ -1,14 +1,14 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import io.moderne.organizations.types.CommitOption;
-import io.moderne.organizations.types.Organization;
-import io.moderne.organizations.types.RepositoryInput;
-import io.moderne.organizations.types.User;
+import io.moderne.orgs.types.CommitOption;
+import io.moderne.orgs.types.Organization;
+import io.moderne.orgs.types.RepositoryInput;
+import io.moderne.orgs.types.User;
 import org.openrewrite.internal.StringUtils;
 import reactor.core.publisher.Flux;
 
@@ -29,7 +29,7 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+    Flux<Organization> orgs(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)

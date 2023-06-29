@@ -1,4 +1,4 @@
-package io.moderne.organizations.types;
+package io.moderne.orgs.types;
 
 import java.lang.Object;
 import java.lang.Override;
@@ -84,7 +84,7 @@ public class Organization {
     return java.util.Objects.hash(id, name, commitOptions, _parent);
   }
 
-  public static io.moderne.organizations.types.Organization.Builder newBuilder() {
+  public static io.moderne.orgs.types.Organization.Builder newBuilder() {
     return new Builder();
   }
 
@@ -101,7 +101,7 @@ public class Organization {
     private Organization _parent;
 
     public Organization build() {
-                  io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
+                  io.moderne.orgs.types.Organization result = new io.moderne.orgs.types.Organization();
                       result.id = this.id;
           result.name = this.name;
           result.commitOptions = this.commitOptions;
@@ -109,12 +109,12 @@ public class Organization {
                       return result;
     }
 
-    public io.moderne.organizations.types.Organization.Builder id(String id) {
+    public io.moderne.orgs.types.Organization.Builder id(String id) {
       this.id = id;
       return this;
     }
 
-    public io.moderne.organizations.types.Organization.Builder name(String name) {
+    public io.moderne.orgs.types.Organization.Builder name(String name) {
       this.name = name;
       return this;
     }
@@ -122,13 +122,13 @@ public class Organization {
     /**
      * Ordered list of commit options as they should appear in the UI.
      */
-    public io.moderne.organizations.types.Organization.Builder commitOptions(
+    public io.moderne.orgs.types.Organization.Builder commitOptions(
         List<CommitOption> commitOptions) {
       this.commitOptions = commitOptions;
       return this;
     }
 
-    public io.moderne.organizations.types.Organization.Builder _parent(Organization _parent) {
+    public io.moderne.orgs.types.Organization.Builder _parent(Organization _parent) {
       this._parent = _parent;
       return this;
     }

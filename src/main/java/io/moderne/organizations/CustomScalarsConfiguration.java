@@ -1,4 +1,4 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
 import com.netflix.graphql.dgs.DgsScalar;
 import graphql.language.StringValue;

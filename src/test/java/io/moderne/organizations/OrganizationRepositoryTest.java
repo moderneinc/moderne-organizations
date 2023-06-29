@@ -1,6 +1,6 @@
-package io.moderne.organizations;
+package io.moderne.orgs;
 
-import io.moderne.organizations.types.RepositoryInput;
+import io.moderne.orgs.types.RepositoryInput;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

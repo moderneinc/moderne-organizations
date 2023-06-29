@@ -1,4 +1,4 @@
-package io.moderne.organizations.types;
+package io.moderne.orgs.types;
 
 import java.lang.Object;
 import java.lang.Override;
@@ -40,7 +40,7 @@ public class User {
     return java.util.Objects.hash(email);
   }
 
-  public static io.moderne.organizations.types.User.Builder newBuilder() {
+  public static io.moderne.orgs.types.User.Builder newBuilder() {
     return new Builder();
   }
 
@@ -48,12 +48,12 @@ public class User {
     private String email;
 
     public User build() {
-      io.moderne.organizations.types.User result = new io.moderne.organizations.types.User();
+      io.moderne.orgs.types.User result = new io.moderne.orgs.types.User();
           result.email = this.email;
           return result;
     }
 
-    public io.moderne.organizations.types.User.Builder email(String email) {
+    public io.moderne.orgs.types.User.Builder email(String email) {
       this.email = email;
       return this;
     }

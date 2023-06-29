@@ -1,4 +1,4 @@
-package io.moderne.organizations.types;
+package io.moderne.orgs.types;
 
 public enum CommitOption {
   Direct,
