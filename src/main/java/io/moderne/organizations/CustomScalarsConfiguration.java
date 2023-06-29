@@ -14,29 +14,29 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class CustomScalarsConfiguration {
 
-    @DgsScalar(name = "DateTime")
-    public static class OffsetDateTimeScalar implements Coercing<OffsetDateTime, String> {
-        @Override
-        public OffsetDateTime parseValue(Object input) throws CoercingParseValueException {
-            return OffsetDateTime.parse(input.toString(), DateTimeFormatter.ISO_DATE_TIME);
-        }
-
-        @Override
-        public OffsetDateTime parseLiteral(Object input) throws CoercingParseLiteralException {
-            if (input instanceof StringValue) {
-                return OffsetDateTime.parse(((StringValue) input).getValue(), DateTimeFormatter.ISO_DATE_TIME);
-            }
-
-            throw new CoercingParseLiteralException("Value is not a valid ISO date time");
-        }
-
-        @Override
-        public String serialize(Object dataFetcherResult) throws CoercingSerializeException {
-            if (dataFetcherResult instanceof OffsetDateTime) {
-                return ((OffsetDateTime) dataFetcherResult).format(DateTimeFormatter.ISO_DATE_TIME);
-            } else {
-                throw new CoercingSerializeException("Not a valid DateTime");
-            }
-        }
+  @DgsScalar(name = "DateTime")
+  public static class OffsetDateTimeScalar implements Coercing<OffsetDateTime, String> {
+    @Override
+    public OffsetDateTime parseValue(Object input) throws CoercingParseValueException {
+      return OffsetDateTime.parse(input.toString(), DateTimeFormatter.ISO_DATE_TIME);
     }
+
+    @Override
+    public OffsetDateTime parseLiteral(Object input) throws CoercingParseLiteralException {
+      if (input instanceof StringValue) {
+        return OffsetDateTime.parse(((StringValue) input).getValue(), DateTimeFormatter.ISO_DATE_TIME);
+      }
+
+      throw new CoercingParseLiteralException("Value is not a valid ISO date time");
+    }
+
+    @Override
+    public String serialize(Object dataFetcherResult) throws CoercingSerializeException {
+      if (dataFetcherResult instanceof OffsetDateTime) {
+        return ((OffsetDateTime) dataFetcherResult).format(DateTimeFormatter.ISO_DATE_TIME);
+      } else {
+        throw new CoercingSerializeException("Not a valid DateTime");
+      }
+    }
+  }
 }
