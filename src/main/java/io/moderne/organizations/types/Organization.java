@@ -21,11 +21,11 @@ public class Organization {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent) {
+      Organization parent) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
-    this._parent = _parent;
+    this._parent = parent;
   }
 
   public String getId() {
@@ -70,8 +70,12 @@ public class Organization {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Organization that = (Organization) o;
         return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(name, that.name) &&
