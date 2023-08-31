@@ -76,8 +76,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.micrometer:micrometer-core:latest.release")
 
-    implementation("com.graphql-java:graphql-java:18+")
-    implementation("com.graphql-java:graphql-java-extended-scalars:18+")
+    implementation("com.graphql-java:graphql-java-extended-scalars:19+")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
