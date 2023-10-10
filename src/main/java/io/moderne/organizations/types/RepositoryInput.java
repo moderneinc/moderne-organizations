@@ -46,15 +46,15 @@ public class RepositoryInput {
 
   @Override
   public String toString() {
-    return "RepositoryInput{" + "path='" + path + "'," +"origin='" + origin + "'," +"branch='" + branch + "'" +"}";
+    return "RepositoryInput{" + "path='" + path + "'," + "origin='" + origin + "'," + "branch='" + branch + "'" + "}";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RepositoryInput that = (RepositoryInput) o;
-        return java.util.Objects.equals(path, that.path) &&
+    if (o == null || getClass() != o.getClass()) return false;
+    RepositoryInput that = (RepositoryInput) o;
+    return java.util.Objects.equals(path, that.path) &&
                             java.util.Objects.equals(origin, that.origin) &&
                             java.util.Objects.equals(branch, that.branch);
   }
@@ -76,11 +76,11 @@ public class RepositoryInput {
     private String branch;
 
     public RepositoryInput build() {
-                  io.moderne.organizations.types.RepositoryInput result = new io.moderne.organizations.types.RepositoryInput();
-                      result.path = this.path;
-          result.origin = this.origin;
-          result.branch = this.branch;
-                      return result;
+      io.moderne.organizations.types.RepositoryInput result = new io.moderne.organizations.types.RepositoryInput();
+      result.path = this.path;
+      result.origin = this.origin;
+      result.branch = this.branch;
+      return result;
     }
 
     public io.moderne.organizations.types.RepositoryInput.Builder path(String path) {
