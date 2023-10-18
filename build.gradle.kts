@@ -67,7 +67,7 @@ configurations {
 dependencies {
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2021.0.2"))
-    implementation(platform("io.netty:netty-bom:4.1.86.Final"))
+    implementation(platform("io.netty:netty-bom:4.1.100.Final"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
