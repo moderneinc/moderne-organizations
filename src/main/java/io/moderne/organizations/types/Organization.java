@@ -21,7 +21,7 @@ public class Organization {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent) {
+                          Organization _parent) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
@@ -65,15 +65,15 @@ public class Organization {
 
   @Override
   public String toString() {
-    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'" +"}";
+    return "Organization{" + "id='" + id + "'," + "name='" + name + "'," + "commitOptions='" + commitOptions + "'," + "parent='" + _parent + "'" + "}";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Organization that = (Organization) o;
-        return java.util.Objects.equals(id, that.id) &&
+    if (o == null || getClass() != o.getClass()) return false;
+    Organization that = (Organization) o;
+    return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(name, that.name) &&
                             java.util.Objects.equals(commitOptions, that.commitOptions) &&
                             java.util.Objects.equals(_parent, that._parent);
@@ -101,12 +101,12 @@ public class Organization {
     private Organization _parent;
 
     public Organization build() {
-                  io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
-                      result.id = this.id;
-          result.name = this.name;
-          result.commitOptions = this.commitOptions;
-          result._parent = this._parent;
-                      return result;
+      io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
+      result.id = this.id;
+      result.name = this.name;
+      result.commitOptions = this.commitOptions;
+      result._parent = this._parent;
+      return result;
     }
 
     public io.moderne.organizations.types.Organization.Builder id(String id) {
@@ -123,7 +123,7 @@ public class Organization {
      * Ordered list of commit options as they should appear in the UI.
      */
     public io.moderne.organizations.types.Organization.Builder commitOptions(
-        List<CommitOption> commitOptions) {
+                            List<CommitOption> commitOptions) {
       this.commitOptions = commitOptions;
       return this;
     }

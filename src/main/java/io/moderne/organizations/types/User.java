@@ -24,15 +24,15 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{" + "email='" + email + "'" +"}";
+    return "User{" + "email='" + email + "'" + "}";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return java.util.Objects.equals(email, that.email);
+    if (o == null || getClass() != o.getClass()) return false;
+    User that = (User) o;
+    return java.util.Objects.equals(email, that.email);
   }
 
   @Override
@@ -49,8 +49,8 @@ public class User {
 
     public User build() {
       io.moderne.organizations.types.User result = new io.moderne.organizations.types.User();
-          result.email = this.email;
-          return result;
+      result.email = this.email;
+      return result;
     }
 
     public io.moderne.organizations.types.User.Builder email(String email) {
