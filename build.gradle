@@ -4,7 +4,7 @@ plugins {
     id("io.moderne.gradle.docker-simple") version "latest.integration"
 }
 
-ext{
+ext {
     graphqlBasePath = "io.moderne.organizations"
 }
 
