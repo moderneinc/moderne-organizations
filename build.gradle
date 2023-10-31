@@ -1,0 +1,19 @@
+plugins {
+    id("io.moderne.gradle.saas-service") version "latest.integration"
+    id("io.moderne.gradle.graphql") version "latest.integration"
+    id("io.moderne.gradle.docker-simple") version "latest.integration"
+}
+
+ext{
+    graphqlBasePath = "io.moderne.organizations"
+}
+
+dependencies {
+    implementation("org.openrewrite:rewrite-core")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
+    implementation("io.github.classgraph:classgraph")
+
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("io.micrometer:micrometer-core")
+}
+
