@@ -33,6 +33,38 @@ public class DgsConstants {
     public static final String CommitOptions = "commitOptions";
 
     public static final String Parent = "parent";
+
+    public static final String Dashboard = "dashboard";
+  }
+
+  public static class DASHBOARD {
+    public static final String TYPE_NAME = "Dashboard";
+
+    public static final String UpgradesAndMigrations = "upgradesAndMigrations";
+
+    public static final String Visualizations = "visualizations";
+
+    public static final String Security = "security";
+  }
+
+  public static class DASHBOARDVISUALIZATION {
+    public static final String TYPE_NAME = "DashboardVisualization";
+
+    public static final String RecipeId = "recipeId";
+
+    public static final String RecipeOptions = "recipeOptions";
+
+    public static final String VisualizationId = "visualizationId";
+
+    public static final String VisualizationOptions = "visualizationOptions";
+  }
+
+  public static class OPTION {
+    public static final String TYPE_NAME = "Option";
+
+    public static final String Name = "name";
+
+    public static final String Value = "value";
   }
 
   public static class USER {

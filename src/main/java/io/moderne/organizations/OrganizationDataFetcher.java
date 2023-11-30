@@ -5,11 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import io.moderne.organizations.types.CommitOption;
-import io.moderne.organizations.types.Organization;
-import io.moderne.organizations.types.RepositoryInput;
+import io.moderne.organizations.types.*;
 import io.moderne.organizations.types.User;
-import org.openrewrite.internal.StringUtils;
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;
@@ -52,9 +49,51 @@ public class OrganizationDataFetcher {
         return Organization.newBuilder()
                 .id(org.name())
                 .name(org.name())
+                .dashboard(mapDashboard(org.dashboard()))
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :
                         org.commitOptions())
+                .build();
+    }
+
+    private static io.moderne.organizations.types.Dashboard mapDashboard(io.moderne.organizations.Dashboard dashboard) {
+        if (dashboard == null) {
+            return null;
+        }
+
+        return io.moderne.organizations.types.Dashboard.newBuilder()
+                .upgradesAndMigrations(dashboard.upgradesAndMigrations())
+                .visualizations(dashboard.visualizations()
+                        .stream()
+                        .map(OrganizationDataFetcher::mapVisualization)
+                        .toList())
+                .security(dashboard.security())
+                .build();
+    }
+
+    private static io.moderne.organizations.types.DashboardVisualization mapVisualization(DashboardVisualization dashboardVisualization) {
+        if (dashboardVisualization == null) {
+            return null;
+        }
+
+        return io.moderne.organizations.types.DashboardVisualization.newBuilder()
+                .visualizationId(dashboardVisualization.visualizationId())
+                .recipeId(dashboardVisualization.recipeId())
+                .visualizationOptions(dashboardVisualization.visualizationOptions() == null ? null :
+                        dashboardVisualization.visualizationOptions().stream()
+                                .map(OrganizationDataFetcher::mapOption)
+                                .toList())
+                .recipeOptions(dashboardVisualization.recipeOptions() == null ? null :
+                        dashboardVisualization.recipeOptions().stream()
+                                .map(OrganizationDataFetcher::mapOption)
+                                .toList())
+                .build();
+    }
+
+    private static io.moderne.organizations.types.Option mapOption(Option option) {
+        return io.moderne.organizations.types.Option.newBuilder()
+                .name(option.name())
+                .value(option.value())
                 .build();
     }
 }

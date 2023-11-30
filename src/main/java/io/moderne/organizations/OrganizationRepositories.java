@@ -11,8 +11,8 @@ import java.util.List;
  * @param repositories The set of repositories that this organization owns.
  */
 public record OrganizationRepositories(String name, List<OrganizationRepository> repositories,
+                                       Dashboard dashboard,
                                        @Nullable List<CommitOption> commitOptions) {
-
     boolean matches(RepositoryInput toMatchRepositoryInput) {
         return repositories.stream().anyMatch(repository -> repository.matches(toMatchRepositoryInput));
     }

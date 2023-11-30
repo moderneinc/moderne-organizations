@@ -27,6 +27,37 @@ type Organization {
     commitOptions: [CommitOption!]!
 
     parent: Organization
+
+    """
+    The dashboard for this organization.
+    """
+    dashboard: Dashboard
+}
+
+type Dashboard {
+    """
+    List of recipe IDs to show upgrades and migrations for.
+    """
+    upgradesAndMigrations: [String!]!
+
+    visualizations: [DashboardVisualization!]!
+
+    """
+    List of recipe IDs to show for security.
+    """
+    security: [String!]!
+}
+
+type DashboardVisualization {
+    recipeId: String!
+    recipeOptions: [Option!]!
+    visualizationId: String!
+    visualizationOptions: [Option!]!
+}
+
+type Option {
+    name: String!
+    value: String!
 }
 
 input RepositoryInput {

@@ -17,7 +17,34 @@
         "path": "spring-projects/*",
         "branch": "*"
       }
-    ]
+    ],
+    "dashboard": {
+      "upgradesAndMigrations": [
+        "org.openrewrite.java.migrate.UpgradeToJava21",
+        "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2",
+        "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+      ],
+      "security": [
+        "org.openrewrite.java.security.OwaspA01",
+        "org.openrewrite.java.security.OwaspA02",
+        "org.openrewrite.java.security.OwaspA03",
+        "org.openrewrite.java.security.OwaspA04",
+        "org.openrewrite.java.security.OwaspA05",
+        "org.openrewrite.java.security.OwaspA06",
+        "org.openrewrite.java.security.OwaspA08",
+        "org.openrewrite.java.security.OwaspA10"
+      ],
+      "visualizations": [
+        {
+          "recipeId": "org.openrewrite.LanguageComposition",
+          "visualizationId": "io.moderne.LanguageComposition"
+        },
+        {
+          "recipeId": "org.openrewrite.sql.FindSql",
+          "visualizationId": "io.moderne.SqlCrud"
+        }
+      ]
+    }
   },
   {
     "name": "OpenRewrite",
@@ -33,6 +60,33 @@
       "Branch",
       "ForkAndPullRequest",
       "Fork"
-    ]
+    ],
+    "dashboard": {
+      "upgradesAndMigrations": [
+        "org.openrewrite.java.migrate.UpgradeToJava21",
+        "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2",
+        "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+      ],
+      "security": [
+        "org.openrewrite.java.security.OwaspA01",
+        "org.openrewrite.java.security.OwaspA02",
+        "org.openrewrite.java.security.OwaspA03",
+        "org.openrewrite.java.security.OwaspA04",
+        "org.openrewrite.java.security.OwaspA05",
+        "org.openrewrite.java.security.OwaspA06",
+        "org.openrewrite.java.security.OwaspA08",
+        "org.openrewrite.java.security.OwaspA10"
+      ],
+      "visualizations": [
+        {
+          "recipeId": "org.openrewrite.LanguageComposition",
+          "visualizationId": "io.moderne.LanguageComposition"
+        },
+        {
+          "recipeId": "org.openrewrite.sql.FindSql",
+          "visualizationId": "io.moderne.SqlCrud"
+        }
+      ]
+    }
   }
 ]

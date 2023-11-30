@@ -17,15 +17,21 @@ public class Organization {
 
   private Organization _parent;
 
+  /**
+   * The dashboard for this organization.
+   */
+  private Dashboard dashboard;
+
   public Organization() {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent) {
+      Organization _parent, Dashboard dashboard) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
     this._parent = _parent;
+    this.dashboard = dashboard;
   }
 
   public String getId() {
@@ -63,9 +69,20 @@ public class Organization {
     this._parent = _parent;
   }
 
+  /**
+   * The dashboard for this organization.
+   */
+  public Dashboard getDashboard() {
+    return dashboard;
+  }
+
+  public void setDashboard(Dashboard dashboard) {
+    this.dashboard = dashboard;
+  }
+
   @Override
   public String toString() {
-    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'" +"}";
+    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'," +"dashboard='" + dashboard + "'" +"}";
   }
 
   @Override
@@ -76,12 +93,13 @@ public class Organization {
         return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(name, that.name) &&
                             java.util.Objects.equals(commitOptions, that.commitOptions) &&
-                            java.util.Objects.equals(_parent, that._parent);
+                            java.util.Objects.equals(_parent, that._parent) &&
+                            java.util.Objects.equals(dashboard, that.dashboard);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(id, name, commitOptions, _parent);
+    return java.util.Objects.hash(id, name, commitOptions, _parent, dashboard);
   }
 
   public static io.moderne.organizations.types.Organization.Builder newBuilder() {
@@ -100,12 +118,18 @@ public class Organization {
 
     private Organization _parent;
 
+    /**
+     * The dashboard for this organization.
+     */
+    private Dashboard dashboard;
+
     public Organization build() {
                   io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
                       result.id = this.id;
           result.name = this.name;
           result.commitOptions = this.commitOptions;
           result._parent = this._parent;
+          result.dashboard = this.dashboard;
                       return result;
     }
 
@@ -130,6 +154,14 @@ public class Organization {
 
     public io.moderne.organizations.types.Organization.Builder _parent(Organization _parent) {
       this._parent = _parent;
+      return this;
+    }
+
+    /**
+     * The dashboard for this organization.
+     */
+    public io.moderne.organizations.types.Organization.Builder dashboard(Dashboard dashboard) {
+      this.dashboard = dashboard;
       return this;
     }
   }
