@@ -12,7 +12,7 @@ import reactor.test.StepVerifier;
 import java.util.List;
 
 @SpringBootTest(classes = {DgsAutoConfiguration.class, CustomScalarsConfiguration.class, OrganizationDataFetcher.class})
-public class OrganizationDataFetcherTest {
+class OrganizationDataFetcherTest {
 
     @Autowired
     OrganizationDataFetcher organizationDataFetcher;
