@@ -2,8 +2,7 @@ package io.moderne.organizations;
 
 import java.util.List;
 
-public record DashboardVisualization(String recipeId,
-                                     List<Option> recipeOptions,
+public record DashboardVisualization(DashboardRecipe recipe,
                                      String visualizationId,
                                      List<Option> visualizationOptions) {
 }

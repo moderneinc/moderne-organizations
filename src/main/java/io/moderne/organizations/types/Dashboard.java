@@ -9,20 +9,20 @@ public class Dashboard {
   /**
    * List of recipe IDs to show upgrades and migrations for.
    */
-  private List<String> upgradesAndMigrations;
+  private List<DashboardRecipe> upgradesAndMigrations;
 
   private List<DashboardVisualization> visualizations;
 
   /**
    * List of recipe IDs to show for security.
    */
-  private List<String> security;
+  private List<DashboardRecipe> security;
 
   public Dashboard() {
   }
 
-  public Dashboard(List<String> upgradesAndMigrations, List<DashboardVisualization> visualizations,
-      List<String> security) {
+  public Dashboard(List<DashboardRecipe> upgradesAndMigrations,
+      List<DashboardVisualization> visualizations, List<DashboardRecipe> security) {
     this.upgradesAndMigrations = upgradesAndMigrations;
     this.visualizations = visualizations;
     this.security = security;
@@ -31,11 +31,11 @@ public class Dashboard {
   /**
    * List of recipe IDs to show upgrades and migrations for.
    */
-  public List<String> getUpgradesAndMigrations() {
+  public List<DashboardRecipe> getUpgradesAndMigrations() {
     return upgradesAndMigrations;
   }
 
-  public void setUpgradesAndMigrations(List<String> upgradesAndMigrations) {
+  public void setUpgradesAndMigrations(List<DashboardRecipe> upgradesAndMigrations) {
     this.upgradesAndMigrations = upgradesAndMigrations;
   }
 
@@ -50,11 +50,11 @@ public class Dashboard {
   /**
    * List of recipe IDs to show for security.
    */
-  public List<String> getSecurity() {
+  public List<DashboardRecipe> getSecurity() {
     return security;
   }
 
-  public void setSecurity(List<String> security) {
+  public void setSecurity(List<DashboardRecipe> security) {
     this.security = security;
   }
 
@@ -86,14 +86,14 @@ public class Dashboard {
     /**
      * List of recipe IDs to show upgrades and migrations for.
      */
-    private List<String> upgradesAndMigrations;
+    private List<DashboardRecipe> upgradesAndMigrations;
 
     private List<DashboardVisualization> visualizations;
 
     /**
      * List of recipe IDs to show for security.
      */
-    private List<String> security;
+    private List<DashboardRecipe> security;
 
     public Dashboard build() {
                   io.moderne.organizations.types.Dashboard result = new io.moderne.organizations.types.Dashboard();
@@ -107,7 +107,7 @@ public class Dashboard {
      * List of recipe IDs to show upgrades and migrations for.
      */
     public io.moderne.organizations.types.Dashboard.Builder upgradesAndMigrations(
-        List<String> upgradesAndMigrations) {
+        List<DashboardRecipe> upgradesAndMigrations) {
       this.upgradesAndMigrations = upgradesAndMigrations;
       return this;
     }
@@ -121,7 +121,8 @@ public class Dashboard {
     /**
      * List of recipe IDs to show for security.
      */
-    public io.moderne.organizations.types.Dashboard.Builder security(List<String> security) {
+    public io.moderne.organizations.types.Dashboard.Builder security(
+        List<DashboardRecipe> security) {
       this.security = security;
       return this;
     }

@@ -38,19 +38,23 @@ type Dashboard {
     """
     List of recipe IDs to show upgrades and migrations for.
     """
-    upgradesAndMigrations: [String!]!
+    upgradesAndMigrations: [DashboardRecipe!]
 
-    visualizations: [DashboardVisualization!]!
+    visualizations: [DashboardVisualization!]
 
     """
     List of recipe IDs to show for security.
     """
-    security: [String!]!
+    security: [DashboardRecipe!]
+}
+
+type DashboardRecipe {
+    recipeId: String!
+    recipeOptions: [Option!]
 }
 
 type DashboardVisualization {
-    recipeId: String!
-    recipeOptions: [Option!]!
+    recipe: DashboardRecipe!
     visualizationId: String!
     visualizationOptions: [Option!]!
 }

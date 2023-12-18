@@ -47,12 +47,18 @@ public class DgsConstants {
     public static final String Security = "security";
   }
 
-  public static class DASHBOARDVISUALIZATION {
-    public static final String TYPE_NAME = "DashboardVisualization";
+  public static class DASHBOARDRECIPE {
+    public static final String TYPE_NAME = "DashboardRecipe";
 
     public static final String RecipeId = "recipeId";
 
     public static final String RecipeOptions = "recipeOptions";
+  }
+
+  public static class DASHBOARDVISUALIZATION {
+    public static final String TYPE_NAME = "DashboardVisualization";
+
+    public static final String Recipe = "recipe";
 
     public static final String VisualizationId = "visualizationId";
 
