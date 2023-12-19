@@ -88,7 +88,7 @@ public class OrganizationDataFetcher {
         }
 
         return io.moderne.organizations.types.DashboardRecipe.newBuilder()
-                .id(dashboardRecipe.recipeId())
+                .id(dashboardRecipe.id())
                 .options(dashboardRecipe.options() == null ? null :
                         dashboardRecipe.options().stream()
                                 .map(OrganizationDataFetcher::mapOption)
@@ -102,10 +102,10 @@ public class OrganizationDataFetcher {
         }
 
         return io.moderne.organizations.types.DashboardVisualization.newBuilder()
-                .id(dashboardVisualization.visualizationId())
+                .id(dashboardVisualization.id())
                 .recipe(mapRecipe(dashboardVisualization.recipe()))
-                .options(dashboardVisualization.visualizationOptions() == null ? null :
-                        dashboardVisualization.visualizationOptions().stream()
+                .options(dashboardVisualization.options() == null ? null :
+                        dashboardVisualization.options().stream()
                                 .map(OrganizationDataFetcher::mapOption)
                                 .toList())
                 .build();
