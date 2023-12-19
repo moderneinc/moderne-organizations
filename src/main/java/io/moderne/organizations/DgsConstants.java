@@ -50,9 +50,9 @@ public class DgsConstants {
   public static class DASHBOARDRECIPE {
     public static final String TYPE_NAME = "DashboardRecipe";
 
-    public static final String RecipeId = "recipeId";
+    public static final String Id = "id";
 
-    public static final String RecipeOptions = "recipeOptions";
+    public static final String Options = "options";
   }
 
   public static class DASHBOARDVISUALIZATION {
@@ -60,9 +60,9 @@ public class DgsConstants {
 
     public static final String Recipe = "recipe";
 
-    public static final String VisualizationId = "visualizationId";
+    public static final String Id = "id";
 
-    public static final String VisualizationOptions = "visualizationOptions";
+    public static final String Options = "options";
   }
 
   public static class OPTION {

@@ -6,6 +6,7 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import io.moderne.organizations.types.*;
+import io.moderne.organizations.types.DashboardRecipe;
 import io.moderne.organizations.types.User;
 import reactor.core.publisher.Flux;
 
@@ -62,12 +63,36 @@ public class OrganizationDataFetcher {
         }
 
         return io.moderne.organizations.types.Dashboard.newBuilder()
-                .upgradesAndMigrations(dashboard.upgradesAndMigrations())
+                .upgradesAndMigrations(mapRecipes(dashboard.upgradesAndMigrations()))
                 .visualizations(dashboard.visualizations()
                         .stream()
                         .map(OrganizationDataFetcher::mapVisualization)
                         .toList())
-                .security(dashboard.security())
+                .security(mapRecipes(dashboard.security()))
+                .build();
+    }
+
+    private static List<DashboardRecipe> mapRecipes(List<io.moderne.organizations.DashboardRecipe> dashboardRecipes) {
+        if (dashboardRecipes == null) {
+            return null;
+        }
+
+        return dashboardRecipes.stream()
+                .map(OrganizationDataFetcher::mapRecipe)
+                .toList();
+    }
+
+    private static io.moderne.organizations.types.DashboardRecipe mapRecipe(io.moderne.organizations.DashboardRecipe dashboardRecipe) {
+        if (dashboardRecipe == null) {
+            return null;
+        }
+
+        return io.moderne.organizations.types.DashboardRecipe.newBuilder()
+                .id(dashboardRecipe.recipeId())
+                .options(dashboardRecipe.options() == null ? null :
+                        dashboardRecipe.options().stream()
+                                .map(OrganizationDataFetcher::mapOption)
+                                .toList())
                 .build();
     }
 
@@ -77,14 +102,10 @@ public class OrganizationDataFetcher {
         }
 
         return io.moderne.organizations.types.DashboardVisualization.newBuilder()
-                .visualizationId(dashboardVisualization.visualizationId())
-                .recipeId(dashboardVisualization.recipeId())
-                .visualizationOptions(dashboardVisualization.visualizationOptions() == null ? null :
+                .id(dashboardVisualization.visualizationId())
+                .recipe(mapRecipe(dashboardVisualization.recipe()))
+                .options(dashboardVisualization.visualizationOptions() == null ? null :
                         dashboardVisualization.visualizationOptions().stream()
-                                .map(OrganizationDataFetcher::mapOption)
-                                .toList())
-                .recipeOptions(dashboardVisualization.recipeOptions() == null ? null :
-                        dashboardVisualization.recipeOptions().stream()
                                 .map(OrganizationDataFetcher::mapOption)
                                 .toList())
                 .build();

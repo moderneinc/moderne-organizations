@@ -1,38 +1,50 @@
 [
   {
-    "name": "Default",
+    "name": "Moderne",
     "repositories": [
       {
         "origin": "github.com",
-        "path": "Netflix/*",
-        "branch": "*"
-      },
-      {
-        "origin": "github.com",
-        "path": "spring-cloud/*",
-        "branch": "*"
-      },
-      {
-        "origin": "github.com",
-        "path": "spring-projects/*",
+        "path": "moderneinc/*",
         "branch": "*"
       }
     ],
     "dashboard": {
       "upgradesAndMigrations": [
-        "org.openrewrite.java.migrate.UpgradeToJava21",
-        "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2",
-        "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+        {
+          "id": "org.openrewrite.java.migrate.UpgradeToJava21"
+        },
+        {
+          "id": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
+        },
+        {
+          "id": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+        }
       ],
       "security": [
-        "org.openrewrite.java.security.OwaspA01",
-        "org.openrewrite.java.security.OwaspA02",
-        "org.openrewrite.java.security.OwaspA03",
-        "org.openrewrite.java.security.OwaspA04",
-        "org.openrewrite.java.security.OwaspA05",
-        "org.openrewrite.java.security.OwaspA06",
-        "org.openrewrite.java.security.OwaspA08",
-        "org.openrewrite.java.security.OwaspA10"
+        {
+          "id": "org.openrewrite.java.security.OwaspA01"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA02"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA03"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA04"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA05"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA06"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA08"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA10"
+        }
       ],
       "visualizations": [
         {
@@ -63,19 +75,41 @@
     ],
     "dashboard": {
       "upgradesAndMigrations": [
-        "org.openrewrite.java.migrate.UpgradeToJava21",
-        "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2",
-        "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+        {
+          "id": "org.openrewrite.java.migrate.UpgradeToJava21"
+        },
+        {
+          "id": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
+        },
+        {
+          "id": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+        }
       ],
       "security": [
-        "org.openrewrite.java.security.OwaspA01",
-        "org.openrewrite.java.security.OwaspA02",
-        "org.openrewrite.java.security.OwaspA03",
-        "org.openrewrite.java.security.OwaspA04",
-        "org.openrewrite.java.security.OwaspA05",
-        "org.openrewrite.java.security.OwaspA06",
-        "org.openrewrite.java.security.OwaspA08",
-        "org.openrewrite.java.security.OwaspA10"
+        {
+          "id": "org.openrewrite.java.security.OwaspA01"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA02"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA03"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA04"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA05"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA06"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA08"
+        },
+        {
+          "id": "org.openrewrite.java.security.OwaspA10"
+        }
       ],
       "visualizations": [
         {

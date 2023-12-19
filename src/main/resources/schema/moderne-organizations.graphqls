@@ -49,14 +49,14 @@ type Dashboard {
 }
 
 type DashboardRecipe {
-    recipeId: String!
-    recipeOptions: [Option!]
+    id: String!
+    options: [Option!]
 }
 
 type DashboardVisualization {
     recipe: DashboardRecipe!
-    visualizationId: String!
-    visualizationOptions: [Option!]!
+    id: String!
+    options: [Option!]!
 }
 
 type Option {
