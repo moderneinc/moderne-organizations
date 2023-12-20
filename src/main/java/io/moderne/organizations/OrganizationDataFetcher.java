@@ -18,43 +18,43 @@ import java.util.List;
 
 @DgsComponent
 public class OrganizationDataFetcher {
-    List<OrganizationRepositories> ownership;
+  List<OrganizationRepositories> ownership;
 
-    public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
-        this.ownership = mapper.readValue(
+  public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
+    this.ownership = mapper.readValue(
                 getClass().getResourceAsStream("/ownership.json"),
                 new TypeReference<>() {
                 }
-        );
-    }
+    );
+  }
 
-    @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
-        return Flux.fromIterable(ownership)
+  @DgsQuery
+  Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+    return Flux.fromIterable(ownership)
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)
                 .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" group
-    }
+  }
 
-    @DgsQuery
-    Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
-        // everybody belongs to every organization, and the "default" organization is listed
-        // first in the json that this list is based on, so it will be selected by default in the UI
-        return Flux.fromIterable(ownership)
+  @DgsQuery
+  Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
+    // everybody belongs to every organization, and the "default" organization is listed
+    // first in the json that this list is based on, so it will be selected by default in the UI
+    return Flux.fromIterable(ownership)
                 .map(OrganizationDataFetcher::mapOrganization)
                 .concatWith(
-                        Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
-                                .filter(__ -> true) // give "ALL" organization to all users
+                            Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
+                                        .filter(__ -> true) // give "ALL" organization to all users
                 );
-    }
+  }
 
-    private static Organization mapOrganization(OrganizationRepositories org) {
-        return Organization.newBuilder()
+  private static Organization mapOrganization(OrganizationRepositories org) {
+    return Organization.newBuilder()
                 .id(org.name())
                 .name(org.name())
                 .commitOptions(org.commitOptions() == null ?
-                        List.of(CommitOption.values()) :
-                        org.commitOptions())
+                            List.of(CommitOption.values()) :
+                            org.commitOptions())
                 .build();
-    }
+  }
 }
