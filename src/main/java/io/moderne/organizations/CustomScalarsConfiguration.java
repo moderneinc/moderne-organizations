@@ -23,8 +23,8 @@ public class CustomScalarsConfiguration {
 
         @Override
         public OffsetDateTime parseLiteral(Object input) throws CoercingParseLiteralException {
-            if (input instanceof StringValue) {
-                return OffsetDateTime.parse(((StringValue) input).getValue(), DateTimeFormatter.ISO_DATE_TIME);
+            if (input instanceof StringValue value) {
+                return OffsetDateTime.parse(value.getValue(), DateTimeFormatter.ISO_DATE_TIME);
             }
 
             throw new CoercingParseLiteralException("Value is not a valid ISO date time");
@@ -32,8 +32,8 @@ public class CustomScalarsConfiguration {
 
         @Override
         public String serialize(Object dataFetcherResult) throws CoercingSerializeException {
-            if (dataFetcherResult instanceof OffsetDateTime) {
-                return ((OffsetDateTime) dataFetcherResult).format(DateTimeFormatter.ISO_DATE_TIME);
+            if (dataFetcherResult instanceof OffsetDateTime time) {
+                return time.format(DateTimeFormatter.ISO_DATE_TIME);
             } else {
                 throw new CoercingSerializeException("Not a valid DateTime");
             }
