@@ -5,6 +5,11 @@ type Query {
     organizations(repository: RepositoryInput!): [Organization!]!
 
     """
+    The list of all possible organizations
+    """
+    allOrganizations: [Organization!]!
+
+    """
     The list of organizations that a user belongs to. If it is possible to
     determine the organizations that a user belonged to at a given time, use the `at`
     parameter. The "default" organization that is selected for a user is the first organization

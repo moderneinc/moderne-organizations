@@ -14,6 +14,6 @@ public record OrganizationRepositories(String name, List<OrganizationRepository>
                                        @Nullable List<CommitOption> commitOptions) {
 
     boolean matches(RepositoryInput toMatchRepositoryInput) {
-        return repositories.stream().anyMatch(repository -> repository.matches(toMatchRepositoryInput));
+        return repositories != null && repositories.stream().anyMatch(repository -> repository.matches(toMatchRepositoryInput));
     }
 }

@@ -9,7 +9,6 @@ import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
 import io.moderne.organizations.types.User;
-import org.openrewrite.internal.StringUtils;
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;
@@ -33,7 +32,14 @@ public class OrganizationDataFetcher {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.matches(repository))
                 .map(OrganizationDataFetcher::mapOrganization)
-                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" group
+                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" organization
+    }
+
+    @DgsQuery
+    Flux<Organization> allOrganizations() {
+        return Flux.fromIterable(ownership)
+                .map(OrganizationDataFetcher::mapOrganization)
+                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" organization
     }
 
     @DgsQuery
