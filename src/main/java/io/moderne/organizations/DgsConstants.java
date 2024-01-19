@@ -10,6 +10,8 @@ public class DgsConstants {
 
     public static final String Organizations = "organizations";
 
+    public static final String AllOrganizations = "allOrganizations";
+
     public static final String UserOrganizations = "userOrganizations";
 
     public static class ORGANIZATIONS_INPUT_ARGUMENT {
