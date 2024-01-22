@@ -13,6 +13,7 @@ import reactor.core.publisher.Flux;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @DgsComponent
@@ -51,7 +52,14 @@ public class OrganizationDataFetcher {
                 .concatWith(
                         Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
                                 .filter(__ -> true) // give "ALL" organization to all users
-                );
+                )
+                .collectList()
+                .map(organizations -> {
+                    // sort by organization id
+                    organizations.sort(Comparator.comparing(Organization::getId));
+                    return organizations;
+                })
+                .flatMapMany(Flux::fromIterable);
     }
 
     private static Organization mapOrganization(OrganizationRepositories org) {
