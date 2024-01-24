@@ -9,23 +9,23 @@ public class DashboardConfiguration {
   /**
    * Available/recommended upgrades and migrations.
    */
-  private List<RecipeRunRequest> upgradesAndMigrations;
+  private List<DashboardRecipe> upgradesAndMigrations;
 
   /**
    * Recommended visualizations to run on this organization.
    */
-  private List<VisualizationRequest> visualizations;
+  private List<DashboardVisualization> visualizations;
 
   /**
    * Security recipes to run for this organization.
    */
-  private List<RecipeRunRequest> security;
+  private List<DashboardRecipe> security;
 
   public DashboardConfiguration() {
   }
 
-  public DashboardConfiguration(List<RecipeRunRequest> upgradesAndMigrations,
-      List<VisualizationRequest> visualizations, List<RecipeRunRequest> security) {
+  public DashboardConfiguration(List<DashboardRecipe> upgradesAndMigrations,
+      List<DashboardVisualization> visualizations, List<DashboardRecipe> security) {
     this.upgradesAndMigrations = upgradesAndMigrations;
     this.visualizations = visualizations;
     this.security = security;
@@ -34,33 +34,33 @@ public class DashboardConfiguration {
   /**
    * Available/recommended upgrades and migrations.
    */
-  public List<RecipeRunRequest> getUpgradesAndMigrations() {
+  public List<DashboardRecipe> getUpgradesAndMigrations() {
     return upgradesAndMigrations;
   }
 
-  public void setUpgradesAndMigrations(List<RecipeRunRequest> upgradesAndMigrations) {
+  public void setUpgradesAndMigrations(List<DashboardRecipe> upgradesAndMigrations) {
     this.upgradesAndMigrations = upgradesAndMigrations;
   }
 
   /**
    * Recommended visualizations to run on this organization.
    */
-  public List<VisualizationRequest> getVisualizations() {
+  public List<DashboardVisualization> getVisualizations() {
     return visualizations;
   }
 
-  public void setVisualizations(List<VisualizationRequest> visualizations) {
+  public void setVisualizations(List<DashboardVisualization> visualizations) {
     this.visualizations = visualizations;
   }
 
   /**
    * Security recipes to run for this organization.
    */
-  public List<RecipeRunRequest> getSecurity() {
+  public List<DashboardRecipe> getSecurity() {
     return security;
   }
 
-  public void setSecurity(List<RecipeRunRequest> security) {
+  public void setSecurity(List<DashboardRecipe> security) {
     this.security = security;
   }
 
@@ -92,17 +92,17 @@ public class DashboardConfiguration {
     /**
      * Available/recommended upgrades and migrations.
      */
-    private List<RecipeRunRequest> upgradesAndMigrations;
+    private List<DashboardRecipe> upgradesAndMigrations;
 
     /**
      * Recommended visualizations to run on this organization.
      */
-    private List<VisualizationRequest> visualizations;
+    private List<DashboardVisualization> visualizations;
 
     /**
      * Security recipes to run for this organization.
      */
-    private List<RecipeRunRequest> security;
+    private List<DashboardRecipe> security;
 
     public DashboardConfiguration build() {
                   io.moderne.organizations.types.DashboardConfiguration result = new io.moderne.organizations.types.DashboardConfiguration();
@@ -116,7 +116,7 @@ public class DashboardConfiguration {
      * Available/recommended upgrades and migrations.
      */
     public io.moderne.organizations.types.DashboardConfiguration.Builder upgradesAndMigrations(
-        List<RecipeRunRequest> upgradesAndMigrations) {
+        List<DashboardRecipe> upgradesAndMigrations) {
       this.upgradesAndMigrations = upgradesAndMigrations;
       return this;
     }
@@ -125,7 +125,7 @@ public class DashboardConfiguration {
      * Recommended visualizations to run on this organization.
      */
     public io.moderne.organizations.types.DashboardConfiguration.Builder visualizations(
-        List<VisualizationRequest> visualizations) {
+        List<DashboardVisualization> visualizations) {
       this.visualizations = visualizations;
       return this;
     }
@@ -134,7 +134,7 @@ public class DashboardConfiguration {
      * Security recipes to run for this organization.
      */
     public io.moderne.organizations.types.DashboardConfiguration.Builder security(
-        List<RecipeRunRequest> security) {
+        List<DashboardRecipe> security) {
       this.security = security;
       return this;
     }

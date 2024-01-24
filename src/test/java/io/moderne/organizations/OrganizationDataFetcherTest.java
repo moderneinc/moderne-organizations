@@ -26,28 +26,28 @@ public class OrganizationDataFetcherTest {
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
                                 .dashboard(DashboardConfiguration.newBuilder()
                                         .upgradesAndMigrations(List.of(
-                                                new RecipeRunRequest("org.openrewrite.java.migrate.UpgradeToJava21", null),
-                                                new RecipeRunRequest("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),
-                                                new RecipeRunRequest("org.openrewrite.java.testing.junit5.JUnit4to5Migration", null)
+                                                new DashboardRecipe("org.openrewrite.java.migrate.UpgradeToJava21", null),
+                                                new DashboardRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),
+                                                new DashboardRecipe("org.openrewrite.java.testing.junit5.JUnit4to5Migration", null)
                                         ))
                                         .security(List.of(
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA01", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA02", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA03", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA04", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA05", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA06", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA08", null),
-                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA10", null)
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA01", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA02", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA03", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA04", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA05", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA06", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA08", null),
+                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA10", null)
                                         ))
                                         .visualizations(List.of(
-                                                new VisualizationRequest(
+                                                new DashboardVisualization(
                                                         "org.openrewrite.LanguageComposition",
                                                         null,
                                                         "io.moderne.LanguageComposition",
                                                         null
                                                 ),
-                                                new VisualizationRequest(
+                                                new DashboardVisualization(
                                                         "org.openrewrite.sql.FindSql",
                                                         null,
                                                         "io.moderne.SqlCrud",

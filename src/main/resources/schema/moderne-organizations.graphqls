@@ -37,27 +37,27 @@ type DashboardConfiguration{
     """
     Available/recommended upgrades and migrations.
     """
-    upgradesAndMigrations: [RecipeRunRequest!]
+    upgradesAndMigrations: [DashboardRecipe!]
 
     """
     Recommended visualizations to run on this organization.
     """
-    visualizations: [VisualizationRequest!]
+    visualizations: [DashboardVisualization!]
 
     """
     Security recipes to run for this organization.
     """
-    security: [RecipeRunRequest!]
+    security: [DashboardRecipe!]
 }
 
-type VisualizationRequest{
+type DashboardVisualization{
     recipeId: String!
     recipeOptions: [Option!]!
     visualizationId: String!
     visualizationOptions: [Option!]!
 }
 
-type RecipeRunRequest{
+type DashboardRecipe{
     recipeId: String!
     options: [Option!]!
 }

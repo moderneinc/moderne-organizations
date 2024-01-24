@@ -47,8 +47,8 @@ public class DgsConstants {
     public static final String Security = "security";
   }
 
-  public static class VISUALIZATIONREQUEST {
-    public static final String TYPE_NAME = "VisualizationRequest";
+  public static class DASHBOARDVISUALIZATION {
+    public static final String TYPE_NAME = "DashboardVisualization";
 
     public static final String RecipeId = "recipeId";
 
@@ -59,8 +59,8 @@ public class DgsConstants {
     public static final String VisualizationOptions = "visualizationOptions";
   }
 
-  public static class RECIPERUNREQUEST {
-    public static final String TYPE_NAME = "RecipeRunRequest";
+  public static class DASHBOARDRECIPE {
+    public static final String TYPE_NAME = "DashboardRecipe";
 
     public static final String RecipeId = "recipeId";
 
