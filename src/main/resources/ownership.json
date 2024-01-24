@@ -11,39 +11,39 @@
     "dashboard": {
       "upgradesAndMigrations": [
         {
-          "id": "org.openrewrite.java.migrate.UpgradeToJava21"
+          "recipeId": "org.openrewrite.java.migrate.UpgradeToJava21"
         },
         {
-          "id": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
+          "recipeId": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
         },
         {
-          "id": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+          "recipeId": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
         }
       ],
       "security": [
         {
-          "id": "org.openrewrite.java.security.OwaspA01"
+          "recipeId": "org.openrewrite.java.security.OwaspA01"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA02"
+          "recipeId": "org.openrewrite.java.security.OwaspA02"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA03"
+          "recipeId": "org.openrewrite.java.security.OwaspA03"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA04"
+          "recipeId": "org.openrewrite.java.security.OwaspA04"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA05"
+          "recipeId": "org.openrewrite.java.security.OwaspA05"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA06"
+          "recipeId": "org.openrewrite.java.security.OwaspA06"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA08"
+          "recipeId": "org.openrewrite.java.security.OwaspA08"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA10"
+          "recipeId": "org.openrewrite.java.security.OwaspA10"
         }
       ],
       "visualizations": [
@@ -76,53 +76,49 @@
     "dashboard": {
       "upgradesAndMigrations": [
         {
-          "id": "org.openrewrite.java.migrate.UpgradeToJava21"
+          "recipeId": "org.openrewrite.java.migrate.UpgradeToJava21"
         },
         {
-          "id": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
+          "recipeId": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
         },
         {
-          "id": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+          "recipeId": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
         }
       ],
       "security": [
         {
-          "id": "org.openrewrite.java.security.OwaspA01"
+          "recipeId": "org.openrewrite.java.security.OwaspA01"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA02"
+          "recipeId": "org.openrewrite.java.security.OwaspA02"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA03"
+          "recipeId": "org.openrewrite.java.security.OwaspA03"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA04"
+          "recipeId": "org.openrewrite.java.security.OwaspA04"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA05"
+          "recipeId": "org.openrewrite.java.security.OwaspA05"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA06"
+          "recipeId": "org.openrewrite.java.security.OwaspA06"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA08"
+          "recipeId": "org.openrewrite.java.security.OwaspA08"
         },
         {
-          "id": "org.openrewrite.java.security.OwaspA10"
+          "recipeId": "org.openrewrite.java.security.OwaspA10"
         }
       ],
       "visualizations": [
         {
-          "recipe": {
-            "id": "org.openrewrite.LanguageComposition"
-          },
-          "id": "io.moderne.LanguageComposition"
+          "recipeId": "org.openrewrite.LanguageComposition",
+          "visualizationId": "io.moderne.LanguageComposition"
         },
         {
-          "recipe": {
-            "id": "org.openrewrite.sql.FindSql"
-          },
-          "id": "io.moderne.SqlCrud"
+          "recipeId": "org.openrewrite.sql.FindSql",
+          "visualizationId": "io.moderne.SqlCrud"
         }
       ]
     }

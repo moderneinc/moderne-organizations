@@ -1,22 +1,30 @@
 package io.moderne.organizations.types;
 
-import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
 
 public class Option {
+  /**
+   * Example: `methodPattern`
+   */
   private String name;
 
-  private String value;
+  /**
+   * Example: `java.util.List add(..)`
+   */
+  private Object value;
 
   public Option() {
   }
 
-  public Option(String name, String value) {
+  public Option(String name, Object value) {
     this.name = name;
     this.value = value;
   }
 
+  /**
+   * Example: `methodPattern`
+   */
   public String getName() {
     return name;
   }
@@ -25,11 +33,14 @@ public class Option {
     this.name = name;
   }
 
-  public String getValue() {
+  /**
+   * Example: `java.util.List add(..)`
+   */
+  public Object getValue() {
     return value;
   }
 
-  public void setValue(String value) {
+  public void setValue(Object value) {
     this.value = value;
   }
 
@@ -39,7 +50,7 @@ public class Option {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(java.lang.Object o) {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Option that = (Option) o;
@@ -57,9 +68,15 @@ public class Option {
   }
 
   public static class Builder {
+    /**
+     * Example: `methodPattern`
+     */
     private String name;
 
-    private String value;
+    /**
+     * Example: `java.util.List add(..)`
+     */
+    private Object value;
 
     public Option build() {
                   io.moderne.organizations.types.Option result = new io.moderne.organizations.types.Option();
@@ -68,12 +85,18 @@ public class Option {
                       return result;
     }
 
+    /**
+     * Example: `methodPattern`
+     */
     public io.moderne.organizations.types.Option.Builder name(String name) {
       this.name = name;
       return this;
     }
 
-    public io.moderne.organizations.types.Option.Builder value(String value) {
+    /**
+     * Example: `java.util.List add(..)`
+     */
+    public io.moderne.organizations.types.Option.Builder value(Object value) {
       this.value = value;
       return this;
     }

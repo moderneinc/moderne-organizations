@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import io.moderne.organizations.types.*;
-import io.moderne.organizations.types.DashboardRecipe;
+import io.moderne.organizations.types.CommitOption;
+import io.moderne.organizations.types.Organization;
+import io.moderne.organizations.types.RepositoryInput;
 import io.moderne.organizations.types.User;
 import reactor.core.publisher.Flux;
 
@@ -50,71 +51,11 @@ public class OrganizationDataFetcher {
         return Organization.newBuilder()
                 .id(org.name())
                 .name(org.name())
-                .dashboard(mapDashboard(org.dashboard()))
+                .dashboard(org.dashboard())
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :
                         org.commitOptions())
                 .build();
     }
 
-    private static io.moderne.organizations.types.Dashboard mapDashboard(io.moderne.organizations.Dashboard dashboard) {
-        if (dashboard == null) {
-            return null;
-        }
-
-        return io.moderne.organizations.types.Dashboard.newBuilder()
-                .upgradesAndMigrations(mapRecipes(dashboard.upgradesAndMigrations()))
-                .visualizations(dashboard.visualizations()
-                        .stream()
-                        .map(OrganizationDataFetcher::mapVisualization)
-                        .toList())
-                .security(mapRecipes(dashboard.security()))
-                .build();
-    }
-
-    private static List<DashboardRecipe> mapRecipes(List<io.moderne.organizations.DashboardRecipe> dashboardRecipes) {
-        if (dashboardRecipes == null) {
-            return null;
-        }
-
-        return dashboardRecipes.stream()
-                .map(OrganizationDataFetcher::mapRecipe)
-                .toList();
-    }
-
-    private static io.moderne.organizations.types.DashboardRecipe mapRecipe(io.moderne.organizations.DashboardRecipe dashboardRecipe) {
-        if (dashboardRecipe == null) {
-            return null;
-        }
-
-        return io.moderne.organizations.types.DashboardRecipe.newBuilder()
-                .id(dashboardRecipe.id())
-                .options(dashboardRecipe.options() == null ? null :
-                        dashboardRecipe.options().stream()
-                                .map(OrganizationDataFetcher::mapOption)
-                                .toList())
-                .build();
-    }
-
-    private static io.moderne.organizations.types.DashboardVisualization mapVisualization(DashboardVisualization dashboardVisualization) {
-        if (dashboardVisualization == null) {
-            return null;
-        }
-
-        return io.moderne.organizations.types.DashboardVisualization.newBuilder()
-                .id(dashboardVisualization.id())
-                .recipe(mapRecipe(dashboardVisualization.recipe()))
-                .options(dashboardVisualization.options() == null ? null :
-                        dashboardVisualization.options().stream()
-                                .map(OrganizationDataFetcher::mapOption)
-                                .toList())
-                .build();
-    }
-
-    private static io.moderne.organizations.types.Option mapOption(Option option) {
-        return io.moderne.organizations.types.Option.newBuilder()
-                .name(option.name())
-                .value(option.value())
-                .build();
-    }
 }

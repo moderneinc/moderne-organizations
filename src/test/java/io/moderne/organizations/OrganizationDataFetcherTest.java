@@ -1,10 +1,7 @@
 package io.moderne.organizations;
 
 import com.netflix.graphql.dgs.autoconfig.DgsAutoConfiguration;
-import io.moderne.organizations.types.Dashboard;
-import io.moderne.organizations.types.DashboardRecipe;
 import io.moderne.organizations.types.*;
-import io.moderne.organizations.types.DashboardVisualization;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,30 +24,32 @@ public class OrganizationDataFetcherTest {
                                 .id("OpenRewrite")
                                 .name("OpenRewrite")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
-                                .dashboard(Dashboard.newBuilder()
+                                .dashboard(DashboardConfiguration.newBuilder()
                                         .upgradesAndMigrations(List.of(
-                                                new DashboardRecipe("org.openrewrite.java.migrate.UpgradeToJava21", null),
-                                                new DashboardRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),
-                                                new DashboardRecipe("org.openrewrite.java.testing.junit5.JUnit4to5Migration", null)
+                                                new RecipeRunRequest("org.openrewrite.java.migrate.UpgradeToJava21", null),
+                                                new RecipeRunRequest("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),
+                                                new RecipeRunRequest("org.openrewrite.java.testing.junit5.JUnit4to5Migration", null)
                                         ))
                                         .security(List.of(
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA01", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA02", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA03", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA04", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA05", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA06", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA08", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA10", null)
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA01", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA02", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA03", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA04", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA05", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA06", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA08", null),
+                                                new RecipeRunRequest("org.openrewrite.java.security.OwaspA10", null)
                                         ))
                                         .visualizations(List.of(
-                                                new DashboardVisualization(
-                                                        new DashboardRecipe("org.openrewrite.LanguageComposition", null),
+                                                new VisualizationRequest(
+                                                        "org.openrewrite.LanguageComposition",
+                                                        null,
                                                         "io.moderne.LanguageComposition",
                                                         null
                                                 ),
-                                                new DashboardVisualization(
-                                                        new DashboardRecipe("org.openrewrite.sql.FindSql", null),
+                                                new VisualizationRequest(
+                                                        "org.openrewrite.sql.FindSql",
+                                                        null,
                                                         "io.moderne.SqlCrud",
                                                         null
                                                 )

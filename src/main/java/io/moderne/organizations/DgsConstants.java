@@ -37,8 +37,8 @@ public class DgsConstants {
     public static final String Dashboard = "dashboard";
   }
 
-  public static class DASHBOARD {
-    public static final String TYPE_NAME = "Dashboard";
+  public static class DASHBOARDCONFIGURATION {
+    public static final String TYPE_NAME = "DashboardConfiguration";
 
     public static final String UpgradesAndMigrations = "upgradesAndMigrations";
 
@@ -47,20 +47,22 @@ public class DgsConstants {
     public static final String Security = "security";
   }
 
-  public static class DASHBOARDRECIPE {
-    public static final String TYPE_NAME = "DashboardRecipe";
+  public static class VISUALIZATIONREQUEST {
+    public static final String TYPE_NAME = "VisualizationRequest";
 
-    public static final String Id = "id";
+    public static final String RecipeId = "recipeId";
 
-    public static final String Options = "options";
+    public static final String RecipeOptions = "recipeOptions";
+
+    public static final String VisualizationId = "visualizationId";
+
+    public static final String VisualizationOptions = "visualizationOptions";
   }
 
-  public static class DASHBOARDVISUALIZATION {
-    public static final String TYPE_NAME = "DashboardVisualization";
+  public static class RECIPERUNREQUEST {
+    public static final String TYPE_NAME = "RecipeRunRequest";
 
-    public static final String Recipe = "recipe";
-
-    public static final String Id = "id";
+    public static final String RecipeId = "recipeId";
 
     public static final String Options = "options";
   }

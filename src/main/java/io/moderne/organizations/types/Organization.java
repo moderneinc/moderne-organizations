@@ -20,13 +20,13 @@ public class Organization {
   /**
    * The dashboard for this organization.
    */
-  private Dashboard dashboard;
+  private DashboardConfiguration dashboard;
 
   public Organization() {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent, Dashboard dashboard) {
+      Organization _parent, DashboardConfiguration dashboard) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
@@ -72,11 +72,11 @@ public class Organization {
   /**
    * The dashboard for this organization.
    */
-  public Dashboard getDashboard() {
+  public DashboardConfiguration getDashboard() {
     return dashboard;
   }
 
-  public void setDashboard(Dashboard dashboard) {
+  public void setDashboard(DashboardConfiguration dashboard) {
     this.dashboard = dashboard;
   }
 
@@ -121,7 +121,7 @@ public class Organization {
     /**
      * The dashboard for this organization.
      */
-    private Dashboard dashboard;
+    private DashboardConfiguration dashboard;
 
     public Organization build() {
                   io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
@@ -160,7 +160,8 @@ public class Organization {
     /**
      * The dashboard for this organization.
      */
-    public io.moderne.organizations.types.Organization.Builder dashboard(Dashboard dashboard) {
+    public io.moderne.organizations.types.Organization.Builder dashboard(
+        DashboardConfiguration dashboard) {
       this.dashboard = dashboard;
       return this;
     }

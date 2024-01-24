@@ -31,38 +31,49 @@ type Organization {
     """
     The dashboard for this organization.
     """
-    dashboard: Dashboard
+    dashboard: DashboardConfiguration
+}
+type DashboardConfiguration{
+    """
+    Available/recommended upgrades and migrations.
+    """
+    upgradesAndMigrations: [RecipeRunRequest!]
+
+    """
+    Recommended visualizations to run on this organization.
+    """
+    visualizations: [VisualizationRequest!]
+
+    """
+    Security recipes to run for this organization.
+    """
+    security: [RecipeRunRequest!]
 }
 
-type Dashboard {
-    """
-    List of recipe IDs to show upgrades and migrations for.
-    """
-    upgradesAndMigrations: [DashboardRecipe!]
-
-    visualizations: [DashboardVisualization!]
-
-    """
-    List of recipe IDs to show for security.
-    """
-    security: [DashboardRecipe!]
+type VisualizationRequest{
+    recipeId: String!
+    recipeOptions: [Option!]!
+    visualizationId: String!
+    visualizationOptions: [Option!]!
 }
 
-type DashboardRecipe {
-    id: String!
-    options: [Option!]
-}
-
-type DashboardVisualization {
-    recipe: DashboardRecipe!
-    id: String!
+type RecipeRunRequest{
+    recipeId: String!
     options: [Option!]!
 }
 
 type Option {
+    """
+    Example: `methodPattern`
+    """
     name: String!
-    value: String!
+    """
+    Example: `java.util.List add(..)`
+    """
+    value: Object!
 }
+
+scalar Object
 
 input RepositoryInput {
     path: String!
