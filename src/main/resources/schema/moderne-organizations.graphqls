@@ -32,7 +32,53 @@ type Organization {
     commitOptions: [CommitOption!]!
 
     parent: Organization
+
+    """
+    The dashboard for this organization.
+    """
+    dashboard: DashboardConfiguration
 }
+type DashboardConfiguration{
+    """
+    Available/recommended upgrades and migrations.
+    """
+    upgradesAndMigrations: [DashboardRecipe!]
+
+    """
+    Recommended visualizations to run on this organization.
+    """
+    visualizations: [DashboardVisualization!]
+
+    """
+    Security recipes to run for this organization.
+    """
+    security: [DashboardRecipe!]
+}
+
+type DashboardVisualization{
+    recipeId: String!
+    recipeOptions: [Option!]!
+    visualizationId: String!
+    visualizationOptions: [Option!]!
+}
+
+type DashboardRecipe{
+    recipeId: String!
+    options: [Option!]!
+}
+
+type Option {
+    """
+    Example: `methodPattern`
+    """
+    name: String!
+    """
+    Example: `java.util.List add(..)`
+    """
+    value: Object!
+}
+
+scalar Object
 
 input RepositoryInput {
     path: String!

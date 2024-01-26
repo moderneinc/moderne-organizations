@@ -1,11 +1,15 @@
 package io.moderne.organizations;
 
+import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsRuntimeWiring;
 import com.netflix.graphql.dgs.DgsScalar;
 import graphql.language.StringValue;
+import graphql.scalars.ExtendedScalars;
 import graphql.schema.Coercing;
 import graphql.schema.CoercingParseLiteralException;
 import graphql.schema.CoercingParseValueException;
 import graphql.schema.CoercingSerializeException;
+import graphql.schema.idl.RuntimeWiring;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.OffsetDateTime;
@@ -37,6 +41,14 @@ public class CustomScalarsConfiguration {
             } else {
                 throw new CoercingSerializeException("Not a valid DateTime");
             }
+        }
+    }
+
+    @DgsComponent
+    public static class ObjectScalar {
+        @DgsRuntimeWiring
+        public RuntimeWiring.Builder addScalar(RuntimeWiring.Builder builder) {
+            return builder.scalar(ExtendedScalars.Object);
         }
     }
 }

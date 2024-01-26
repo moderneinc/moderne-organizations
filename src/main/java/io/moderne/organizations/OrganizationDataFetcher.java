@@ -58,9 +58,11 @@ public class OrganizationDataFetcher {
         return Organization.newBuilder()
                 .id(org.name())
                 .name(org.name())
+                .dashboard(org.dashboard())
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :
                         org.commitOptions())
                 .build();
     }
+
 }
