@@ -49,7 +49,7 @@ public class OrganizationDataFetcher {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.name().equals(id))
                 .next()
-                .map(OrganizationDataFetcher::mapOrganization);
+                .map(this::mapOrganization);
     }
 
     @DgsQuery
