@@ -16,6 +16,11 @@ type Query {
     returned.
     """
     userOrganizations(user: User!, at: DateTime): [Organization!]!
+
+    """
+    A single organization by id.
+    """
+    organization(id: ID!): Organization
 }
 
 input User {
@@ -33,12 +38,16 @@ type Organization {
 
     parent: Organization
 
-    """
-    The dashboard for this organization.
-    """
-    dashboard: DashboardConfiguration
+    dashboard: Dashboard
 }
-type DashboardConfiguration{
+
+input RepositoryInput {
+    path: String!
+    origin: String
+    branch: String
+}
+
+type Dashboard{
     """
     Available/recommended upgrades and migrations.
     """
@@ -78,14 +87,6 @@ type Option {
     value: Object!
 }
 
-scalar Object
-
-input RepositoryInput {
-    path: String!
-    origin: String
-    branch: String
-}
-
 enum CommitOption {
     Direct
     Branch
@@ -95,3 +96,7 @@ enum CommitOption {
 }
 
 scalar DateTime
+"""
+Objects are generic types that serialize to JSON as `string`, `number`, or `boolean`.
+"""
+scalar Object

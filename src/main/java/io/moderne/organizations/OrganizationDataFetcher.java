@@ -10,6 +10,7 @@ import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.RepositoryInput;
 import io.moderne.organizations.types.User;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -41,6 +42,14 @@ public class OrganizationDataFetcher {
         return Flux.fromIterable(ownership)
                 .map(this::mapOrganization)
                 .concatWithValues(ALL_ORG); // if you want an "ALL" organization
+    }
+
+    @DgsQuery
+    Mono<Organization> organization(@InputArgument String id) {
+        return Flux.fromIterable(ownership)
+                .filter(org -> org.name().equals(id))
+                .next()
+                .map(this::mapOrganization);
     }
 
     @DgsQuery

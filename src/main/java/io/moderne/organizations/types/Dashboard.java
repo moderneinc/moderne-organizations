@@ -5,7 +5,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
-public class DashboardConfiguration {
+public class Dashboard {
   /**
    * Available/recommended upgrades and migrations.
    */
@@ -21,10 +21,10 @@ public class DashboardConfiguration {
    */
   private List<DashboardRecipe> security;
 
-  public DashboardConfiguration() {
+  public Dashboard() {
   }
 
-  public DashboardConfiguration(List<DashboardRecipe> upgradesAndMigrations,
+  public Dashboard(List<DashboardRecipe> upgradesAndMigrations,
       List<DashboardVisualization> visualizations, List<DashboardRecipe> security) {
     this.upgradesAndMigrations = upgradesAndMigrations;
     this.visualizations = visualizations;
@@ -66,14 +66,14 @@ public class DashboardConfiguration {
 
   @Override
   public String toString() {
-    return "DashboardConfiguration{" + "upgradesAndMigrations='" + upgradesAndMigrations + "'," +"visualizations='" + visualizations + "'," +"security='" + security + "'" +"}";
+    return "Dashboard{" + "upgradesAndMigrations='" + upgradesAndMigrations + "'," +"visualizations='" + visualizations + "'," +"security='" + security + "'" +"}";
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DashboardConfiguration that = (DashboardConfiguration) o;
+        Dashboard that = (Dashboard) o;
         return java.util.Objects.equals(upgradesAndMigrations, that.upgradesAndMigrations) &&
                             java.util.Objects.equals(visualizations, that.visualizations) &&
                             java.util.Objects.equals(security, that.security);
@@ -84,7 +84,7 @@ public class DashboardConfiguration {
     return java.util.Objects.hash(upgradesAndMigrations, visualizations, security);
   }
 
-  public static io.moderne.organizations.types.DashboardConfiguration.Builder newBuilder() {
+  public static io.moderne.organizations.types.Dashboard.Builder newBuilder() {
     return new Builder();
   }
 
@@ -104,8 +104,8 @@ public class DashboardConfiguration {
      */
     private List<DashboardRecipe> security;
 
-    public DashboardConfiguration build() {
-                  io.moderne.organizations.types.DashboardConfiguration result = new io.moderne.organizations.types.DashboardConfiguration();
+    public Dashboard build() {
+                  io.moderne.organizations.types.Dashboard result = new io.moderne.organizations.types.Dashboard();
                       result.upgradesAndMigrations = this.upgradesAndMigrations;
           result.visualizations = this.visualizations;
           result.security = this.security;
@@ -115,7 +115,7 @@ public class DashboardConfiguration {
     /**
      * Available/recommended upgrades and migrations.
      */
-    public io.moderne.organizations.types.DashboardConfiguration.Builder upgradesAndMigrations(
+    public io.moderne.organizations.types.Dashboard.Builder upgradesAndMigrations(
         List<DashboardRecipe> upgradesAndMigrations) {
       this.upgradesAndMigrations = upgradesAndMigrations;
       return this;
@@ -124,7 +124,7 @@ public class DashboardConfiguration {
     /**
      * Recommended visualizations to run on this organization.
      */
-    public io.moderne.organizations.types.DashboardConfiguration.Builder visualizations(
+    public io.moderne.organizations.types.Dashboard.Builder visualizations(
         List<DashboardVisualization> visualizations) {
       this.visualizations = visualizations;
       return this;
@@ -133,7 +133,7 @@ public class DashboardConfiguration {
     /**
      * Security recipes to run for this organization.
      */
-    public io.moderne.organizations.types.DashboardConfiguration.Builder security(
+    public io.moderne.organizations.types.Dashboard.Builder security(
         List<DashboardRecipe> security) {
       this.security = security;
       return this;
