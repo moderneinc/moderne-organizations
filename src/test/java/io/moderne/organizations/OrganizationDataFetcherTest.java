@@ -24,7 +24,7 @@ public class OrganizationDataFetcherTest {
                                 .id("OpenRewrite")
                                 .name("OpenRewrite")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
-                                .dashboard(DashboardConfiguration.newBuilder()
+                                .dashboard(Dashboard.newBuilder()
                                         .upgradesAndMigrations(List.of(
                                                 new DashboardRecipe("org.openrewrite.java.migrate.UpgradeToJava21", null),
                                                 new DashboardRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),

@@ -14,6 +14,8 @@ public class DgsConstants {
 
     public static final String UserOrganizations = "userOrganizations";
 
+    public static final String Organization = "organization";
+
     public static class ORGANIZATIONS_INPUT_ARGUMENT {
       public static final String Repository = "repository";
     }
@@ -22,6 +24,10 @@ public class DgsConstants {
       public static final String User = "user";
 
       public static final String At = "at";
+    }
+
+    public static class ORGANIZATION_INPUT_ARGUMENT {
+      public static final String Id = "id";
     }
   }
 
@@ -39,8 +45,8 @@ public class DgsConstants {
     public static final String Dashboard = "dashboard";
   }
 
-  public static class DASHBOARDCONFIGURATION {
-    public static final String TYPE_NAME = "DashboardConfiguration";
+  public static class DASHBOARD {
+    public static final String TYPE_NAME = "Dashboard";
 
     public static final String UpgradesAndMigrations = "upgradesAndMigrations";
 
