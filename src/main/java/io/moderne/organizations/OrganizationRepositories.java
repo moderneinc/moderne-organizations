@@ -13,7 +13,8 @@ import java.util.List;
  */
 public record OrganizationRepositories(String name, List<OrganizationRepository> repositories,
                                        DashboardConfiguration dashboard,
-                                       @Nullable List<CommitOption> commitOptions) {
+                                       @Nullable List<CommitOption> commitOptions,
+                                       @Nullable String parent) {
     boolean matches(RepositoryInput toMatchRepositoryInput) {
         return repositories != null && repositories.stream().anyMatch(repository -> repository.matches(toMatchRepositoryInput));
     }

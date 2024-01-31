@@ -18,6 +18,7 @@ import java.util.List;
 @DgsComponent
 public class OrganizationDataFetcher {
     List<OrganizationRepositories> ownership;
+    Organization ALL_ORG = Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build();
 
     public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
         this.ownership = mapper.readValue(
@@ -31,15 +32,15 @@ public class OrganizationDataFetcher {
     Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
         return Flux.fromIterable(ownership)
                 .filter(org -> org.matches(repository))
-                .map(OrganizationDataFetcher::mapOrganization)
-                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" organization
+                .map(this::mapOrganization)
+                .concatWithValues(ALL_ORG); // if you want an "ALL" organization
     }
 
     @DgsQuery
     Flux<Organization> allOrganizations() {
         return Flux.fromIterable(ownership)
-                .map(OrganizationDataFetcher::mapOrganization)
-                .concatWithValues(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build()); // if you want an "ALL" organization
+                .map(this::mapOrganization)
+                .concatWithValues(ALL_ORG); // if you want an "ALL" organization
     }
 
     @DgsQuery
@@ -47,14 +48,14 @@ public class OrganizationDataFetcher {
         // everybody belongs to every organization, and the "default" organization is listed
         // first in the json that this list is based on, so it will be selected by default in the UI
         return Flux.fromIterable(ownership)
-                .map(OrganizationDataFetcher::mapOrganization)
+                .map(this::mapOrganization)
                 .concatWith(
-                        Flux.just(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
+                        Flux.just(ALL_ORG)
                                 .filter(__ -> true) // give "ALL" organization to all users
                 );
     }
 
-    private static Organization mapOrganization(OrganizationRepositories org) {
+    private Organization mapOrganization(OrganizationRepositories org) {
         return Organization.newBuilder()
                 .id(org.name())
                 .name(org.name())
@@ -62,7 +63,19 @@ public class OrganizationDataFetcher {
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :
                         org.commitOptions())
+                ._parent(org.parent() != null ? getOrganizationByName(org.parent()) : null)
                 .build();
     }
 
+    private Organization getOrganizationByName(String name) {
+        if (name.equals("ALL")) {
+            return ALL_ORG;
+        }
+
+        return ownership.stream()
+                .filter(org -> org.name().equals(name))
+                .findFirst()
+                .map(this::mapOrganization)
+                .orElse(null);
+    }
 }
