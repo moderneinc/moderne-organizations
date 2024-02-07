@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "2.7.2"
+    id("org.springframework.boot") version "3.2.2"
     java
     id("nebula.release") version "15.3.1"
     id("nebula.maven-nebula-publish") version "18.2.0"
@@ -51,12 +51,6 @@ java {
 
 configurations {
     all {
-        resolutionStrategy.eachDependency {
-            if(requested.group == "org.yaml" && requested.name == "snakeyaml") {
-                useVersion("1.33")
-                because("snakeyaml 2.0 doesn't work with Spring Boot.")
-            }
-        }
         resolutionStrategy {
             cacheChangingModulesFor(0, TimeUnit.SECONDS)
             cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
@@ -66,8 +60,9 @@ configurations {
 
 dependencies {
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2021.0.2"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.100.Final"))
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
@@ -76,17 +71,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.micrometer:micrometer-core:latest.release")
 
-    implementation("com.graphql-java:graphql-java:18+")
-    implementation("com.graphql-java:graphql-java-extended-scalars:18+")
+    implementation("com.graphql-java:graphql-java")
+    implementation("com.graphql-java:graphql-java-extended-scalars")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter:5+") {
-        exclude(module = "snakeyaml")
-    }
-    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer:5+") {
-        exclude(module = "snakeyaml")
-    }
+    implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter")
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
 
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
 
