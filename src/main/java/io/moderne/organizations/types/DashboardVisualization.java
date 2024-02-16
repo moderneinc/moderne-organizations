@@ -6,10 +6,6 @@ import java.lang.String;
 import java.util.List;
 
 public class DashboardVisualization {
-  private String recipeId;
-
-  private List<Option> recipeOptions;
-
   private String visualizationId;
 
   private List<Option> visualizationOptions;
@@ -17,28 +13,9 @@ public class DashboardVisualization {
   public DashboardVisualization() {
   }
 
-  public DashboardVisualization(String recipeId, List<Option> recipeOptions, String visualizationId,
-      List<Option> visualizationOptions) {
-    this.recipeId = recipeId;
-    this.recipeOptions = recipeOptions;
+  public DashboardVisualization(String visualizationId, List<Option> visualizationOptions) {
     this.visualizationId = visualizationId;
     this.visualizationOptions = visualizationOptions;
-  }
-
-  public String getRecipeId() {
-    return recipeId;
-  }
-
-  public void setRecipeId(String recipeId) {
-    this.recipeId = recipeId;
-  }
-
-  public List<Option> getRecipeOptions() {
-    return recipeOptions;
-  }
-
-  public void setRecipeOptions(List<Option> recipeOptions) {
-    this.recipeOptions = recipeOptions;
   }
 
   public String getVisualizationId() {
@@ -59,7 +36,7 @@ public class DashboardVisualization {
 
   @Override
   public String toString() {
-    return "DashboardVisualization{" + "recipeId='" + recipeId + "'," +"recipeOptions='" + recipeOptions + "'," +"visualizationId='" + visualizationId + "'," +"visualizationOptions='" + visualizationOptions + "'" +"}";
+    return "DashboardVisualization{" + "visualizationId='" + visualizationId + "'," +"visualizationOptions='" + visualizationOptions + "'" +"}";
   }
 
   @Override
@@ -67,15 +44,13 @@ public class DashboardVisualization {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DashboardVisualization that = (DashboardVisualization) o;
-        return java.util.Objects.equals(recipeId, that.recipeId) &&
-                            java.util.Objects.equals(recipeOptions, that.recipeOptions) &&
-                            java.util.Objects.equals(visualizationId, that.visualizationId) &&
+        return java.util.Objects.equals(visualizationId, that.visualizationId) &&
                             java.util.Objects.equals(visualizationOptions, that.visualizationOptions);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(recipeId, recipeOptions, visualizationId, visualizationOptions);
+    return java.util.Objects.hash(visualizationId, visualizationOptions);
   }
 
   public static io.moderne.organizations.types.DashboardVisualization.Builder newBuilder() {
@@ -83,32 +58,15 @@ public class DashboardVisualization {
   }
 
   public static class Builder {
-    private String recipeId;
-
-    private List<Option> recipeOptions;
-
     private String visualizationId;
 
     private List<Option> visualizationOptions;
 
     public DashboardVisualization build() {
                   io.moderne.organizations.types.DashboardVisualization result = new io.moderne.organizations.types.DashboardVisualization();
-                      result.recipeId = this.recipeId;
-          result.recipeOptions = this.recipeOptions;
-          result.visualizationId = this.visualizationId;
+                      result.visualizationId = this.visualizationId;
           result.visualizationOptions = this.visualizationOptions;
                       return result;
-    }
-
-    public io.moderne.organizations.types.DashboardVisualization.Builder recipeId(String recipeId) {
-      this.recipeId = recipeId;
-      return this;
-    }
-
-    public io.moderne.organizations.types.DashboardVisualization.Builder recipeOptions(
-        List<Option> recipeOptions) {
-      this.recipeOptions = recipeOptions;
-      return this;
     }
 
     public io.moderne.organizations.types.DashboardVisualization.Builder visualizationId(
