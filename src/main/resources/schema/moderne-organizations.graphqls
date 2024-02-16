@@ -65,8 +65,6 @@ type Dashboard{
 }
 
 type DashboardVisualization{
-    recipeId: String!
-    recipeOptions: [Option!]!
     visualizationId: String!
     visualizationOptions: [Option!]!
 }

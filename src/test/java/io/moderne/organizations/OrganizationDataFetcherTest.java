@@ -42,14 +42,10 @@ public class OrganizationDataFetcherTest {
                                         ))
                                         .visualizations(List.of(
                                                 new DashboardVisualization(
-                                                        "org.openrewrite.LanguageComposition",
-                                                        null,
                                                         "io.moderne.LanguageComposition",
                                                         null
                                                 ),
                                                 new DashboardVisualization(
-                                                        "org.openrewrite.sql.FindSql",
-                                                        null,
                                                         "io.moderne.SqlCrud",
                                                         null
                                                 )

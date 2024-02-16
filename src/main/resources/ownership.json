@@ -123,11 +123,9 @@
       ],
       "visualizations": [
         {
-          "recipeId": "org.openrewrite.LanguageComposition",
           "visualizationId": "io.moderne.LanguageComposition"
         },
         {
-          "recipeId": "org.openrewrite.sql.FindSql",
           "visualizationId": "io.moderne.SqlCrud"
         }
       ]
