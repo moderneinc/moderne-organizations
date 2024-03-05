@@ -6,24 +6,24 @@ import java.lang.String;
 import java.util.List;
 
 public class DashboardRecipe {
-  private String recipeId;
+  private String id;
 
   private List<Option> options;
 
   public DashboardRecipe() {
   }
 
-  public DashboardRecipe(String recipeId, List<Option> options) {
-    this.recipeId = recipeId;
+  public DashboardRecipe(String id, List<Option> options) {
+    this.id = id;
     this.options = options;
   }
 
-  public String getRecipeId() {
-    return recipeId;
+  public String getId() {
+    return id;
   }
 
-  public void setRecipeId(String recipeId) {
-    this.recipeId = recipeId;
+  public void setId(String id) {
+    this.id = id;
   }
 
   public List<Option> getOptions() {
@@ -36,7 +36,7 @@ public class DashboardRecipe {
 
   @Override
   public String toString() {
-    return "DashboardRecipe{" + "recipeId='" + recipeId + "'," +"options='" + options + "'" +"}";
+    return "DashboardRecipe{" + "id='" + id + "'," +"options='" + options + "'" +"}";
   }
 
   @Override
@@ -44,13 +44,13 @@ public class DashboardRecipe {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DashboardRecipe that = (DashboardRecipe) o;
-        return java.util.Objects.equals(recipeId, that.recipeId) &&
+        return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(options, that.options);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(recipeId, options);
+    return java.util.Objects.hash(id, options);
   }
 
   public static io.moderne.organizations.types.DashboardRecipe.Builder newBuilder() {
@@ -58,19 +58,19 @@ public class DashboardRecipe {
   }
 
   public static class Builder {
-    private String recipeId;
+    private String id;
 
     private List<Option> options;
 
     public DashboardRecipe build() {
                   io.moderne.organizations.types.DashboardRecipe result = new io.moderne.organizations.types.DashboardRecipe();
-                      result.recipeId = this.recipeId;
+                      result.id = this.id;
           result.options = this.options;
                       return result;
     }
 
-    public io.moderne.organizations.types.DashboardRecipe.Builder recipeId(String recipeId) {
-      this.recipeId = recipeId;
+    public io.moderne.organizations.types.DashboardRecipe.Builder id(String id) {
+      this.id = id;
       return this;
     }
 

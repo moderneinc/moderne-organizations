@@ -42,11 +42,11 @@ public class DgsConstants {
 
     public static final String Parent = "parent";
 
-    public static final String Dashboard = "dashboard";
+    public static final String DevCenter = "devCenter";
   }
 
-  public static class DASHBOARD {
-    public static final String TYPE_NAME = "Dashboard";
+  public static class DEVCENTER {
+    public static final String TYPE_NAME = "DevCenter";
 
     public static final String UpgradesAndMigrations = "upgradesAndMigrations";
 
@@ -55,16 +55,34 @@ public class DgsConstants {
     public static final String Security = "security";
   }
 
-  public static class DASHBOARDVISUALIZATION {
-    public static final String TYPE_NAME = "DashboardVisualization";
+  public static class DEVCENTERVISUALIZATIONCARD {
+    public static final String TYPE_NAME = "DevCenterVisualizationCard";
 
     public static final String VisualizationId = "visualizationId";
 
     public static final String VisualizationOptions = "visualizationOptions";
   }
 
-  public static class DASHBOARDRECIPE {
-    public static final String TYPE_NAME = "DashboardRecipe";
+  public static class MEASURE {
+    public static final String TYPE_NAME = "Measure";
+
+    public static final String Name = "name";
+
+    public static final String Recipe = "recipe";
+  }
+
+  public static class DEVCENTERRECIPECARD {
+    public static final String TYPE_NAME = "DevCenterRecipeCard";
+
+    public static final String Title = "title";
+
+    public static final String Measures = "measures";
+
+    public static final String Fix = "fix";
+  }
+
+  public static class DEVCENTERRECIPE {
+    public static final String TYPE_NAME = "DevCenterRecipe";
 
     public static final String RecipeId = "recipeId";
 

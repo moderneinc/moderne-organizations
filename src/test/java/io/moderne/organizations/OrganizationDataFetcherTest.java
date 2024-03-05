@@ -24,33 +24,6 @@ public class OrganizationDataFetcherTest {
                                 .id("OpenRewrite")
                                 .name("OpenRewrite")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
-                                .dashboard(Dashboard.newBuilder()
-                                        .upgradesAndMigrations(List.of(
-                                                new DashboardRecipe("org.openrewrite.java.migrate.UpgradeToJava21", null),
-                                                new DashboardRecipe("org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2", null),
-                                                new DashboardRecipe("org.openrewrite.java.testing.junit5.JUnit4to5Migration", null)
-                                        ))
-                                        .security(List.of(
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA01", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA02", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA03", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA04", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA05", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA06", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA08", null),
-                                                new DashboardRecipe("org.openrewrite.java.security.OwaspA10", null)
-                                        ))
-                                        .visualizations(List.of(
-                                                new DashboardVisualization(
-                                                        "io.moderne.LanguageComposition",
-                                                        null
-                                                ),
-                                                new DashboardVisualization(
-                                                        "io.moderne.SqlCrud",
-                                                        null
-                                                )
-                                        ))
-                                        .build())
                                 .build()) // From the ownership.json file
                 .expectNext(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
                 .verifyComplete();
