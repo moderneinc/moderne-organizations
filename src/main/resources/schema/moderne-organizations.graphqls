@@ -38,7 +38,7 @@ type Organization {
 
     parent: Organization
 
-    dashboard: Dashboard
+    devCenter: DevCenter
 }
 
 input RepositoryInput {
@@ -47,29 +47,40 @@ input RepositoryInput {
     branch: String
 }
 
-type Dashboard{
+type DevCenter {
     """
     Available/recommended upgrades and migrations.
     """
-    upgradesAndMigrations: [DashboardRecipe!]
+    upgradesAndMigrations: [DevCenterRecipeCard!]
 
     """
     Recommended visualizations to run on this organization.
     """
-    visualizations: [DashboardVisualization!]
+    visualizations: [DevCenterVisualizationCard!]
 
     """
     Security recipes to run for this organization.
     """
-    security: [DashboardRecipe!]
+    security: [DevCenterRecipe!]
 }
 
-type DashboardVisualization{
+type DevCenterVisualizationCard {
     visualizationId: String!
     visualizationOptions: [Option!]!
 }
 
-type DashboardRecipe{
+type Measure {
+    name: String!
+    recipe: DevCenterRecipe!
+}
+
+type DevCenterRecipeCard {
+    title: String!
+    measures: [Measure!]!
+    fix: DevCenterRecipe!
+}
+
+type DevCenterRecipe {
     recipeId: String!
     options: [Option!]!
 }
