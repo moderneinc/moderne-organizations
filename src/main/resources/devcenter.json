@@ -143,7 +143,7 @@
           "visualizationId": "io.moderne.LanguageComposition"
         },
         {
-          "visualizationId": "io.moderne-private.SqlHistogram"
+          "visualizationId": "io.moderne.SqlCrud"
         }
       ],
       "security": [
@@ -307,7 +307,7 @@
           "visualizationId": "io.moderne.LanguageComposition"
         },
         {
-          "visualizationId": "io.moderne-private.SqlHistogram"
+          "visualizationId": "io.moderne.SqlCrud"
         }
       ],
       "security": [
