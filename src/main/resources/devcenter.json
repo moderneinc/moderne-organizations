@@ -145,23 +145,23 @@
         {
           "visualizationId": "io.moderne-private.SqlHistogram"
         }
+      ],
+      "security": [
+        { "recipeId": "org.openrewrite.java.security.OwaspA01" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA02" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA03" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA05" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA06" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA08" },
+        {
+          "recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"
+        },
+        { "recipeId": "org.openrewrite.java.security.secrets.FindSecrets" },
+        { "recipeId": "org.openrewrite.java.security.ZipSlip" },
+        { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
       ]
     },
-    "security": [
-      {"recipeId": "org.openrewrite.java.security.OwaspA01"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA02"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA03"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA05"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA06"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA08"},
-      {"recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"},
-      {"recipeId": "org.openrewrite.java.security.secrets.FindSecrets"},
-      {"recipeId": "org.openrewrite.java.security.ZipSlip"},
-      {"recipeId": "org.openrewrite.java.security.SecureTempFileCreation"}
-    ],
-    "organizations": [
-      "Default"
-    ]
+    "organizations": ["Default"]
   },
   {
     "devCenter": {
@@ -309,23 +309,23 @@
         {
           "visualizationId": "io.moderne-private.SqlHistogram"
         }
+      ],
+      "security": [
+        { "recipeId": "org.openrewrite.java.security.OwaspA01" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA02" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA03" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA05" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA06" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA08" },
+        {
+          "recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"
+        },
+        { "recipeId": "org.openrewrite.java.security.secrets.FindSecrets" },
+        { "recipeId": "org.openrewrite.java.security.ZipSlip" },
+        { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
       ]
     },
-    "security": [
-      {"recipeId": "org.openrewrite.java.security.OwaspA01"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA02"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA03"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA05"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA06"},
-      {"recipeId": "org.openrewrite.java.security.OwaspA08"},
-      {"recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"},
-      {"recipeId": "org.openrewrite.java.security.secrets.FindSecrets"},
-      {"recipeId": "org.openrewrite.java.security.ZipSlip"},
-      {"recipeId": "org.openrewrite.java.security.SecureTempFileCreation"}
-    ],
-    "organizations": [
-      "WebGoat"
-    ]
+    "organizations": ["WebGoat"]
   },
   {
     "devCenter": {
@@ -519,8 +519,6 @@
         }
       ]
     },
-    "organizations": [
-      "Apache Maven"
-    ]
+    "organizations": ["Apache Maven"]
   }
 ]
