@@ -8,7 +8,7 @@
             {
               "name": "Major",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -28,7 +28,7 @@
             {
               "name": "Minor",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -48,7 +48,7 @@
             {
               "name": "Patch",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -76,7 +76,7 @@
             {
               "name": "Java 8+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -88,7 +88,7 @@
             {
               "name": "Java 11+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -100,7 +100,7 @@
             {
               "name": "Java 17+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -172,7 +172,7 @@
             {
               "name": "Major",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -192,7 +192,7 @@
             {
               "name": "Minor",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -212,7 +212,7 @@
             {
               "name": "Patch",
               "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.DependencyInsight",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
                 "options": [
                   {
                     "name": "groupIdPattern",
@@ -240,7 +240,7 @@
             {
               "name": "Java 8+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -252,7 +252,7 @@
             {
               "name": "Java 11+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -264,7 +264,7 @@
             {
               "name": "Java 17+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -468,7 +468,7 @@
             {
               "name": "Java 8+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -480,7 +480,7 @@
             {
               "name": "Java 11+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
@@ -492,7 +492,7 @@
             {
               "name": "Java 17+",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasJavaVersion",
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
                 "options": [
                   {
                     "name": "version",
