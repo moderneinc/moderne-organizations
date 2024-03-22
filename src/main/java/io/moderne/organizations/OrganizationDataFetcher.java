@@ -46,6 +46,9 @@ public class OrganizationDataFetcher {
 
     @DgsQuery
     Mono<Organization> organization(@InputArgument String id) {
+        if (id.equals(ALL_ORG.getId())) {
+            return Mono.just(ALL_ORG);
+        }
         return Flux.fromIterable(ownership)
                 .filter(org -> org.name().equals(id))
                 .next()
@@ -76,10 +79,9 @@ public class OrganizationDataFetcher {
     }
 
     private Organization getOrganizationByName(String name) {
-        if (name.equals("ALL")) {
+        if (name.equals(ALL_ORG.getName())) {
             return ALL_ORG;
         }
-
         return ownership.stream()
                 .filter(org -> org.name().equals(name))
                 .findFirst()
