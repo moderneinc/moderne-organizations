@@ -50,7 +50,7 @@ public class OrganizationDataFetcher {
             return Mono.just(ALL_ORG);
         }
         return Flux.fromIterable(ownership)
-                .filter(org -> org.name().equals(id))
+                .filter(org -> org.id().equals(id))
                 .next()
                 .map(this::mapOrganization);
     }
