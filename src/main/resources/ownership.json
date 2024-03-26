@@ -1,6 +1,7 @@
 [
   {
     "name": "Default",
+    "parent" : "ALL",
     "repositories": [
       {
         "origin": "github.com",
@@ -21,6 +22,7 @@
   },
   {
     "name": "OpenRewrite",
+    "parent" : "ALL",
     "repositories": [
       {
         "origin": "github.com",
