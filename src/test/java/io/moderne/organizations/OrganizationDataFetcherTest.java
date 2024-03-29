@@ -17,6 +17,11 @@ public class OrganizationDataFetcherTest {
 
     @Test
     void organizationForThisRepository() {
+        Organization all = Organization.newBuilder()
+                .id("ALL")
+                .name("ALL")
+                .commitOptions(List.of(CommitOption.Direct, CommitOption.Branch, CommitOption.Fork, CommitOption.PullRequest, CommitOption.ForkAndPullRequest))
+                .build();
         StepVerifier
                 .create(organizationDataFetcher.organizations(new RepositoryInput("openrewrite/rewrite", "github.com", "main")))
                 .expectNext(
@@ -24,8 +29,9 @@ public class OrganizationDataFetcherTest {
                                 .id("OpenRewrite")
                                 .name("OpenRewrite")
                                 .commitOptions(List.of(CommitOption.PullRequest, CommitOption.Branch, CommitOption.ForkAndPullRequest, CommitOption.Fork))
-                                .build()) // From the ownership.json file
-                .expectNext(Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build())
+                                ._parent(all)
+                                .build())
+                .expectNext(all)
                 .verifyComplete();
     }
 }
