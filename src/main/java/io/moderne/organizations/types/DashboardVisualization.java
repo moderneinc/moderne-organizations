@@ -52,8 +52,12 @@ public class DashboardVisualization {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         DashboardVisualization that = (DashboardVisualization) o;
         return java.util.Objects.equals(recipe, that.recipe) &&
                             java.util.Objects.equals(id, that.id) &&

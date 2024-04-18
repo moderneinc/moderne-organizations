@@ -71,8 +71,12 @@ public class DevCenter {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         DevCenter that = (DevCenter) o;
         return java.util.Objects.equals(upgradesAndMigrations, that.upgradesAndMigrations) &&
                             java.util.Objects.equals(visualizations, that.visualizations) &&

@@ -41,8 +41,12 @@ public class DevCenterVisualizationCard {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         DevCenterVisualizationCard that = (DevCenterVisualizationCard) o;
         return java.util.Objects.equals(visualizationId, that.visualizationId) &&
                             java.util.Objects.equals(visualizationOptions, that.visualizationOptions);

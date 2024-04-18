@@ -52,8 +52,12 @@ public class DevCenterRecipeCard {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         DevCenterRecipeCard that = (DevCenterRecipeCard) o;
         return java.util.Objects.equals(title, that.title) &&
                             java.util.Objects.equals(measures, that.measures) &&
