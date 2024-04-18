@@ -65,8 +65,12 @@ public class Dashboard {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Dashboard that = (Dashboard) o;
         return java.util.Objects.equals(upgradesAndMigrations, that.upgradesAndMigrations) &&
                             java.util.Objects.equals(visualizations, that.visualizations) &&

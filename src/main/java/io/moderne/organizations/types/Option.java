@@ -51,8 +51,12 @@ public class Option {
 
   @Override
   public boolean equals(java.lang.Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Option that = (Option) o;
         return java.util.Objects.equals(name, that.name) &&
                             java.util.Objects.equals(value, that.value);

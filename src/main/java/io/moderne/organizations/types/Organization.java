@@ -81,8 +81,12 @@ public class Organization {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Organization that = (Organization) o;
         return java.util.Objects.equals(id, that.id) &&
                             java.util.Objects.equals(name, that.name) &&
