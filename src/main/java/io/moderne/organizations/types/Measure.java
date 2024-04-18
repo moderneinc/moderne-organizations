@@ -40,8 +40,12 @@ public class Measure {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Measure that = (Measure) o;
         return java.util.Objects.equals(name, that.name) &&
                             java.util.Objects.equals(recipe, that.recipe);

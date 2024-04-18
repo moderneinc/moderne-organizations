@@ -9,7 +9,7 @@ public record OrganizationRepository(String path, String origin, String branch) 
         this.origin = origin;
         this.path = path;
         this.branch = branch;
-        if (origin.equals("*") && path.equals("*") && branch.equals("*")) {
+        if ("*".equals(origin) && "*".equals(path) && "*".equals(branch)) {
             throw new IllegalArgumentException("Cannot have a repository with origin=* and branch=* and path=* as this would match all repositories");
         }
     }
