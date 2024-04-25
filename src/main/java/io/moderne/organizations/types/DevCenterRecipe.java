@@ -41,8 +41,12 @@ public class DevCenterRecipe {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         DevCenterRecipe that = (DevCenterRecipe) o;
         return java.util.Objects.equals(recipeId, that.recipeId) &&
                             java.util.Objects.equals(options, that.options);

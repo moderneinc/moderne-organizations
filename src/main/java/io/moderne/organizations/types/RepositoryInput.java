@@ -51,8 +51,12 @@ public class RepositoryInput {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         RepositoryInput that = (RepositoryInput) o;
         return java.util.Objects.equals(path, that.path) &&
                             java.util.Objects.equals(origin, that.origin) &&
