@@ -19,13 +19,13 @@ public class Organization {
 
   private DevCenter devCenter;
 
-  private List<Repository> repositories;
+  private RepositoryConnection repositories;
 
   public Organization() {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent, DevCenter devCenter, List<Repository> repositories) {
+      Organization _parent, DevCenter devCenter, RepositoryConnection repositories) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
@@ -77,11 +77,11 @@ public class Organization {
     this.devCenter = devCenter;
   }
 
-  public List<Repository> getRepositories() {
+  public RepositoryConnection getRepositories() {
     return repositories;
   }
 
-  public void setRepositories(List<Repository> repositories) {
+  public void setRepositories(RepositoryConnection repositories) {
     this.repositories = repositories;
   }
 
@@ -126,7 +126,7 @@ public class Organization {
 
     private DevCenter devCenter;
 
-    private List<Repository> repositories;
+    private RepositoryConnection repositories;
 
     public Organization build() {
                   io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
@@ -169,7 +169,7 @@ public class Organization {
     }
 
     public io.moderne.organizations.types.Organization.Builder repositories(
-        List<Repository> repositories) {
+        RepositoryConnection repositories) {
       this.repositories = repositories;
       return this;
     }

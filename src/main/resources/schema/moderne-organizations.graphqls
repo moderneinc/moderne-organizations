@@ -40,7 +40,26 @@ type Organization {
 
     devCenter: DevCenter
 
-    repositories: [Repository!]!
+    repositories: RepositoryConnection!
+}
+
+type RepositoryConnection {
+    edges: [RepositoryEdge]
+    pageInfo: PageInfo
+    count: Int
+}
+
+type RepositoryEdge {
+    node: Repository
+    cursor: String
+}
+
+# Pagination Type - Generic
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
 }
 
 type Repository {

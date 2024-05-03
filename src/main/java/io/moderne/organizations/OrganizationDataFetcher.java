@@ -1,8 +1,10 @@
 package io.moderne.organizations;
 
 import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
+import graphql.schema.DataFetchingEnvironment;
 import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
 import reactor.core.publisher.Flux;
@@ -61,9 +63,20 @@ public class OrganizationDataFetcher {
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :
                         org.commitOptions())
-                .repositories(org.repositories().stream().map(this::mapRepository).toList())
                 ._parent(org.parent() != null ? getOrganizationByName(org.parent()) : null)
                 .build();
+    }
+
+    @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
+    public Mono<ExtendedRelayConnection<Repository>> repositories(DataFetchingEnvironment dfe) {
+        Organization organization = dfe.getSource();
+        return ExtendedRelayConnection.getConnection(dfe,
+                Mono.fromCallable(() -> organizations.get(organization.getName()).repositories().size()).onErrorReturn(0),
+                limitOffset -> Flux.fromIterable(organizations.get(organization.getName()).repositories())
+                        .skip(limitOffset.getOffset())
+                        .take(limitOffset.getLimit())
+                        .map(this::mapRepository)
+        );
     }
 
     private Repository mapRepository(RepositoryInput repositoryInput) {
