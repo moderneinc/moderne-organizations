@@ -21,6 +21,13 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
+    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+        return Flux.fromIterable(organizations.values())
+                .filter(org -> org.contains(repository))
+                .map(this::mapOrganization);
+    }
+
+    @DgsQuery
     Flux<Organization> allOrganizations() {
         return Flux.fromIterable(organizations.values())
                 .map(this::mapOrganization);
@@ -31,6 +38,7 @@ public class OrganizationDataFetcher {
         return Mono.justOrEmpty(organizations.get(id))
                 .map(this::mapOrganization);
     }
+
 
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
