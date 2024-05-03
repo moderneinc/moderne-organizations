@@ -1,21 +1,21 @@
-cloneUrl,branch
-https://github.com/openrewrite/rewrite-recipe-bom,main,Default
-https://github.com/openrewrite/rewrite-recommendations,main,Default
-https://github.com/WebGoat/WebGoat,main,Default
-https://github.com/openrewrite/rewrite-cucumber-jvm,main,OpenRewrite
-https://github.com/openrewrite/rewrite-hibernate,main,OpenRewrite
-https://github.com/openrewrite/rewrite-javascript,main,OpenRewrite
-https://github.com/openrewrite/rewrite-launchdarkly,main,OpenRewrite
-https://github.com/openrewrite/rewrite-liberty,main,OpenRewrite
-https://github.com/openrewrite/rewrite-maven-plugin,main,OpenRewrite
-https://github.com/openrewrite/rewrite-micrometer,main,OpenRewrite
-https://github.com/openrewrite/rewrite-micronaut,main,OpenRewrite
-https://github.com/openrewrite/rewrite-okhttp,main,OpenRewrite
-https://github.com/openrewrite/rewrite-recipe-bom,main,OpenRewrite
-https://github.com/openrewrite/rewrite-recommendations,main,OpenRewrite
-https://github.com/WebGoat/WebGoat,main,WebGoat
-https://github.com/WebGoat/WebGoat-Legacy,master,WebGoat
-https://github.com/WebGoat/WebGoat-Lessons,develop,WebGoat
-https://github.com/WebGoat/WebWolf,master,WebGoat
-https://github.com/WebGoat/WebGoat-Archived-Releases,master,WebGoat
-https://github.com/WebGoat/groovygoat,master,WebGoat
+cloneUrl,branch,org1,orgN
+https://github.com/openrewrite/rewrite-recipe-bom,main,Default,ALL
+https://github.com/openrewrite/rewrite-recommendations,main,Default,ALL
+https://github.com/WebGoat/WebGoat,main,Default,ALL
+https://github.com/openrewrite/rewrite-cucumber-jvm,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-hibernate,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-javascript,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-launchdarkly,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-liberty,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-maven-plugin,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-micrometer,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-micronaut,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-okhttp,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-recipe-bom,main,OpenRewrite,Open source,ALL
+https://github.com/openrewrite/rewrite-recommendations,main,OpenRewrite,Open source,ALL
+https://github.com/WebGoat/WebGoat,main,WebGoat,Open source,ALL
+https://github.com/WebGoat/WebGoat-Legacy,master,WebGoat,Open source,ALL
+https://github.com/WebGoat/WebGoat-Lessons,develop,WebGoat,Open source,ALL
+https://github.com/WebGoat/WebWolf,master,WebGoat,Open source,ALL
+https://github.com/WebGoat/WebGoat-Archived-Releases,master,WebGoat,Open source,ALL
+https://github.com/WebGoat/groovygoat,master,WebGoat,Open source,ALL

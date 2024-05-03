@@ -19,22 +19,26 @@ public class OrganizationDataFetcherTest {
         StepVerifier
                 .create(organizationDataFetcher.allOrganizations())
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("ALL");
-                    assertThat(next.getRepositories()).hasSize(0); // No organizations directly under ALL
-                })
-                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("Default");
                     assertThat(next.getParent().getId()).isEqualTo("ALL");
                     assertThat(next.getRepositories()).hasSize(3);
                 })
                 .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("ALL");
+                    assertThat(next.getRepositories()).hasSize(0);
+                })
+                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("OpenRewrite");
-                    assertThat(next.getParent().getId()).isEqualTo("ALL");
+                    assertThat(next.getParent().getId()).isEqualTo("Open source");
                     assertThat(next.getRepositories()).hasSize(11);
                 })
                 .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("Open source");
+                    assertThat(next.getRepositories()).hasSize(0);
+                })
+                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("WebGoat");
-                    assertThat(next.getParent().getId()).isEqualTo("ALL");
+                    assertThat(next.getParent().getId()).isEqualTo("Open source");
                     assertThat(next.getRepositories()).hasSize(6);
                 })
                 .verifyComplete();

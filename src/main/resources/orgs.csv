@@ -1,5 +1,0 @@
-id,name,parentId,commitOptions
-ALL,ALL,,
-Default,Default,ALL,
-OpenRewrite,OpenRewrite,ALL,PullRequest|Branch|ForkAndPullRequest|Fork
-WebGoat,WebGoat,ALL,
