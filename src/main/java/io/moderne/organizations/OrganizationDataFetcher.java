@@ -25,13 +25,6 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
-        return Flux.fromIterable(organizations.values())
-                .filter(org -> org.contains(repository))
-                .map(this::mapOrganization);
-    }
-
-    @DgsQuery
     Flux<Organization> allOrganizations() {
         return Flux.fromIterable(organizations.values())
                 .map(this::mapOrganization);
@@ -43,11 +36,10 @@ public class OrganizationDataFetcher {
                 .map(this::mapOrganization);
     }
 
-
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
         // everybody belongs to every organization, and the "default" organization is listed
-        // first in the json that this list is based on, so it will be selected by default in the UI
+        // first in the repos.csv that this list is based on, so it will be selected by default in the UI
         return Flux.fromIterable(organizations.values())
                 .filter(org -> allowAccess(user, at, org.name()))
                 .map(this::mapOrganization);
