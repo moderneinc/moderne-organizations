@@ -19,12 +19,12 @@ public class OrganizationDataFetcherTest {
         StepVerifier
                 .create(organizationDataFetcher.allOrganizations())
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Default");
-                    assertThat(next.getParent().getId()).isEqualTo("ALL");
-                })
-                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("ALL");
                     assertThat(next.getParent()).isNull();
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("Default");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL");
                 })
                 .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("OpenRewrite");

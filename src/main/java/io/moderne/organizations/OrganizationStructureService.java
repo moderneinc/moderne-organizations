@@ -21,7 +21,9 @@ public class OrganizationStructureService {
     private static final String REPOS_CSV = "repos.csv";
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
-        Map<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
+        LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
+        // ensure ALL is first
+        organizations.put("ALL",new OrganizationRepositories("ALL", new LinkedHashSet<>(), List.of(CommitOption.values()), null));
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
             reader.readLine(); // skip header
