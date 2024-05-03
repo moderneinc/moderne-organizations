@@ -1,10 +1,5 @@
 type Query {
     """
-    The list of organizations that a repository belongs to.
-    """
-    organizations(repository: RepositoryInput!): [Organization!]!
-
-    """
     The list of all possible organizations
     """
     allOrganizations: [Organization!]!
@@ -39,6 +34,14 @@ type Organization {
     parent: Organization
 
     devCenter: DevCenter
+
+    repositories: [Repository!]!
+}
+
+type Repository {
+    path: String!
+    origin: String
+    branch: String
 }
 
 input RepositoryInput {

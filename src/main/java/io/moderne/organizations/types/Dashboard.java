@@ -7,14 +7,17 @@ import java.util.List;
 
 public class Dashboard {
   /**
-   * List of recipe IDs to show upgrades and migrations for.
+   * Available/recommended upgrades and migrations.
    */
   private List<DashboardRecipe> upgradesAndMigrations;
 
+  /**
+   * Recommended visualizations to run on this organization.
+   */
   private List<DashboardVisualization> visualizations;
 
   /**
-   * List of recipe IDs to show for security.
+   * Security recipes to run for this organization.
    */
   private List<DashboardRecipe> security;
 
@@ -29,7 +32,7 @@ public class Dashboard {
   }
 
   /**
-   * List of recipe IDs to show upgrades and migrations for.
+   * Available/recommended upgrades and migrations.
    */
   public List<DashboardRecipe> getUpgradesAndMigrations() {
     return upgradesAndMigrations;
@@ -39,6 +42,9 @@ public class Dashboard {
     this.upgradesAndMigrations = upgradesAndMigrations;
   }
 
+  /**
+   * Recommended visualizations to run on this organization.
+   */
   public List<DashboardVisualization> getVisualizations() {
     return visualizations;
   }
@@ -48,7 +54,7 @@ public class Dashboard {
   }
 
   /**
-   * List of recipe IDs to show for security.
+   * Security recipes to run for this organization.
    */
   public List<DashboardRecipe> getSecurity() {
     return security;
@@ -84,14 +90,17 @@ public class Dashboard {
 
   public static class Builder {
     /**
-     * List of recipe IDs to show upgrades and migrations for.
+     * Available/recommended upgrades and migrations.
      */
     private List<DashboardRecipe> upgradesAndMigrations;
 
+    /**
+     * Recommended visualizations to run on this organization.
+     */
     private List<DashboardVisualization> visualizations;
 
     /**
-     * List of recipe IDs to show for security.
+     * Security recipes to run for this organization.
      */
     private List<DashboardRecipe> security;
 
@@ -104,7 +113,7 @@ public class Dashboard {
     }
 
     /**
-     * List of recipe IDs to show upgrades and migrations for.
+     * Available/recommended upgrades and migrations.
      */
     public io.moderne.organizations.types.Dashboard.Builder upgradesAndMigrations(
         List<DashboardRecipe> upgradesAndMigrations) {
@@ -112,6 +121,9 @@ public class Dashboard {
       return this;
     }
 
+    /**
+     * Recommended visualizations to run on this organization.
+     */
     public io.moderne.organizations.types.Dashboard.Builder visualizations(
         List<DashboardVisualization> visualizations) {
       this.visualizations = visualizations;
@@ -119,7 +131,7 @@ public class Dashboard {
     }
 
     /**
-     * List of recipe IDs to show for security.
+     * Security recipes to run for this organization.
      */
     public io.moderne.organizations.types.Dashboard.Builder security(
         List<DashboardRecipe> security) {

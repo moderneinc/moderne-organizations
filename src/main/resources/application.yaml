@@ -1,3 +1,6 @@
 management.endpoints.web.exposure.include: prometheus,health
 management.endpoint.prometheus.enabled: true
 management.endpoint.health.enabled: true
+spring:
+  codec:
+    max-in-memory-size: 10MB # this should be big enough to fit all repositories. At least numberOfRepositories x 150B + 10KB

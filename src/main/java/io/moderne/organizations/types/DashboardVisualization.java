@@ -6,48 +6,37 @@ import java.lang.String;
 import java.util.List;
 
 public class DashboardVisualization {
-  private DashboardRecipe recipe;
+  private String visualizationId;
 
-  private String id;
-
-  private List<Option> options;
+  private List<Option> visualizationOptions;
 
   public DashboardVisualization() {
   }
 
-  public DashboardVisualization(DashboardRecipe recipe, String id, List<Option> options) {
-    this.recipe = recipe;
-    this.id = id;
-    this.options = options;
+  public DashboardVisualization(String visualizationId, List<Option> visualizationOptions) {
+    this.visualizationId = visualizationId;
+    this.visualizationOptions = visualizationOptions;
   }
 
-  public DashboardRecipe getRecipe() {
-    return recipe;
+  public String getVisualizationId() {
+    return visualizationId;
   }
 
-  public void setRecipe(DashboardRecipe recipe) {
-    this.recipe = recipe;
+  public void setVisualizationId(String visualizationId) {
+    this.visualizationId = visualizationId;
   }
 
-  public String getId() {
-    return id;
+  public List<Option> getVisualizationOptions() {
+    return visualizationOptions;
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public List<Option> getOptions() {
-    return options;
-  }
-
-  public void setOptions(List<Option> options) {
-    this.options = options;
+  public void setVisualizationOptions(List<Option> visualizationOptions) {
+    this.visualizationOptions = visualizationOptions;
   }
 
   @Override
   public String toString() {
-    return "DashboardVisualization{" + "recipe='" + recipe + "'," +"id='" + id + "'," +"options='" + options + "'" +"}";
+    return "DashboardVisualization{" + "visualizationId='" + visualizationId + "'," +"visualizationOptions='" + visualizationOptions + "'" +"}";
   }
 
   @Override
@@ -55,14 +44,13 @@ public class DashboardVisualization {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DashboardVisualization that = (DashboardVisualization) o;
-        return java.util.Objects.equals(recipe, that.recipe) &&
-                            java.util.Objects.equals(id, that.id) &&
-                            java.util.Objects.equals(options, that.options);
+        return java.util.Objects.equals(visualizationId, that.visualizationId) &&
+                            java.util.Objects.equals(visualizationOptions, that.visualizationOptions);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(recipe, id, options);
+    return java.util.Objects.hash(visualizationId, visualizationOptions);
   }
 
   public static io.moderne.organizations.types.DashboardVisualization.Builder newBuilder() {
@@ -70,34 +58,26 @@ public class DashboardVisualization {
   }
 
   public static class Builder {
-    private DashboardRecipe recipe;
+    private String visualizationId;
 
-    private String id;
-
-    private List<Option> options;
+    private List<Option> visualizationOptions;
 
     public DashboardVisualization build() {
                   io.moderne.organizations.types.DashboardVisualization result = new io.moderne.organizations.types.DashboardVisualization();
-                      result.recipe = this.recipe;
-          result.id = this.id;
-          result.options = this.options;
+                      result.visualizationId = this.visualizationId;
+          result.visualizationOptions = this.visualizationOptions;
                       return result;
     }
 
-    public io.moderne.organizations.types.DashboardVisualization.Builder recipe(
-        DashboardRecipe recipe) {
-      this.recipe = recipe;
+    public io.moderne.organizations.types.DashboardVisualization.Builder visualizationId(
+        String visualizationId) {
+      this.visualizationId = visualizationId;
       return this;
     }
 
-    public io.moderne.organizations.types.DashboardVisualization.Builder id(String id) {
-      this.id = id;
-      return this;
-    }
-
-    public io.moderne.organizations.types.DashboardVisualization.Builder options(
-        List<Option> options) {
-      this.options = options;
+    public io.moderne.organizations.types.DashboardVisualization.Builder visualizationOptions(
+        List<Option> visualizationOptions) {
+      this.visualizationOptions = visualizationOptions;
       return this;
     }
   }

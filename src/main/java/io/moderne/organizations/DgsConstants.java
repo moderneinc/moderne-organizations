@@ -43,6 +43,18 @@ public class DgsConstants {
     public static final String Parent = "parent";
 
     public static final String DevCenter = "devCenter";
+
+    public static final String Repositories = "repositories";
+  }
+
+  public static class REPOSITORY {
+    public static final String TYPE_NAME = "Repository";
+
+    public static final String Path = "path";
+
+    public static final String Origin = "origin";
+
+    public static final String Branch = "branch";
   }
 
   public static class DEVCENTER {
