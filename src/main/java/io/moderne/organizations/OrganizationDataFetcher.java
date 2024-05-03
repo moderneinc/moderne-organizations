@@ -73,8 +73,8 @@ public class OrganizationDataFetcher {
         return ExtendedRelayConnection.getConnection(dfe,
                 Mono.fromCallable(() -> organizations.get(organization.getName()).repositories().size()).onErrorReturn(0),
                 limitOffset -> Flux.fromIterable(organizations.get(organization.getName()).repositories())
-                        .skip(limitOffset.getOffset())
-                        .take(limitOffset.getLimit())
+                        .skip(limitOffset.offset())
+                        .take(limitOffset.limit())
                         .map(this::mapRepository)
         );
     }

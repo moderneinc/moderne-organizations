@@ -10,24 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-/**
- * Represents a connection in Relay however contains extra metadata about the
- * connection.  For example (original intent) storing the total result count
- * before Relay pagination.
- */
-public class ExtendedRelayConnection<T> implements Connection<T> {
-
+public record ExtendedRelayConnection<T>(List<Edge<T>> edges,
+                                         PageInfo pageInfo,
+                                         Integer count) implements Connection<T> {
     static final int NO_COUNT = -1;
-
-    private final List<Edge<T>> edges;
-    private final PageInfo pageInfo;
-    private final Integer count;
-
-    public ExtendedRelayConnection(List<Edge<T>> edges, PageInfo pageInfo, Integer count) {
-        this.edges = edges;
-        this.pageInfo = pageInfo;
-        this.count = count;
-    }
 
     @Override
     public List<Edge<T>> getEdges() {
@@ -37,10 +23,6 @@ public class ExtendedRelayConnection<T> implements Connection<T> {
     @Override
     public PageInfo getPageInfo() {
         return pageInfo;
-    }
-
-    public Integer getCount() {
-        return count;
     }
 
     public static <V> Mono<ExtendedRelayConnection<V>> getConnection(
@@ -75,9 +57,9 @@ public class ExtendedRelayConnection<T> implements Connection<T> {
                     boolean hasNextPage;
                     int edgeCount = nodes.size();
                     if (isTotalRequested) {
-                        hasNextPage = resultCount > limitOffset.getOffset() + limitOffset.getLimit();
+                        hasNextPage = resultCount > limitOffset.offset() + limitOffset.limit();
                     } else {
-                        hasNextPage = StringUtils.isNullOrEmpty(before) && nodes.size() == limitOffset.getLimit(); // we found 1 more than we actually want, so there is a next page
+                        hasNextPage = StringUtils.isNullOrEmpty(before) && nodes.size() == limitOffset.limit(); // we found 1 more than we actually want, so there is a next page
                         if (hasNextPage) {
                             edgeCount = nodes.size() - 1;
                         }
@@ -85,13 +67,13 @@ public class ExtendedRelayConnection<T> implements Connection<T> {
                     List<Edge<V>> edges = new ArrayList<>(edgeCount);
                     for (int i = 0; i < edgeCount; i++) {
                         edges.add(new DefaultEdge<>(nodes.get(i),
-                                new DefaultConnectionCursor(Integer.toString(limitOffset.getOffset() + i))));
+                                new DefaultConnectionCursor(Integer.toString(limitOffset.offset() + i))));
                     }
                     return new ExtendedRelayConnection<>(edges,
                             new DefaultPageInfo(
-                                    new DefaultConnectionCursor(Integer.toString(limitOffset.getOffset())),
-                                    new DefaultConnectionCursor(Integer.toString(limitOffset.getOffset() + edges.size() - 1)),
-                                    limitOffset.getOffset() > 0,
+                                    new DefaultConnectionCursor(Integer.toString(limitOffset.offset())),
+                                    new DefaultConnectionCursor(Integer.toString(limitOffset.offset() + edges.size() - 1)),
+                                    limitOffset.offset() > 0,
                                     hasNextPage
                             ),
                             resultCount
@@ -99,21 +81,6 @@ public class ExtendedRelayConnection<T> implements Connection<T> {
                 }));
     }
 
-    public static class LimitOffset {
-        private final int limit;
-        private final int offset;
-
-        public LimitOffset(int limit, int offset) {
-            this.limit = limit;
-            this.offset = offset;
-        }
-
-        public int getLimit() {
-            return limit;
-        }
-
-        public int getOffset() {
-            return offset;
-        }
+    public record LimitOffset(int limit, int offset) {
     }
 }
