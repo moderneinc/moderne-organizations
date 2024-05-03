@@ -4,6 +4,8 @@ import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
+import graphql.relay.Connection;
+import graphql.relay.SimpleListConnection;
 import graphql.schema.DataFetchingEnvironment;
 import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
@@ -68,15 +70,16 @@ public class OrganizationDataFetcher {
     }
 
     @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
-    public Mono<ExtendedRelayConnection<Repository>> repositories(DataFetchingEnvironment dfe) {
+    public Mono<Connection<Repository>> repositories(DataFetchingEnvironment dfe) {
         Organization organization = dfe.getSource();
-        return ExtendedRelayConnection.getConnection(dfe,
-                Mono.fromCallable(() -> organizations.get(organization.getName()).repositories().size()).onErrorReturn(0),
-                limitOffset -> Flux.fromIterable(organizations.get(organization.getName()).repositories())
-                        .skip(limitOffset.offset())
-                        .take(limitOffset.limit())
-                        .map(this::mapRepository)
-        );
+        return Mono.fromCallable(() -> {
+            List<Repository> repositories = organizations.get(organization.getName())
+                    .repositories()
+                    .stream()
+                    .map(this::mapRepository)
+                    .toList();
+            return new SimpleListConnection<>(repositories).get(dfe);
+        });
     }
 
     private Repository mapRepository(RepositoryInput repositoryInput) {
