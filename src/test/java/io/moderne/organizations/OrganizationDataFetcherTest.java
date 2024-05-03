@@ -8,7 +8,7 @@ import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = {DgsAutoConfiguration.class, CustomScalarsConfiguration.class, OrganizationDataFetcher.class, OrganizationDataService.class})
+@SpringBootTest(classes = {DgsAutoConfiguration.class, CustomScalarsConfiguration.class, OrganizationDataFetcher.class, OrganizationStructureService.class})
 public class OrganizationDataFetcherTest {
 
     @Autowired

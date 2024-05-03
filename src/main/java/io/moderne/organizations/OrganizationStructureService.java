@@ -12,9 +12,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// currently based on repos.csv, but could also call out to scm apis.
+/**
+ * This service could also directly call your SCM api to determine the available repositories
+ */
 @Service
-public class OrganizationDataService {
+public class OrganizationStructureService {
     private static final Pattern GITHUB_PATTERN = Pattern.compile("github.com/(.*)");
     private static final String ORGS_CSV = "orgs.csv";
     private static final String REPOS_CSV = "repos.csv";

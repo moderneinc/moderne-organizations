@@ -16,8 +16,8 @@ import java.util.Map;
 public class OrganizationDataFetcher {
     Map<String, OrganizationRepositories> organizations;
 
-    public OrganizationDataFetcher(OrganizationDataService organizationDataService) {
-        this.organizations = organizationDataService.readOrganizationStructure();
+    public OrganizationDataFetcher(OrganizationStructureService organizationStructureService) {
+        this.organizations = organizationStructureService.readOrganizationStructure();
     }
 
     @DgsQuery
