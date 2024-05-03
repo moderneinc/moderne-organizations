@@ -11,8 +11,7 @@ import java.util.Set;
  * @param name         The name of the organization
  * @param repositories The set of repositories that this organization owns.
  */
-public record OrganizationRepositories(String id,
-                                       String name,
+public record OrganizationRepositories(String name,
                                        Set<RepositoryInput> repositories,
                                        @Nullable List<CommitOption> commitOptions,
                                        @Nullable String parent) {

@@ -47,7 +47,7 @@ public class OrganizationStructureService {
                             String parent = fields.length > i + 1 ? fields[i + 1].trim() : null;
                             organizations.compute(organization, (k, v) -> {
                                 if (v == null) {
-                                    v = new OrganizationRepositories(organization, organization, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
+                                    v = new OrganizationRepositories(organization, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
                                 }
                                 if (!Objects.equals(v.parent(), parent)) {
                                     throw new IllegalStateException("An organization parent should be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
