@@ -22,6 +22,8 @@ public class OrganizationStructureService {
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
+        Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
+        organizations.put("ALL", new OrganizationRepositories("ALL", allRepositories, List.of(CommitOption.values()), null));
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
             reader.readLine(); // skip header
@@ -40,6 +42,8 @@ public class OrganizationStructureService {
                         }
                         String origin = "github.com";
                         String path = matcher.group(1);
+                        RepositoryInput repository = new RepositoryInput(path, origin, branch);
+                        allRepositories.add(repository);
 
                         for (int i = 2; i < fields.length; i++) {
                             boolean first = i == 2;
@@ -53,7 +57,7 @@ public class OrganizationStructureService {
                                     throw new IllegalStateException("An organization parent should be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
                                 }
                                 if (first) {
-                                    v.repositories().add(new RepositoryInput(path, origin, branch));
+                                    v.repositories().add(repository);
                                 }
                                 return v;
                             });

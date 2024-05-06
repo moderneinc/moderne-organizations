@@ -15,7 +15,4 @@ public record OrganizationRepositories(String name,
                                        Set<RepositoryInput> repositories,
                                        @Nullable List<CommitOption> commitOptions,
                                        @Nullable String parent) {
-    public boolean contains(RepositoryInput repository) {
-        return repositories != null && repositories.contains(repository);
-    }
 }
