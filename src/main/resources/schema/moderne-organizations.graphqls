@@ -3,7 +3,7 @@ type Query {
     Deprecated: will be replaced by allOrganizations query.
     The list of organizations that a repository belongs to.
     """
-    organizations(repository: RepositoryInput!): [Organization!]! @deprecated
+    organizations(repository: RepositoryInput!): [Organization!]! @deprecated(reason: "Will be replaced by allOrganizations query.")
 
     """
     The list of all possible organizations
