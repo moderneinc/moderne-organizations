@@ -23,7 +23,6 @@ public class OrganizationStructureService {
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
         Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
-        organizations.put("ALL", new OrganizationRepositories("ALL", allRepositories, List.of(CommitOption.values()), null));
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
             reader.readLine(); // skip header
@@ -45,7 +44,7 @@ public class OrganizationStructureService {
                         RepositoryInput repository = new RepositoryInput(path, origin, branch);
                         allRepositories.add(repository);
 
-                        for (int i = 2; i < fields.length; i++) {
+                        for (int i = fields.length - 1; i > 1; i--) {
                             boolean first = i == 2;
                             String organization = fields[i].trim();
                             String parent = fields.length > i + 1 ? fields[i + 1].trim() : null;
@@ -66,6 +65,7 @@ public class OrganizationStructureService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        organizations.put("ALL", new OrganizationRepositories("ALL", allRepositories, List.of(CommitOption.values()), null));
         return organizations;
     }
 }
