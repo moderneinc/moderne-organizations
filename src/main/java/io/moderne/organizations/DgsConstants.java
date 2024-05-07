@@ -43,6 +43,48 @@ public class DgsConstants {
     public static final String Parent = "parent";
 
     public static final String DevCenter = "devCenter";
+
+    public static final String Repositories = "repositories";
+  }
+
+  public static class REPOSITORYCONNECTION {
+    public static final String TYPE_NAME = "RepositoryConnection";
+
+    public static final String Edges = "edges";
+
+    public static final String PageInfo = "pageInfo";
+
+    public static final String Count = "count";
+  }
+
+  public static class REPOSITORYEDGE {
+    public static final String TYPE_NAME = "RepositoryEdge";
+
+    public static final String Node = "node";
+
+    public static final String Cursor = "cursor";
+  }
+
+  public static class PAGEINFO {
+    public static final String TYPE_NAME = "PageInfo";
+
+    public static final String HasPreviousPage = "hasPreviousPage";
+
+    public static final String HasNextPage = "hasNextPage";
+
+    public static final String StartCursor = "startCursor";
+
+    public static final String EndCursor = "endCursor";
+  }
+
+  public static class REPOSITORY {
+    public static final String TYPE_NAME = "Repository";
+
+    public static final String Path = "path";
+
+    public static final String Origin = "origin";
+
+    public static final String Branch = "branch";
   }
 
   public static class DEVCENTER {

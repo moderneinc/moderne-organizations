@@ -1,8 +1,9 @@
 type Query {
     """
+    Deprecated: will be replaced by allOrganizations query.
     The list of organizations that a repository belongs to.
     """
-    organizations(repository: RepositoryInput!): [Organization!]!
+    organizations(repository: RepositoryInput!): [Organization!]! @deprecated(reason: "Will be replaced by allOrganizations query.")
 
     """
     The list of all possible organizations
@@ -39,6 +40,33 @@ type Organization {
     parent: Organization
 
     devCenter: DevCenter
+
+    repositories: RepositoryConnection!
+}
+
+type RepositoryConnection {
+    edges: [RepositoryEdge]
+    pageInfo: PageInfo
+    count: Int
+}
+
+type RepositoryEdge {
+    node: Repository
+    cursor: String
+}
+
+# Pagination Type - Generic
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+type Repository {
+    path: String!
+    origin: String
+    branch: String
 }
 
 input RepositoryInput {

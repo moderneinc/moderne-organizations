@@ -1,70 +1,61 @@
 package io.moderne.organizations;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsData;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
-import io.moderne.organizations.types.CommitOption;
-import io.moderne.organizations.types.Organization;
-import io.moderne.organizations.types.RepositoryInput;
-import io.moderne.organizations.types.User;
+import graphql.relay.Connection;
+import graphql.relay.SimpleListConnection;
+import graphql.schema.DataFetchingEnvironment;
+import io.moderne.organizations.types.*;
+import org.openrewrite.internal.lang.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 
 @DgsComponent
 public class OrganizationDataFetcher {
-    List<OrganizationRepositories> ownership;
-    Organization ALL_ORG = Organization.newBuilder().id("ALL").name("ALL").commitOptions(List.of(CommitOption.values())).build();
+    Map<String, OrganizationRepositories> organizations;
 
-    public OrganizationDataFetcher(ObjectMapper mapper) throws IOException {
-        this.ownership = mapper.readValue(
-                getClass().getResourceAsStream("/ownership.json"),
-                new TypeReference<>() {
-                }
-        );
-    }
-
-    @DgsQuery
-    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
-        return Flux.fromIterable(ownership)
-                .filter(org -> org.matches(repository))
-                .map(this::mapOrganization)
-                .concatWithValues(ALL_ORG); // if you want an "ALL" organization
+    public OrganizationDataFetcher(OrganizationStructureService organizationStructureService) {
+        this.organizations = organizationStructureService.readOrganizationStructure();
     }
 
     @DgsQuery
     Flux<Organization> allOrganizations() {
-        return Flux.fromIterable(ownership)
-                .map(this::mapOrganization)
-                .concatWithValues(ALL_ORG); // if you want an "ALL" organization
+        return Flux.fromIterable(organizations.values())
+                .map(this::mapOrganization);
     }
 
     @DgsQuery
     Mono<Organization> organization(@InputArgument String id) {
-        if (id.equals(ALL_ORG.getId())) {
-            return Mono.just(ALL_ORG);
-        }
-        return Flux.fromIterable(ownership)
-                .filter(org -> org.name().equals(id))
-                .next()
+        return Mono.justOrEmpty(organizations.get(id))
+                .map(this::mapOrganization);
+    }
+
+    @Deprecated
+    @DgsQuery
+    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+        return Flux.fromIterable(organizations.values())
+                .filter(org -> org.repositories().contains(repository))
                 .map(this::mapOrganization);
     }
 
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
         // everybody belongs to every organization, and the "default" organization is listed
-        // first in the json that this list is based on, so it will be selected by default in the UI
-        return Flux.fromIterable(ownership)
-                .map(this::mapOrganization)
-                .concatWith(
-                        Flux.just(ALL_ORG)
-                                .filter(__ -> true) // give "ALL" organization to all users
-                );
+        // first in the repos.csv that this list is based on, so it will be selected by default in the UI
+        return Flux.fromIterable(organizations.values())
+                .filter(org -> allowAccess(user, at, org.name()))
+                .map(this::mapOrganization);
+    }
+
+    private boolean allowAccess(User user, OffsetDateTime at, String orgName) {
+        // Determine if a user should have access to the organization
+        return true;
     }
 
     private Organization mapOrganization(OrganizationRepositories org) {
@@ -78,14 +69,33 @@ public class OrganizationDataFetcher {
                 .build();
     }
 
+    @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
+    public Mono<Connection<Repository>> repositories(DataFetchingEnvironment dfe) {
+        Organization organization = dfe.getSource();
+        return Mono.fromCallable(() -> {
+            List<Repository> repositories = organizations.get(organization.getName())
+                    .repositories()
+                    .stream()
+                    .map(this::mapRepository)
+                    .toList();
+            return new SimpleListConnection<>(repositories).get(dfe);
+        });
+    }
+
+    private Repository mapRepository(RepositoryInput repositoryInput) {
+        return Repository.newBuilder()
+                .origin(repositoryInput.getOrigin())
+                .path(repositoryInput.getPath())
+                .branch(repositoryInput.getBranch())
+                .build();
+    }
+
+    @Nullable
     private Organization getOrganizationByName(String name) {
-        if (name.equals(ALL_ORG.getName())) {
-            return ALL_ORG;
+        OrganizationRepositories org = organizations.get(name);
+        if (org == null) {
+            return null;
         }
-        return ownership.stream()
-                .filter(org -> org.name().equals(name))
-                .findFirst()
-                .map(this::mapOrganization)
-                .orElse(null);
+        return mapOrganization(org);
     }
 }
