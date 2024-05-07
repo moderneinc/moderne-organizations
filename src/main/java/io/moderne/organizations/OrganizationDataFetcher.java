@@ -54,7 +54,7 @@ public class OrganizationDataFetcher {
     }
 
     private boolean allowAccess(User user, OffsetDateTime at, String orgName) {
-        // Determine if a user should have access sto the organization
+        // Determine if a user should have access to the organization
         return true;
     }
 
