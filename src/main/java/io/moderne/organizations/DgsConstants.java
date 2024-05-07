@@ -45,6 +45,16 @@ public class DgsConstants {
     public static final String DevCenter = "devCenter";
 
     public static final String Repositories = "repositories";
+
+    public static class REPOSITORIES_INPUT_ARGUMENT {
+      public static final String After = "after";
+
+      public static final String First = "first";
+
+      public static final String Before = "before";
+
+      public static final String Last = "last";
+    }
   }
 
   public static class REPOSITORYCONNECTION {

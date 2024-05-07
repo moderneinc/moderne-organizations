@@ -1,6 +1,7 @@
 cloneUrl,branch,org1,org2,org3,org4,org5,org6,org7,org8,org9,org10
 https://github.com/openrewrite/rewrite-recipe-bom,main,Default,ALL
 https://github.com/openrewrite/rewrite-recommendations,main,Default,ALL
+https://github.com/Netflix/eureka,master,Default,ALL
 https://github.com/WebGoat/WebGoat,main,Default,ALL
 https://github.com/openrewrite/rewrite-cucumber-jvm,main,OpenRewrite,Open source,ALL
 https://github.com/openrewrite/rewrite-hibernate,main,OpenRewrite,Open source,ALL
@@ -13,9 +14,39 @@ https://github.com/openrewrite/rewrite-micronaut,main,OpenRewrite,Open source,AL
 https://github.com/openrewrite/rewrite-okhttp,main,OpenRewrite,Open source,ALL
 https://github.com/openrewrite/rewrite-recipe-bom,main,OpenRewrite,Open source,ALL
 https://github.com/openrewrite/rewrite-recommendations,main,OpenRewrite,Open source,ALL
-https://github.com/WebGoat/WebGoat,main,WebGoat,Open source,ALL
-https://github.com/WebGoat/WebGoat-Legacy,master,WebGoat,Open source,ALL
-https://github.com/WebGoat/WebGoat-Lessons,develop,WebGoat,Open source,ALL
-https://github.com/WebGoat/WebWolf,master,WebGoat,Open source,ALL
-https://github.com/WebGoat/WebGoat-Archived-Releases,master,WebGoat,Open source,ALL
-https://github.com/WebGoat/groovygoat,master,WebGoat,Open source,ALL
+https://github.com/WebGoat/WebGoat,main,WebGoat,Test,ALL
+https://github.com/WebGoat/WebGoat-Legacy,master,WebGoat,Test,ALL
+https://github.com/WebGoat/WebGoat-Lessons,develop,WebGoat,Test,ALL
+https://github.com/WebGoat/WebWolf,master,WebGoat,Test,ALL
+https://github.com/WebGoat/WebGoat-Archived-Releases,master,WebGoat,Test,ALL
+https://github.com/WebGoat/groovygoat,master,WebGoat,Test,ALL
+https://github.com/Netflix/mantis,master,Netflix,Open source,ALL
+https://github.com/Netflix/eclipse-jifa,main,Netflix,Open source,ALL
+https://github.com/Netflix/dispatch,master,Netflix,Open source,ALL
+https://github.com/Netflix/metacat,master,Netflix,Open source,ALL
+https://github.com/Netflix/spectator-go,main,Netflix,Open source,ALL
+https://github.com/Netflix/metaflow,master,Netflix,Open source,ALL
+https://github.com/Netflix/dgs,main,Netflix,Open source,ALL
+https://github.com/Netflix/dgs-framework,master,Netflix,Open source,ALL
+https://github.com/Netflix/OpenVPCal,main,Netflix,Open source,ALL
+https://github.com/Netflix/bpftop,main,Netflix,Open source,ALL
+https://github.com/Netflix/atlas-docs,main,Netflix,Open source,ALL
+https://github.com/Netflix/dgs-intellij-plugin,main,Netflix,Open source,ALL
+https://github.com/Netflix/lemur,main,Netflix,Open source,ALL
+https://github.com/Netflix/atlas,main,Netflix,Open source,ALL
+https://github.com/Netflix/metaflow-docs,master,Netflix,Open source,ALL
+https://github.com/Netflix/Priam,3.x,Netflix,Open source,ALL
+https://github.com/Netflix/zuul,master,Netflix,Open source,ALL
+https://github.com/Netflix/eureka,master,Netflix,Open source,ALL
+https://github.com/Netflix/genie,master,Netflix,Open source,ALL
+https://github.com/Netflix/metaflow-nflx-extensions,main,Netflix,Open source,ALL
+https://github.com/Netflix/dgs-examples-java,main,Netflix,Open source,ALL
+https://github.com/Netflix/eslint-config-netflix,main,Netflix,Open source,ALL
+https://github.com/Netflix/vectorflow,master,Netflix,Open source,ALL
+https://github.com/Netflix/metaflow-service,master,Netflix,Open source,ALL
+https://github.com/Netflix/metaflow-ui,master,Netflix,Open source,ALL
+https://github.com/Netflix/dgs-codegen,master,Netflix,Open source,ALL
+https://github.com/Netflix/iep,main,Netflix,Open source,ALL
+https://github.com/Netflix/mantis-rxcontrol,master,Netflix,Open source,ALL
+https://github.com/Netflix/vmaf,master,Netflix,Open source,ALL
+https://github.com/Netflix/x-element,main,Netflix,Open source,ALL

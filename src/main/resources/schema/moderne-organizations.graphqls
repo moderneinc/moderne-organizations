@@ -41,7 +41,10 @@ type Organization {
 
     devCenter: DevCenter
 
-    repositories: RepositoryConnection!
+    repositories(after: String,
+        first: Int = 100,
+        before: String,
+        last: Int): RepositoryConnection!
 }
 
 type RepositoryConnection {
