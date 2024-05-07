@@ -36,6 +36,14 @@ public class OrganizationDataFetcher {
                 .map(this::mapOrganization);
     }
 
+    @Deprecated
+    @DgsQuery
+    Flux<Organization> organizations(@InputArgument RepositoryInput repository) {
+        return Flux.fromIterable(organizations.values())
+                .filter(org -> org.repositories().contains(repository))
+                .map(this::mapOrganization);
+    }
+
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
         // everybody belongs to every organization, and the "default" organization is listed
