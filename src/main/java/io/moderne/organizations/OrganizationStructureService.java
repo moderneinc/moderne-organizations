@@ -54,7 +54,7 @@ public class OrganizationStructureService {
                                     v = new OrganizationRepositories(organization, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
                                 }
                                 if (!Objects.equals(v.parent(), parent)) {
-                                    throw new IllegalStateException("An organization parent should be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
+                                    throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
                                 }
                                 if (first) {
                                     v.repositories().add(repository);
