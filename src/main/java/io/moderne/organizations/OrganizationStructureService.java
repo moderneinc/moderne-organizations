@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,22 +45,25 @@ public class OrganizationStructureService {
                         RepositoryInput repository = new RepositoryInput(path, origin, branch);
                         allRepositories.add(repository);
 
+                        OrganizationRepositories first = null;
                         for (int i = fields.length - 1; i > 1; i--) {
-                            boolean first = i == 2;
                             String organization = fields[i].trim();
+                            if (organization.isEmpty()) {
+                                break;
+                            }
                             String parent = fields.length > i + 1 ? fields[i + 1].trim() : null;
-                            organizations.compute(organization, (k, v) -> {
+                            first = organizations.compute(organization, (k, v) -> {
                                 if (v == null) {
                                     v = new OrganizationRepositories(organization, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
                                 }
                                 if (!Objects.equals(v.parent(), parent)) {
                                     throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
                                 }
-                                if (first) {
-                                    v.repositories().add(repository);
-                                }
                                 return v;
                             });
+                        }
+                        if (first != null) {
+                            first.repositories().add(repository);
                         }
                     });
         } catch (IOException e) {
