@@ -80,6 +80,7 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
 
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
+    implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))

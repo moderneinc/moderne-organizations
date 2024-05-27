@@ -1,10 +1,5 @@
 type Query {
     """
-    The list of organizations that a repository belongs to.
-    """
-    organizations(repository: RepositoryInput!): [Organization!]!
-
-    """
     The list of all possible organizations
     """
     allOrganizations: [Organization!]!
@@ -39,6 +34,36 @@ type Organization {
     parent: Organization
 
     devCenter: DevCenter
+
+    repositories(after: String,
+        first: Int = 100,
+        before: String,
+        last: Int): RepositoryConnection!
+}
+
+type RepositoryConnection {
+    edges: [RepositoryEdge]
+    pageInfo: PageInfo
+    count: Int
+}
+
+type RepositoryEdge {
+    node: Repository
+    cursor: String
+}
+
+# Pagination Type - Generic
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+type Repository {
+    path: String!
+    origin: String
+    branch: String
 }
 
 input RepositoryInput {
