@@ -8,17 +8,11 @@ public class DgsConstants {
   public static class QUERY {
     public static final String TYPE_NAME = "Query";
 
-    public static final String Organizations = "organizations";
-
     public static final String AllOrganizations = "allOrganizations";
 
     public static final String UserOrganizations = "userOrganizations";
 
     public static final String Organization = "organization";
-
-    public static class ORGANIZATIONS_INPUT_ARGUMENT {
-      public static final String Repository = "repository";
-    }
 
     public static class USERORGANIZATIONS_INPUT_ARGUMENT {
       public static final String User = "user";
