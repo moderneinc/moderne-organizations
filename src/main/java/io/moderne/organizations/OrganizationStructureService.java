@@ -2,6 +2,8 @@ package io.moderne.organizations;
 
 import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.regex.Pattern;
 public class OrganizationStructureService {
     private static final Pattern GITHUB_PATTERN = Pattern.compile("github.com/(.*)");
     private static final String REPOS_CSV = "repos.csv";
+    private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
@@ -70,6 +73,30 @@ public class OrganizationStructureService {
             throw new RuntimeException(e);
         }
         organizations.put("ALL", new OrganizationRepositories("ALL", allRepositories, List.of(CommitOption.values()), null));
+        logStructure(organizations);
         return organizations;
+    }
+
+    void logStructure(Map<String, OrganizationRepositories> organizations) {
+        Map<String, List<OrganizationRepositories>> tree = new HashMap<>();
+
+        for (OrganizationRepositories org : organizations.values()) {
+            if (!tree.containsKey(org.parent())) {
+                tree.put(org.parent(), new ArrayList<>());
+            }
+            tree.get(org.parent()).add(org);
+        }
+        if (!log.isDebugEnabled())
+            return;
+        log.debug("Organization structure: name [repositories]");
+        printTree(tree, null, 0);
+    }
+
+    public static void printTree(Map<String, List<OrganizationRepositories>> tree, String parentName, int level) {
+        for (OrganizationRepositories org : tree.getOrDefault(parentName, Collections.emptyList())) {
+            String indent = "\t".repeat(level);
+            log.debug("{}{} [{}]", indent, org.name(), org.repositories().size());
+            printTree(tree, org.name(), level + 1);
+        }
     }
 }
