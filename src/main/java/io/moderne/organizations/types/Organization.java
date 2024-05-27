@@ -19,16 +19,19 @@ public class Organization {
 
   private DevCenter devCenter;
 
+  private RepositoryConnection repositories;
+
   public Organization() {
   }
 
   public Organization(String id, String name, List<CommitOption> commitOptions,
-      Organization _parent, DevCenter devCenter) {
+      Organization _parent, DevCenter devCenter, RepositoryConnection repositories) {
     this.id = id;
     this.name = name;
     this.commitOptions = commitOptions;
     this._parent = _parent;
     this.devCenter = devCenter;
+    this.repositories = repositories;
   }
 
   public String getId() {
@@ -74,9 +77,17 @@ public class Organization {
     this.devCenter = devCenter;
   }
 
+  public RepositoryConnection getRepositories() {
+    return repositories;
+  }
+
+  public void setRepositories(RepositoryConnection repositories) {
+    this.repositories = repositories;
+  }
+
   @Override
   public String toString() {
-    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'," +"devCenter='" + devCenter + "'" +"}";
+    return "Organization{" + "id='" + id + "'," +"name='" + name + "'," +"commitOptions='" + commitOptions + "'," +"parent='" + _parent + "'," +"devCenter='" + devCenter + "'," +"repositories='" + repositories + "'" +"}";
   }
 
   @Override
@@ -88,12 +99,13 @@ public class Organization {
                             java.util.Objects.equals(name, that.name) &&
                             java.util.Objects.equals(commitOptions, that.commitOptions) &&
                             java.util.Objects.equals(_parent, that._parent) &&
-                            java.util.Objects.equals(devCenter, that.devCenter);
+                            java.util.Objects.equals(devCenter, that.devCenter) &&
+                            java.util.Objects.equals(repositories, that.repositories);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(id, name, commitOptions, _parent, devCenter);
+    return java.util.Objects.hash(id, name, commitOptions, _parent, devCenter, repositories);
   }
 
   public static io.moderne.organizations.types.Organization.Builder newBuilder() {
@@ -114,6 +126,8 @@ public class Organization {
 
     private DevCenter devCenter;
 
+    private RepositoryConnection repositories;
+
     public Organization build() {
                   io.moderne.organizations.types.Organization result = new io.moderne.organizations.types.Organization();
                       result.id = this.id;
@@ -121,6 +135,7 @@ public class Organization {
           result.commitOptions = this.commitOptions;
           result._parent = this._parent;
           result.devCenter = this.devCenter;
+          result.repositories = this.repositories;
                       return result;
     }
 
@@ -150,6 +165,12 @@ public class Organization {
 
     public io.moderne.organizations.types.Organization.Builder devCenter(DevCenter devCenter) {
       this.devCenter = devCenter;
+      return this;
+    }
+
+    public io.moderne.organizations.types.Organization.Builder repositories(
+        RepositoryConnection repositories) {
+      this.repositories = repositories;
       return this;
     }
   }
