@@ -20,6 +20,29 @@ To fetch all repositories from a Bitbucket Data Center instance:
 ./bitbucket-data-center.sh https://my-bitbucket.com/stash
 ```
 
+### `bitbucket-cloud.sh`
+
+This script fetches all repositories from a Bitbucket Cloud workspace and assumes the workspace as the organization.
+
+#### Using paremeters
+```sh
+./bitbucket-cloud.sh -u <username> -p <app_password> <workspace> > repos.csv
+```
+
+#### Using env vars
+```sh
+env BITBUCKET_USERNAME="<username>" BITBUCKET_APP_PASSWORD="<app_password>" ./bitbucket-cloud.sh <workspace>
+```
+
+#### Description
+This script fetches all repositories from the specified Bitbucket Cloud workspace.
+
+#### Example
+To fetch all repositories from a Bitbucket Data Center instance:
+```sh
+./bitbucket-cloud.sh -u moderne -p secret moderneinc > repos.csv
+```
+
 ### `gitlab.sh`
 
 This script fetches all repositories from a GitLab instance or a specific group within a GitLab instance using the (sub)group path as the organization
