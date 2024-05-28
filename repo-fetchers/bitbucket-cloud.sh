@@ -51,7 +51,7 @@ while [ -n "$NEXT_URL" ]; do
   RESPONSE=$(curl -s -u "$USERNAME:$APP_PASSWORD" "$NEXT_URL")
 
   # Extract repository data and append to CSV file
-  echo $RESPONSE | jq -r '.values[] | (.links.clone[] | select(.name=="https") | .href) as $cloneUrl | .mainbranch.name as $branchName | "\($cloneUrl),\($branchName)"'
+  echo $RESPONSE | jq -r '.values[] | (.links.clone[] | select(.name=="https") | .href) as $cloneUrl | .mainbranch.name as $branchName | .workspace.name as $organization | "\($cloneUrl),\($branchName),\($organization)"'
 
   # Get the next URL
   NEXT_URL=$(echo $RESPONSE | jq -r '.next // empty')
