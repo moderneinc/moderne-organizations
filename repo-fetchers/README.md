@@ -23,6 +23,7 @@ To fetch all repositories from a Bitbucket Data Center instance:
 ### `bitbucket-cloud.sh`
 
 This script fetches all repositories from a Bitbucket Cloud workspace and assumes the workspace as the organization.
+Note: Email addresses do not work, you need your Bitbucket username which you can find (here)[https://bitbucket.org/account/settings/]
 
 #### Using paremeters
 ```sh
