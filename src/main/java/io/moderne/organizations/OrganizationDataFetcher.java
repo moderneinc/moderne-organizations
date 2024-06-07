@@ -52,7 +52,7 @@ public class OrganizationDataFetcher {
 
     private Organization mapOrganization(OrganizationRepositories org) {
         return Organization.newBuilder()
-                .id(org.name())
+                .id(org.id())
                 .name(org.name())
                 .commitOptions(org.commitOptions() == null ?
                         List.of(CommitOption.values()) :

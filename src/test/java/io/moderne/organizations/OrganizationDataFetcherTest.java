@@ -24,6 +24,7 @@ public class OrganizationDataFetcherTest {
                 })
                 .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("Default");
+                    assertThat(next.getName()).isEqualTo("Default Organization");
                     assertThat(next.getParent().getId()).isEqualTo("ALL");
                 })
                 .assertNext(next -> {
@@ -35,7 +36,15 @@ public class OrganizationDataFetcherTest {
                     assertThat(next.getParent().getId()).isEqualTo("Open source");
                 })
                 .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("Test");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL");
+                })
+                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("WebGoat");
+                    assertThat(next.getParent().getId()).isEqualTo("Test");
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("Netflix");
                     assertThat(next.getParent().getId()).isEqualTo("Open source");
                 })
                 .verifyComplete();

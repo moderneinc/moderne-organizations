@@ -22,11 +22,26 @@ import java.util.regex.Pattern;
 public class OrganizationStructureService {
     private static final Pattern GITHUB_PATTERN = Pattern.compile("github.com/(.*)");
     private static final String REPOS_CSV = "repos.csv";
+    private static final String NAME_MAPPING = "id-mapping.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
         Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
+
+        Map<String, String> idToNameMapping = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(NAME_MAPPING).getInputStream()))) {
+            reader.lines()
+                    .forEach(line -> {
+                        String[] fields = line.split("=", 2);
+                        if (fields.length != 2) {
+                            throw new IllegalStateException("id-mapping.txt lines should have exactly one =");
+                        }
+                        idToNameMapping.put(fields[0].trim(), fields[1].trim());
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
             reader.readLine(); // skip header
@@ -57,7 +72,15 @@ public class OrganizationStructureService {
                             String parent = fields.length > i + 1 ? fields[i + 1].trim() : null;
                             first = organizations.compute(organization, (k, v) -> {
                                 if (v == null) {
-                                    v = new OrganizationRepositories(organization, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
+                                    String name = organization;
+                                    if (idToNameMapping.containsKey(organization)) {
+                                        name = idToNameMapping.get(organization);
+                                    }
+                                    v = new OrganizationRepositories(
+                                            organization,
+                                            name,
+                                            new LinkedHashSet<>(),
+                                            List.of(CommitOption.values()), parent);
                                 }
                                 if (!Objects.equals(v.parent(), parent)) {
                                     throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
@@ -72,7 +95,7 @@ public class OrganizationStructureService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        organizations.put("ALL", new OrganizationRepositories("ALL", allRepositories, List.of(CommitOption.values()), null));
+        organizations.put("ALL", new OrganizationRepositories("ALL", "ALL", allRepositories, List.of(CommitOption.values()), null));
         logStructure(organizations);
         return organizations;
     }
