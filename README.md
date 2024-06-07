@@ -54,6 +54,9 @@ The org structure is represented in a series of columns `org1..orgN` where `N` i
 
 There is repetition in organizational hierarchy in this format. The reference implementation validates the internal consistency of those organizational repositories across CSV lines.
 
+If you have multiple organizations with the same display name, you can map id to display name in an `id-mapping.txt`. A simple reference
+file is included in this repository.
+
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are
 available to developers in that organization. These are the options that are presented to developers when they create a
