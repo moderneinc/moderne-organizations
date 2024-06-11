@@ -167,7 +167,7 @@
     "devCenter": {
       "upgradesAndMigrations": [
         {
-          "title": "Spring boot 3.2",
+          "title": "Spring boot 3.2.5",
           "measures": [
             {
               "name": "Major",
@@ -176,15 +176,15 @@
                 "options": [
                   {
                     "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
+                    "value": "org.springframework"
                   },
                   {
                     "name": "artifactIdPattern",
-                    "value": "spring-boot"
+                    "value": "spring-core"
                   },
                   {
                     "name": "version",
-                    "value": "1-2"
+                    "value": "[,5)"
                   }
                 ]
               }
@@ -196,15 +196,15 @@
                 "options": [
                   {
                     "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
+                    "value": "org.springframework"
                   },
                   {
                     "name": "artifactIdPattern",
-                    "value": "spring-boot"
+                    "value": "spring-core"
                   },
                   {
                     "name": "version",
-                    "value": "3-3.1"
+                    "value": "[5,6.0)"
                   }
                 ]
               }
@@ -216,15 +216,15 @@
                 "options": [
                   {
                     "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
+                    "value": "org.springframework"
                   },
                   {
                     "name": "artifactIdPattern",
-                    "value": "spring-boot"
+                    "value": "spring-core"
                   },
                   {
                     "name": "version",
-                    "value": "3.2-3.2.2"
+                    "value": "6.1.1-6.1.5"
                   }
                 ]
               }
