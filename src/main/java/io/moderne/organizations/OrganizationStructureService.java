@@ -5,6 +5,7 @@ import io.moderne.organizations.types.RepositoryInput;
 import org.openrewrite.internal.lang.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,12 @@ public class OrganizationStructureService {
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
     private final RepositoryMapper repositoryMapper = new RepositoryMapper();
 
+    private final boolean allowMissingScmOrigins;
+
+    public OrganizationStructureService(@Value("${organizations.allow-missing-scm-origins:true}") boolean allowMissingScmOrigins) {
+        this.allowMissingScmOrigins = allowMissingScmOrigins;
+    }
+
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
         Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
@@ -46,7 +53,12 @@ public class OrganizationStructureService {
                         String branch = fields[1].trim();
                         RepositoryInput repository = repositoryMapper.determineRepository(cloneUrl, branch);
                         if (repository == null) {
-                            return;
+                            if (allowMissingScmOrigins) {
+                                log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
+                                return;
+                            } else {
+                                throw new IllegalStateException("No scm origin found for %s. Add it to scm-origins.txt or set organizations.allow-missing-scm-origins to true".formatted(cloneUrl));
+                            }
                         }
                         allRepositories.add(repository);
 

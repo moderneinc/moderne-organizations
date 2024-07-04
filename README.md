@@ -73,6 +73,8 @@ If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/op
 }
 ```
 
+you can set `organizations.allow-missing-scm-origins` in [application.yaml](src/main/resources/application.yaml) to true if you want to strictly check on startup that all origins in repos.csv are present.
+
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are
 available to developers in that organization. These are the options that are presented to developers when they create a
