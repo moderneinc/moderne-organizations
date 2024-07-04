@@ -57,6 +57,25 @@ There is repetition in organizational hierarchy in this format. The reference im
 If you have multiple organizations with the same display name, you can map id to display name in an `id-mapping.txt`. A simple reference
 file is included in this repository.
 
+### Mapping repositories
+
+When dealing with public SaaS SCMs it's easy to map a cloneUrl to a reporitory origin and path, but when self hosting figuring out where the origin ends and the path starts can be tricky.
+To achieve this mapping you need an implementation of [RepositoryMapper.java](src/main/java/io/moderne/organizations/RepositoryMapper.java) interface and inject a Spring bean of that type.
+
+For your convenience we have created a simple version which you can supply origins (host + context-path) and the mapper will use that to split a clone url into the origin and path.
+See [Application.java](src/main/java/io/moderne/organizations/Application.java) in the example code.
+
+Example: 
+If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `OriginBasedRepositoryMapper` with `bitbucket.example.com/stash/scm` it will create a repository:
+
+```
+{
+    "origin": "bitbucket.example.com/stash/scm",
+    "path": "openrewrite/rewrite",
+    "branch": "main"
+}
+```
+
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are
 available to developers in that organization. These are the options that are presented to developers when they create a

@@ -11,19 +11,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This service could also directly call your SCM api to determine the available repositories
  */
 @Service
 public class OrganizationStructureService {
-    private static final Pattern GITHUB_PATTERN = Pattern.compile("github.com/(.*)");
     private static final String REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
+    private final RepositoryMapper repositoryMapper;
+
+    public OrganizationStructureService(RepositoryMapper repositoryMapper) {
+        this.repositoryMapper = repositoryMapper;
+    }
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
@@ -53,14 +54,10 @@ public class OrganizationStructureService {
                         }
                         String cloneUrl = fields[0].trim();
                         String branch = fields[1].trim();
-
-                        Matcher matcher = GITHUB_PATTERN.matcher(cloneUrl);
-                        if (!matcher.find()) {
+                        RepositoryInput repository = repositoryMapper.determineRepository(cloneUrl, branch);
+                        if (repository == null) {
                             return;
                         }
-                        String origin = "github.com";
-                        String path = matcher.group(1);
-                        RepositoryInput repository = new RepositoryInput(path, origin, branch);
                         allRepositories.add(repository);
 
                         OrganizationRepositories first = null;
