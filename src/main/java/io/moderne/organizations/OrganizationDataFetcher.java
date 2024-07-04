@@ -13,6 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -65,12 +66,15 @@ public class OrganizationDataFetcher {
     public Mono<Connection<Repository>> repositories(DataFetchingEnvironment dfe) {
         Organization organization = dfe.getSource();
         return Mono.fromCallable(() -> {
-            List<Repository> repositories = organizations.get(organization.getName())
-                    .repositories()
-                    .stream()
-                    .map(this::mapRepository)
-                    .toList();
-            return new SimpleListConnection<>(repositories).get(dfe);
+            if (organizations.containsKey(organization.getName())) {
+                List<Repository> repositories = organizations.get(organization.getName())
+                        .repositories()
+                        .stream()
+                        .map(this::mapRepository)
+                        .toList();
+                return new SimpleListConnection<>(repositories).get(dfe);
+            }
+            return new SimpleListConnection<>(Collections.<Repository>emptyList()).get(dfe);
         });
     }
 

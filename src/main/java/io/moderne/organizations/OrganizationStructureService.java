@@ -175,7 +175,7 @@ public class OrganizationStructureService {
             if (origin.startsWith("http://") || origin.startsWith("https://") || origin.startsWith("ssh://")) {
                 try {
                     final URL url = new URL(origin);
-                    origin = url.getHost() + "/" + url.getPath();
+                    origin = url.getHost() + url.getPath();
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
                 }
