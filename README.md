@@ -57,6 +57,24 @@ There is repetition in organizational hierarchy in this format. The reference im
 If you have multiple organizations with the same display name, you can map id to display name in an `id-mapping.txt`. A simple reference
 file is included in this repository.
 
+### Mapping repositories
+
+Use [scm-origins.txt](src/main/resources/scm-origins.txt) to list all the origins (host + context path) for the SCM providers listed in the repos.csv.
+This will be used to split the clone url into an origin and path.
+
+Example: 
+If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `bitbucket.example.com/stash/scm` it will create a repository:
+
+```
+{
+    "origin": "bitbucket.example.com/stash/scm",
+    "path": "openrewrite/rewrite",
+    "branch": "main"
+}
+```
+
+you can set `organizations.allow-missing-scm-origins` in [application.yaml](src/main/resources/application.yaml) to true if you want to strictly check on startup that all origins in repos.csv are present.
+
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are
 available to developers in that organization. These are the options that are presented to developers when they create a
