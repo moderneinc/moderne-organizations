@@ -2,6 +2,7 @@ package io.moderne.organizations;
 
 import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
+import org.openrewrite.internal.lang.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This service could also directly call your SCM api to determine the available repositories
@@ -19,30 +24,15 @@ import java.util.*;
 public class OrganizationStructureService {
     private static final String REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
+    private static final String SCM_ORIGINS = "scm-origins.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
-    private final RepositoryMapper repositoryMapper;
-
-    public OrganizationStructureService(RepositoryMapper repositoryMapper) {
-        this.repositoryMapper = repositoryMapper;
-    }
+    private final RepositoryMapper repositoryMapper = new RepositoryMapper();
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
         Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
 
-        Map<String, String> idToNameMapping = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(NAME_MAPPING).getInputStream()))) {
-            reader.lines()
-                    .forEach(line -> {
-                        String[] fields = line.split("=", 2);
-                        if (fields.length != 2) {
-                            throw new IllegalStateException("id-mapping.txt lines should have exactly one =");
-                        }
-                        idToNameMapping.put(fields[0].trim(), fields[1].trim());
-                    });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        final Map<String, String> idToNameMapping = readIdToNameMapping();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
             reader.readLine(); // skip header
@@ -97,6 +87,23 @@ public class OrganizationStructureService {
         return organizations;
     }
 
+    private static Map<String, String> readIdToNameMapping() {
+        Map<String, String> idToNameMapping = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(NAME_MAPPING).getInputStream()))) {
+            reader.lines()
+                    .forEach(line -> {
+                        String[] fields = line.split("=", 2);
+                        if (fields.length != 2) {
+                            throw new IllegalStateException("id-mapping.txt lines should have exactly one =");
+                        }
+                        idToNameMapping.put(fields[0].trim(), fields[1].trim());
+                    });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return idToNameMapping;
+    }
+
     void logStructure(Map<String, OrganizationRepositories> organizations) {
         Map<String, List<OrganizationRepositories>> tree = new HashMap<>();
 
@@ -117,6 +124,64 @@ public class OrganizationStructureService {
             String indent = "\t".repeat(level);
             log.debug("{}{} [{}]", indent, org.name(), org.repositories().size());
             printTree(tree, org.name(), level + 1);
+        }
+    }
+
+    private static class RepositoryMapper {
+        Map<String, Pattern> urlPatterns = new LinkedHashMap<>();
+
+        private RepositoryMapper() {
+            List<String> scmOrigins = new ArrayList<>();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(SCM_ORIGINS).getInputStream()))) {
+                reader.lines()
+                        .filter(s -> !s.startsWith("#"))
+                        .forEach(scmOrigins::add);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            for (String origin : scmOrigins) {
+                Pattern pattern = Pattern.compile(origin + "(.*)");
+                urlPatterns.put(origin, pattern);
+            }
+        }
+
+        @Nullable
+        public RepositoryInput determineRepository(String cloneUrl, String branch) {
+            for (Map.Entry<String, Pattern> entry : urlPatterns.entrySet()) {
+                String origin = cleanOrigin(entry.getKey());
+                Matcher matcher = entry.getValue().matcher(cloneUrl);
+                if (matcher.find()) {
+                    String path = cleanPath(matcher.group(1));
+                    return new RepositoryInput(path, origin, branch);
+                }
+            }
+            return null;
+        }
+
+        private static String cleanOrigin(String origin) {
+            if (origin.startsWith("http://") || origin.startsWith("https://") || origin.startsWith("ssh://")) {
+                try {
+                    final URL url = new URL(origin);
+                    origin = url.getHost() + "/" + url.getPath();
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (origin.endsWith("/")) {
+                origin = origin.substring(0, origin.length() - 1);
+            }
+            return origin;
+        }
+
+        private static String cleanPath(String path) {
+            if (path.startsWith("/")) {
+                path = path.substring(1);
+            }
+            if (path.endsWith(".git")) {
+                path = path.substring(0, path.length() - 4);
+            }
+            return path;
         }
     }
 }

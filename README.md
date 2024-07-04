@@ -59,14 +59,11 @@ file is included in this repository.
 
 ### Mapping repositories
 
-When dealing with public SaaS SCMs it's easy to map a cloneUrl to a reporitory origin and path, but when self hosting figuring out where the origin ends and the path starts can be tricky.
-To achieve this mapping you need an implementation of [RepositoryMapper.java](src/main/java/io/moderne/organizations/RepositoryMapper.java) interface and inject a Spring bean of that type.
-
-For your convenience we have created a simple version which you can supply origins (host + context-path) and the mapper will use that to split a clone url into the origin and path.
-See [Application.java](src/main/java/io/moderne/organizations/Application.java) in the example code.
+Use [scm-origins.txt](src/main/resources/scm-origins.txt) to list all the origins (host + context path) for the SCM providers listed in the repos.csv.
+This will be used to split the clone url into an origin and path.
 
 Example: 
-If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `OriginBasedRepositoryMapper` with `bitbucket.example.com/stash/scm` it will create a repository:
+If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `bitbucket.example.com/stash/scm` it will create a repository:
 
 ```
 {
