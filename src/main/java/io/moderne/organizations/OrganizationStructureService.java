@@ -5,7 +5,6 @@ import io.moderne.organizations.types.RepositoryInput;
 import org.openrewrite.internal.lang.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +24,13 @@ import java.util.regex.Pattern;
 public class OrganizationStructureService {
     private static final String REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
-    private static final String SCM_ORIGINS = "scm-origins.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
-    private final RepositoryMapper repositoryMapper = new RepositoryMapper();
+    private final ScmConfiguration scmConfiguration;
+    private final RepositoryMapper repositoryMapper;
 
-    private final boolean allowMissingScmOrigins;
-
-    public OrganizationStructureService(@Value("${organizations.allow-missing-scm-origins:true}") boolean allowMissingScmOrigins) {
-        this.allowMissingScmOrigins = allowMissingScmOrigins;
+    public OrganizationStructureService(ScmConfiguration scmConfiguration) {
+        this.scmConfiguration = scmConfiguration;
+        repositoryMapper = new RepositoryMapper(scmConfiguration);
     }
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
@@ -53,11 +51,11 @@ public class OrganizationStructureService {
                         String branch = fields[1].trim();
                         RepositoryInput repository = repositoryMapper.determineRepository(cloneUrl, branch);
                         if (repository == null) {
-                            if (allowMissingScmOrigins) {
+                            if (scmConfiguration.isAllowMissingScmOrigins()) {
                                 log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
                                 return;
                             } else {
-                                throw new IllegalStateException("No scm origin found for %s. Add it to scm-origins.txt or set organizations.allow-missing-scm-origins to true".formatted(cloneUrl));
+                                throw new IllegalStateException("No scm origin found for %s. Add it to moderne.scm.repositories or set moderne.scm.allow-missing-scm-origins to true".formatted(cloneUrl));
                             }
                         }
                         allRepositories.add(repository);
@@ -140,31 +138,22 @@ public class OrganizationStructureService {
     }
 
     private static class RepositoryMapper {
-        Map<String, Pattern> urlPatterns = new LinkedHashMap<>();
+        Map<ScmConfiguration.ScmRepository, Pattern> urlPatterns = new LinkedHashMap<>();
 
-        private RepositoryMapper() {
-            List<String> scmOrigins = new ArrayList<>();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(SCM_ORIGINS).getInputStream()))) {
-                reader.lines()
-                        .filter(s -> !s.startsWith("#"))
-                        .forEach(scmOrigins::add);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            for (String origin : scmOrigins) {
-                Pattern pattern = Pattern.compile(origin + "(.*)");
-                urlPatterns.put(origin, pattern);
+        private RepositoryMapper(ScmConfiguration scmConfiguration) {
+            for (ScmConfiguration.ScmRepository repository : scmConfiguration.getRepositories()) {
+                Pattern pattern = Pattern.compile(repository.getOrigin() + "(.*)");
+                urlPatterns.put(repository, pattern);
             }
         }
 
         @Nullable
         public RepositoryInput determineRepository(String cloneUrl, String branch) {
-            for (Map.Entry<String, Pattern> entry : urlPatterns.entrySet()) {
-                String origin = cleanOrigin(entry.getKey());
+            for (Map.Entry<ScmConfiguration.ScmRepository, Pattern> entry : urlPatterns.entrySet()) {
+                String origin = cleanOrigin(entry.getKey().getOrigin());
                 Matcher matcher = entry.getValue().matcher(cloneUrl);
                 if (matcher.find()) {
-                    String path = cleanPath(matcher.group(1));
+                    String path = cleanPath(matcher.group(1), entry.getKey().getType());
                     return new RepositoryInput(path, origin, branch);
                 }
             }
@@ -186,14 +175,14 @@ public class OrganizationStructureService {
             return origin;
         }
 
-        private static String cleanPath(String path) {
+        private static String cleanPath(String path, ScmConfiguration.ScmRepository.Type type) {
             if (path.startsWith("/")) {
                 path = path.substring(1);
             }
             // In case of bitbucket server/on prem we need to remove the `/scm` prefix.
             // his prefix is not part of all URL's to repository resource
             // (for instance pull requests) so it cannot be part of the origin or path.
-            if (path.startsWith("scm/")) {
+            if (type == ScmConfiguration.ScmRepository.Type.BITBUCKET && path.startsWith("scm/")) {
                 path = path.substring(4);
             }
             if (path.endsWith(".git")) {

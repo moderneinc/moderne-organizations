@@ -1,3 +1,15 @@
 management.endpoints.web.exposure.include: prometheus,health
 management.endpoint.prometheus.enabled: true
 management.endpoint.health.enabled: true
+moderne:
+  scm:
+    allowMissingScmOrigins: true
+    repositories:
+      - origin: github.com
+        type: GITHUB
+      - origin: bitbucket.org
+        type: BITBUCKET_CLOUD
+      - origin: gitlab.com
+        type: GITLAB
+      - origin: https://bitbucket.example.com/stash
+        type: BITBUCKET

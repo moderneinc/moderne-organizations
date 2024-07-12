@@ -1,5 +1,0 @@
-# Add 1 repository origin per line.
-github.com
-bitbucket.org
-gitlab.com
-https://bitbucket.example.com/stash/
