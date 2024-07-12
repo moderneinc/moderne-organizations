@@ -187,14 +187,14 @@ public class OrganizationStructureService {
         }
 
         private static String cleanPath(String path) {
+            if (path.startsWith("/")) {
+                path = path.substring(1);
+            }
             // In case of bitbucket server/on prem we need to remove the `/scm` prefix.
             // his prefix is not part of all URL's to repository resource
             // (for instance pull requests) so it cannot be part of the origin or path.
-            if (path.startsWith("/scm")) {
+            if (path.startsWith("scm/")) {
                 path = path.substring(4);
-            }
-            if (path.startsWith("/")) {
-                path = path.substring(1);
             }
             if (path.endsWith(".git")) {
                 path = path.substring(0, path.length() - 4);
