@@ -59,21 +59,23 @@ file is included in this repository.
 
 ### Mapping repositories
 
-Use [scm-origins.txt](src/main/resources/scm-origins.txt) to list all the origins (host + context path) for the SCM providers listed in the repos.csv.
+Edit [application.yaml](src/main/resources/application.yaml) to list all the origins (host + context path) for the SCM providers listed in the repos.csv, and provide a type: `[GITHUB,GITLAB,BITBUCKET_CLOUD,BITBUCKET]`.
 This will be used to split the clone url into an origin and path.
 
+Note that for an on-premise Bitbucket (server) we should not have the `scm/` path segment in the origin or the path. This will automatically be stripped off if you configure this as explained above.
+
 Example: 
-If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `bitbucket.example.com/stash/scm` it will create a repository:
+If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `bitbucket.example.com/stash` it will create a repository:
 
 ```
 {
-    "origin": "bitbucket.example.com/stash/scm",
+    "origin": "bitbucket.example.com/stash",
     "path": "openrewrite/rewrite",
     "branch": "main"
 }
 ```
 
-you can set `organizations.allow-missing-scm-origins` in [application.yaml](src/main/resources/application.yaml) to true if you want to strictly check on startup that all origins in repos.csv are present.
+you can set `moderne.scm.allow-missing-scm-origins` in [application.yaml](src/main/resources/application.yaml) to true if you want to strictly check on startup that all origins in repos.csv are present.
 
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are
