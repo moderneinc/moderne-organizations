@@ -48,6 +48,10 @@ public class OrganizationDataFetcherTest {
                     assertThat(next.getId()).isEqualTo("Netflix");
                     assertThat(next.getParent().getId()).isEqualTo("Open source");
                 })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("Bitbucket");
+                    assertThat(next.getParent().getId()).isEqualTo("OpenRewrite");
+                })
                 .verifyComplete();
     }
 }
