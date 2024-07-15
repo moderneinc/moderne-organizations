@@ -180,7 +180,7 @@ public class OrganizationStructureService {
                 path = path.substring(1);
             }
             // In case of bitbucket server/on prem we need to remove the `/scm` prefix.
-            // his prefix is not part of all URL's to repository resource
+            // This prefix is not part of all URL's to repository resource
             // (for instance pull requests) so it cannot be part of the origin or path.
             if (type == ScmConfiguration.ScmRepository.Type.BITBUCKET && path.startsWith("scm/")) {
                 path = path.substring(4);
