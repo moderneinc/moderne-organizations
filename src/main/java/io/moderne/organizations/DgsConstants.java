@@ -130,6 +130,8 @@ public class DgsConstants {
   public static class DEVCENTERRECIPE {
     public static final String TYPE_NAME = "DevCenterRecipe";
 
+    public static final String Name = "name";
+
     public static final String RecipeId = "recipeId";
 
     public static final String Options = "options";
