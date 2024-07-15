@@ -106,6 +106,10 @@ type DevCenterRecipeCard {
 }
 
 type DevCenterRecipe {
+    """
+    Optional name used for displaying on the DevCenter. Defaults to the recipe display name.
+    """
+    name: String
     recipeId: String!
     options: [Option!]!
 }
