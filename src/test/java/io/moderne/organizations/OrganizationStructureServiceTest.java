@@ -24,9 +24,7 @@ class OrganizationStructureServiceTest {
 
     @Test
     void removeScmFromBitbucketCloneUrl() {
-        OrganizationRepositories organizationRepositories = new OrganizationStructureService(false)
-                .readOrganizationStructure()
-                .get("Bitbucket");
+        OrganizationRepositories organizationRepositories = structureService.readOrganizationStructure().get("Bitbucket");
         assertThat(organizationRepositories.repositories())
                 .extracting(RepositoryInput::getOrigin)
                 .containsExactly("bitbucket.example.com/stash");

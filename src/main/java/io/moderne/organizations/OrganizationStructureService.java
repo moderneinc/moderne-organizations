@@ -55,7 +55,7 @@ public class OrganizationStructureService {
                                 log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
                                 return;
                             } else {
-                                throw new IllegalStateException("No scm origin found for %s. Add it to moderne.scm.repositories or set moderne.scm.allow-missing-scm-origins to true".formatted(cloneUrl));
+                                throw new IllegalStateException("No scm origin found for %s. Add it to moderne.scm.repositories or set moderne.scm.allow-missing-scm-origins to true in application.yaml".formatted(cloneUrl));
                             }
                         }
                         allRepositories.add(repository);

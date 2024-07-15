@@ -2,6 +2,7 @@ package io.moderne.organizations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "moderne.scm")
@@ -35,6 +36,9 @@ public class ScmConfiguration {
     }
 
     public List<ScmRepository> getRepositories() {
+        if (repositories == null) {
+            repositories = new ArrayList<>();
+        }
         return repositories;
     }
 
@@ -49,4 +53,6 @@ public class ScmConfiguration {
     public void setAllowMissingScmOrigins(boolean allowMissingScmOrigins) {
         this.allowMissingScmOrigins = allowMissingScmOrigins;
     }
+
+
 }
