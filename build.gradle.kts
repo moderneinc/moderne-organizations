@@ -16,7 +16,7 @@ buildscript {
 plugins {
     id("org.springframework.boot") version "3.2.2"
     java
-    id("nebula.release") version "15.3.1"
+    id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
     id("com.bmuschko.docker-spring-boot-application") version "8.0.0"
     id("com.netflix.dgs.codegen").version("5.6.9").apply(false)
