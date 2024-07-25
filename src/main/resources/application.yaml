@@ -14,4 +14,4 @@ moderne:
       - origin: https://bitbucket.example.com/stash
         type: BITBUCKET
       - origin: dev.azure.com
-        type: AZURE_DEVOPS_SERVICES
+        type: AZURE_DEVOPS
