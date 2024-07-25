@@ -59,7 +59,7 @@ file is included in this repository.
 
 ### Mapping repositories
 
-Edit [application.yaml](src/main/resources/application.yaml) to list all the origins (host + context path) for the SCM providers listed in the repos.csv, and provide a type: `[GITHUB,GITLAB,BITBUCKET_CLOUD,BITBUCKET]`.
+Edit [application.yaml](src/main/resources/application.yaml) to list all the origins (host + context path) for the SCM providers listed in the repos.csv, and provide a type: `[GITHUB,GITLAB,BITBUCKET_CLOUD,BITBUCKET,AZURE_DEVOPS_SERVICES]`.
 This will be used to split the clone url into an origin and path.
 
 Note that for an on-premise Bitbucket (server) we should not have the `scm/` path segment in the origin or the path. This will automatically be stripped off if you configure this as explained above.
