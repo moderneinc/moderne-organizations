@@ -31,7 +31,7 @@ public class ScmConfiguration {
         }
 
         public enum Type {
-            GITHUB, BITBUCKET_CLOUD, GITLAB, BITBUCKET
+            GITHUB, BITBUCKET_CLOUD, GITLAB, BITBUCKET, AZURE_DEVOPS_SERVICES
         }
     }
 
