@@ -1,7 +1,9 @@
 package io.moderne.organizations;
 
+∑import jakarta.annotation.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,9 @@ import java.util.List;
 public class ScmConfiguration {
     private List<ScmRepository> repositories;
     private boolean allowMissingScmOrigins;
+
+    @Nullable
+    private Path reposCsvPath;
 
     public static class ScmRepository {
         String origin;
@@ -54,5 +59,12 @@ public class ScmConfiguration {
         this.allowMissingScmOrigins = allowMissingScmOrigins;
     }
 
+    @Nullable
+    public Path getReposCsvPath() {
+        return reposCsvPath;
+    }
 
+    public void setReposCsvPath(@Nullable Path reposCsvPath) {
+        this.reposCsvPath = reposCsvPath;
+    }
 }

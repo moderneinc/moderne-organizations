@@ -57,6 +57,8 @@ There is repetition in organizational hierarchy in this format. The reference im
 If you have multiple organizations with the same display name, you can map id to display name in an `id-mapping.txt`. A simple reference
 file is included in this repository.
 
+You can either overwrite the existing [repos.csv](src/main/resources/repos.csv) or set the `moderne.scm.reposCsvPath` in [application.yaml](src/main/resources/application.yaml).
+
 ### Mapping repositories
 
 Edit [application.yaml](src/main/resources/application.yaml) to list all the origins (host + context path) for the SCM providers listed in the repos.csv, and provide a type: `[GITHUB,GITLAB,BITBUCKET_CLOUD,BITBUCKET,AZURE_DEVOPS]`.
