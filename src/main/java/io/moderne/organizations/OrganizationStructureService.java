@@ -27,8 +27,12 @@ public class OrganizationStructureService {
     private final ScmConfiguration scmConfiguration;
     private final RepositoryMapper repositoryMapper;
 
-    public OrganizationStructureService(ScmConfiguration scmConfiguration) {
-        this.scmConfiguration = scmConfiguration;
+    @Nullable
+    private final Path reposCsvPath;
+
+    public OrganizationStructureService(ModerneConfiguration moderneConfiguration) {
+        this.scmConfiguration = moderneConfiguration.getScm();
+        this.reposCsvPath = moderneConfiguration.getReposCsvPath();
         repositoryMapper = new RepositoryMapper(scmConfiguration);
     }
 
@@ -38,13 +42,12 @@ public class OrganizationStructureService {
 
         final Map<String, String> idToNameMapping = readIdToNameMapping();
 
-        Path reposCsvOverride = scmConfiguration.getReposCsvPath();
         InputStream inputStream;
         try {
-            if (reposCsvOverride == null) {
+            if (reposCsvPath == null) {
                 inputStream = new ClassPathResource(DEFAULT_REPOS_CSV).getInputStream();
             } else {
-                inputStream = new FileInputStream(reposCsvOverride.toFile());
+                inputStream = new FileInputStream(reposCsvPath.toFile());
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
