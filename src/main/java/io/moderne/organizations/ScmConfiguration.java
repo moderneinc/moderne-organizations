@@ -1,6 +1,6 @@
 package io.moderne.organizations;
 
-∑import jakarta.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.nio.file.Path;
