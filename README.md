@@ -54,7 +54,7 @@ The org structure is represented in a series of columns `org1..orgN` where `N` i
 
 There is repetition in organizational hierarchy in this format. The reference implementation validates the internal consistency of those organizational repositories across CSV lines.
 
-You can either overwrite the existing [repos.csv](src/main/resources/repos.csv) or set the `moderne.reposCsvPath` in [application.yaml](src/main/resources/application.yaml).
+You can either overwrite the existing [repos.csv](src/main/resources/repos.csv), set the `moderne.reposCsvPath` in [application.yaml](src/main/resources/application.yaml), or provide the path via an argument on application startup.
 
 If you have multiple organizations with the same display name, you can map id to display name in an `id-mapping.txt`. A simple reference
 file is included in this repository.
