@@ -59,13 +59,31 @@ file is included in this repository.
 
 ### Mapping repositories
 
-Edit [application.yaml](src/main/resources/application.yaml) to list all the origins (host + context path) for the SCM providers listed in the repos.csv, and provide a type: `[GITHUB,GITLAB,BITBUCKET_CLOUD,BITBUCKET,AZURE_DEVOPS]`.
-This will be used to split the clone url into an origin and path.
+Edit [application.yaml](src/main/resources/application.yaml) and list all the base uris for any private SCM providers used in the repos.csv.
 
-Note that for an on-premise Bitbucket (server) we should not have the `scm/` path segment in the origin or the path. This will automatically be stripped off if you configure this as explained above.
+You will need to provide the base uri, type and any alternative uri that can be used to access the same SCM server.
+
+Example:
+```yaml
+moderne:
+  scm:
+    repositories:
+      - baseUri: https://bitbucket.example.com/stash
+        type: Bitbucket
+        alternativeUris:
+          - http://bitbucket.example.com:8080/stash
+          - ssh://bitbucket.example.com/stash
+          - ssh://bitbucket.example.com:7999/stash
+```
+
+Make sure to provide the service type. The following (self-hosted) SCM providers are supported: `[GitHub,GitLab,Bitbucket]`.
+
+We use this configuration to split the clone uri into an origin and path.
+
+Note that for an on-premise Bitbucket (DC/server) we should not have the `scm/` path segment in the origin or the path. This will automatically be stripped off if you configure this as explained above.
 
 Example: 
-If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `bitbucket.example.com/stash` it will create a repository:
+If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/openrewrite/rewrite.git` and supply `https://bitbucket.example.com/stash` as the origin it will create a repository:
 
 ```
 {
@@ -76,6 +94,8 @@ If you have a repository at `cloneUrl=https://bitbucket.example.com/stash/scm/op
 ```
 
 you can set `moderne.scm.allow-missing-scm-origins` in [application.yaml](src/main/resources/application.yaml) to true if you want to strictly check on startup that all origins in repos.csv are present.
+
+Note: for backwards compatibility we read the `origin` if the `baseUri` is not supplied and apply the default `https://` protocol to it. It is highly recommended to update the configuration to contain full URIs.
 
 ### Commit options
 The `commitOptions` field on the `Organization` type is a list of strings that represent the commit options that are

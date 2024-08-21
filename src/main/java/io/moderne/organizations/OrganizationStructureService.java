@@ -2,7 +2,7 @@ package io.moderne.organizations;
 
 import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
-import org.openrewrite.internal.lang.Nullable;
+import org.openrewrite.GitRemote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -11,11 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This service could also directly call your SCM api to determine the available repositories
@@ -25,12 +21,13 @@ public class OrganizationStructureService {
     private static final String REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
-    private final ScmConfiguration scmConfiguration;
-    private final RepositoryMapper repositoryMapper;
 
-    public OrganizationStructureService(ScmConfiguration scmConfiguration) {
+    private final ScmConfiguration scmConfiguration;
+    private final GitRemote.Parser gitRemoteParser;
+
+    OrganizationStructureService(ScmConfiguration scmConfiguration, GitRemote.Parser gitRemoteParser) {
         this.scmConfiguration = scmConfiguration;
-        repositoryMapper = new RepositoryMapper(scmConfiguration);
+        this.gitRemoteParser = gitRemoteParser;
     }
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
@@ -49,7 +46,7 @@ public class OrganizationStructureService {
                         }
                         String cloneUrl = fields[0].trim();
                         String branch = fields[1].trim();
-                        RepositoryInput repository = repositoryMapper.determineRepository(cloneUrl, branch);
+                        RepositoryInput repository = determineRepository(cloneUrl, branch);
                         if (repository == null) {
                             if (scmConfiguration.isAllowMissingScmOrigins()) {
                                 log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
@@ -137,62 +134,8 @@ public class OrganizationStructureService {
         }
     }
 
-    private static class RepositoryMapper {
-        Map<ScmConfiguration.ScmRepository, Pattern> urlPatterns = new LinkedHashMap<>();
-
-        private RepositoryMapper(ScmConfiguration scmConfiguration) {
-            for (ScmConfiguration.ScmRepository repository : scmConfiguration.getRepositories()) {
-                Pattern pattern = Pattern.compile(repository.getOrigin() + "(.*)");
-                urlPatterns.put(repository, pattern);
-            }
-        }
-
-        @Nullable
-        public RepositoryInput determineRepository(String cloneUrl, String branch) {
-            for (Map.Entry<ScmConfiguration.ScmRepository, Pattern> entry : urlPatterns.entrySet()) {
-                String origin = cleanOrigin(entry.getKey().getOrigin());
-                Matcher matcher = entry.getValue().matcher(cloneUrl);
-                if (matcher.find()) {
-                    String path = cleanPath(matcher.group(1), entry.getKey().getType());
-                    return new RepositoryInput(path, origin, branch);
-                }
-            }
-            return null;
-        }
-
-        private static String cleanOrigin(String origin) {
-            if (origin.startsWith("http://") || origin.startsWith("https://") || origin.startsWith("ssh://")) {
-                try {
-                    final URL url = new URL(origin);
-                    origin = url.getHost();
-                    if (url.getPort() != -1) {
-                        origin += ":" + url.getPort();
-                    }
-                    origin += url.getPath();
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (origin.endsWith("/")) {
-                origin = origin.substring(0, origin.length() - 1);
-            }
-            return origin;
-        }
-
-        private static String cleanPath(String path, ScmConfiguration.ScmRepository.Type type) {
-            if (path.startsWith("/")) {
-                path = path.substring(1);
-            }
-            // In case of bitbucket server/on prem we need to remove the `/scm` prefix.
-            // This prefix is not part of all URL's to repository resource
-            // (for instance pull requests) so it cannot be part of the origin or path.
-            if (type == ScmConfiguration.ScmRepository.Type.BITBUCKET && path.startsWith("scm/")) {
-                path = path.substring(4);
-            }
-            if (path.endsWith(".git")) {
-                path = path.substring(0, path.length() - 4);
-            }
-            return path;
-        }
+    RepositoryInput determineRepository(String cloneUrl, String branch) {
+        GitRemote gitRemote = gitRemoteParser.parse(cloneUrl);
+        return new RepositoryInput(gitRemote.getOrigin(), gitRemote.getPath(), branch);
     }
 }
