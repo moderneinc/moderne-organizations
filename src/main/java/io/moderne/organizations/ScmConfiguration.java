@@ -31,59 +31,18 @@ class ScmConfiguration {
     }
 
     static class ScmRepository {
-
-        @Deprecated // Use baseUrl instead
-        @Nullable
-        private String origin;
-
-        @Deprecated // Use gitRemoteService in stead
-        @Nullable
-        Type type;
-
-        @Nullable
         private Service gitRemoteService;
-
-        @Nullable
         private URI baseUrl;
 
         @Nullable
         private List<URI> alternativeUrls;
 
         public List<URI> getAlternativeUrls() {
-            if (baseUrl != null) {
-                return Objects.requireNonNullElse(alternativeUrls, Collections.emptyList());
-            }
-            // backwards compatibility
-            if (alternativeUrls != null) {
-                throw new IllegalStateException("Using alternativeUrls without baseUrl is not supported");
-            }
-            if (originHasProtocol()) {
-                return Collections.emptyList();
-            }
-            return List.of(URI.create("ssh://" + origin));
+            return Objects.requireNonNullElse(alternativeUrls, Collections.emptyList());
         }
 
         public URI getBaseUrl() {
-            if (baseUrl != null) {
-                return baseUrl;
-            }
-            // backwards compatibility
-            if (origin == null) {
-                throw new IllegalStateException("Either baseUrl or origin must be set");
-            }
-            if (originHasProtocol()) {
-                return URI.create(origin);
-            }
-            return URI.create("https://" + origin);
-
-        }
-
-        private boolean originHasProtocol() {
-            return origin != null && (origin.startsWith("ssh://") || origin.startsWith("https:/") || origin.startsWith("http://"));
-        }
-
-        public void setOrigin(@Nullable String origin) {
-            this.origin = origin;
+            return baseUrl;
         }
 
         public void setAlternativeUrls(@Nullable List<URI> alternativeUrls) {
@@ -94,28 +53,7 @@ class ScmConfiguration {
             this.baseUrl = baseUrl;
         }
 
-        public @Nullable String getOrigin() {
-            return origin;
-        }
-
-        public @Nullable Type getType() {
-            return type;
-        }
-
-        public void setType(@Nullable Type type) {
-            this.type = type;
-        }
-
         public Service getGitRemoteService() {
-            if (gitRemoteService == null && type != null) {
-                return switch (type) {
-                    case GITHUB -> Service.GitHub;
-                    case BITBUCKET_CLOUD -> Service.BitbucketCloud;
-                    case GITLAB -> Service.GitLab;
-                    case BITBUCKET -> Service.Bitbucket;
-                    case AZURE_DEVOPS -> Service.AzureDevOps;
-                };
-            }
             return gitRemoteService;
         }
 
@@ -123,9 +61,4 @@ class ScmConfiguration {
             this.gitRemoteService = gitRemoteService;
         }
     }
-
-    enum Type {
-        GITHUB, BITBUCKET_CLOUD, GITLAB, BITBUCKET, AZURE_DEVOPS
-    }
-
 }
