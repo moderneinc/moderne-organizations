@@ -136,6 +136,6 @@ public class OrganizationStructureService {
 
     RepositoryInput determineRepository(String cloneUrl, String branch) {
         GitRemote gitRemote = gitRemoteParser.parse(cloneUrl);
-        return new RepositoryInput(gitRemote.getOrigin(), gitRemote.getPath(), branch);
+        return new RepositoryInput(gitRemote.getPath(), gitRemote.getOrigin(), branch);
     }
 }
