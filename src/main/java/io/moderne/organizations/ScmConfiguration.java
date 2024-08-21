@@ -1,7 +1,7 @@
 package io.moderne.organizations;
 
 import org.jspecify.annotations.Nullable;
-import org.openrewrite.GitRemote;
+import org.openrewrite.GitRemote.Service;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.net.URI;
@@ -31,14 +31,17 @@ class ScmConfiguration {
     }
 
     static class ScmRepository {
-        /**
-         * Use baseUrl instead
-         */
-        @Deprecated
+
+        @Deprecated // Use baseUrl instead
         @Nullable
         private String origin;
 
-        private GitRemote.Service type;
+        @Deprecated // Use gitRemoteService in stead
+        @Nullable
+        Type type;
+
+        @Nullable
+        private Service gitRemoteService;
 
         @Nullable
         private URI baseUrl;
@@ -50,32 +53,29 @@ class ScmConfiguration {
             if (baseUrl != null) {
                 return Objects.requireNonNullElse(alternativeUrls, Collections.emptyList());
             }
-            {
-                // backwards compatibility
-                if (alternativeUrls != null) {
-                    throw new IllegalStateException("Using alternativeUrls without baseUrl is not supported");
-                }
-                if (originHasProtocol()) {
-                    return Collections.emptyList();
-                }
-                return List.of(URI.create("ssh://" + origin));
+            // backwards compatibility
+            if (alternativeUrls != null) {
+                throw new IllegalStateException("Using alternativeUrls without baseUrl is not supported");
             }
+            if (originHasProtocol()) {
+                return Collections.emptyList();
+            }
+            return List.of(URI.create("ssh://" + origin));
         }
 
         public URI getBaseUrl() {
             if (baseUrl != null) {
                 return baseUrl;
             }
-            {
-                // backwards compatibility
-                if (origin == null) {
-                    throw new IllegalStateException("Either baseUrl or origin must be set");
-                }
-                if (originHasProtocol()) {
-                    return URI.create(origin);
-                }
-                return URI.create("https://" + origin);
+            // backwards compatibility
+            if (origin == null) {
+                throw new IllegalStateException("Either baseUrl or origin must be set");
             }
+            if (originHasProtocol()) {
+                return URI.create(origin);
+            }
+            return URI.create("https://" + origin);
+
         }
 
         private boolean originHasProtocol() {
@@ -86,14 +86,6 @@ class ScmConfiguration {
             this.origin = origin;
         }
 
-        public GitRemote.Service getType() {
-            return type;
-        }
-
-        public void setType(GitRemote.Service type) {
-            this.type = type;
-        }
-
         public void setAlternativeUrls(@Nullable List<URI> alternativeUrls) {
             this.alternativeUrls = alternativeUrls;
         }
@@ -101,7 +93,39 @@ class ScmConfiguration {
         public void setBaseUrl(@Nullable URI baseUrl) {
             this.baseUrl = baseUrl;
         }
+
+        public @Nullable String getOrigin() {
+            return origin;
+        }
+
+        public @Nullable Type getType() {
+            return type;
+        }
+
+        public void setType(@Nullable Type type) {
+            this.type = type;
+        }
+
+        public Service getGitRemoteService() {
+            if (gitRemoteService == null && type != null) {
+                return switch (type) {
+                    case GITHUB -> Service.GitHub;
+                    case BITBUCKET_CLOUD -> Service.BitbucketCloud;
+                    case GITLAB -> Service.GitLab;
+                    case BITBUCKET -> Service.Bitbucket;
+                    case AZURE_DEVOPS -> Service.AzureDevOps;
+                };
+            }
+            return gitRemoteService;
+        }
+
+        public void setGitRemoteService(@Nullable Service gitRemoteService) {
+            this.gitRemoteService = gitRemoteService;
+        }
     }
 
+    enum Type {
+        GITHUB, BITBUCKET_CLOUD, GITLAB, BITBUCKET, AZURE_DEVOPS
+    }
 
 }
