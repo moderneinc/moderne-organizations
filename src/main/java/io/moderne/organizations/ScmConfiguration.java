@@ -31,7 +31,7 @@ class ScmConfiguration {
     }
 
     static class ScmRepository {
-        private Service gitRemoteService;
+        private Service type;
         private URI baseUrl;
 
         @Nullable
@@ -53,12 +53,12 @@ class ScmConfiguration {
             this.baseUrl = baseUrl;
         }
 
-        public Service getGitRemoteService() {
-            return gitRemoteService;
+        public Service getType() {
+            return type;
         }
 
-        public void setGitRemoteService(@Nullable Service gitRemoteService) {
-            this.gitRemoteService = gitRemoteService;
+        public void setType(@Nullable Service type) {
+            this.type = type;
         }
     }
 }
