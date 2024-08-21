@@ -31,6 +31,9 @@ class ScmConfiguration {
     }
 
     static class ScmRepository {
+        /**
+         * Use baseUrl instead
+         */
         @Deprecated
         @Nullable
         private String origin;
@@ -38,35 +41,35 @@ class ScmConfiguration {
         private GitRemote.Service type;
 
         @Nullable
-        private URI baseUri;
+        private URI baseUrl;
 
         @Nullable
-        private List<URI> alternativeUris;
+        private List<URI> alternativeUrls;
 
-        public List<URI> getAlternativeUris() {
-            if (baseUri != null) {
-                return Objects.requireNonNullElse(alternativeUris, Collections.emptyList());
+        public List<URI> getAlternativeUrls() {
+            if (baseUrl != null) {
+                return Objects.requireNonNullElse(alternativeUrls, Collections.emptyList());
             }
             {
                 // backwards compatibility
-                if (alternativeUris != null) {
-                    throw new IllegalStateException("Using alternativeUris without baseUri is not supported");
+                if (alternativeUrls != null) {
+                    throw new IllegalStateException("Using alternativeUrls without baseUrl is not supported");
                 }
                 if (originHasProtocol()) {
                     return Collections.emptyList();
                 }
-                return Collections.singletonList(URI.create("ssh://" + origin));
+                return List.of(URI.create("ssh://" + origin));
             }
         }
 
-        public URI getBaseUri() {
-            if (baseUri != null) {
-                return baseUri;
+        public URI getBaseUrl() {
+            if (baseUrl != null) {
+                return baseUrl;
             }
             {
                 // backwards compatibility
                 if (origin == null) {
-                    throw new IllegalStateException("Either baseUri or origin must be set");
+                    throw new IllegalStateException("Either baseUrl or origin must be set");
                 }
                 if (originHasProtocol()) {
                     return URI.create(origin);
@@ -91,8 +94,12 @@ class ScmConfiguration {
             this.type = type;
         }
 
-        public void setAlternativeUris(@Nullable List<URI> alternativeUris) {
-            this.alternativeUris = alternativeUris;
+        public void setAlternativeUrls(@Nullable List<URI> alternativeUrls) {
+            this.alternativeUrls = alternativeUrls;
+        }
+
+        public void setBaseUrl(@Nullable URI baseUrl) {
+            this.baseUrl = baseUrl;
         }
     }
 

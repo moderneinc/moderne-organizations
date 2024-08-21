@@ -5,9 +5,9 @@ moderne:
   scm:
     allowMissingScmOrigins: true
     repositories:
-      - origin: https://bitbucket.example.com/stash
+      - baseUrl: https://bitbucket.example.com/stash
         type: Bitbucket
-        alternative-uris:
+        alternativeUrls:
           - http://bitbucket.example.com:8080/stash
           - ssh://bitbucket.example.com/stash
           - ssh://bitbucket.example.com:7999/stash

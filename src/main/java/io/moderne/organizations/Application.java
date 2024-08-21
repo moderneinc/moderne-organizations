@@ -17,7 +17,7 @@ public class Application {
     @Bean
     GitRemote.Parser gitRemoteParser(ScmConfiguration scmConfiguration) {
         GitRemote.Parser gitRemoteParser = new GitRemote.Parser();
-        scmConfiguration.getRepositories().forEach(scmRepository -> gitRemoteParser.registerRemote(scmRepository.getType(), scmRepository.getBaseUri(), scmRepository.getAlternativeUris()));
+        scmConfiguration.getRepositories().forEach(scmRepository -> gitRemoteParser.registerRemote(scmRepository.getType(), scmRepository.getBaseUrl(), scmRepository.getAlternativeUrls()));
         return gitRemoteParser;
     }
 
