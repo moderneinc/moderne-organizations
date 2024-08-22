@@ -8,11 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,14 +21,18 @@ import java.util.regex.Pattern;
  */
 @Service
 public class OrganizationStructureService {
-    private static final String REPOS_CSV = "repos.csv";
+    private static final String DEFAULT_REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
     private final ScmConfiguration scmConfiguration;
     private final RepositoryMapper repositoryMapper;
 
-    public OrganizationStructureService(ScmConfiguration scmConfiguration) {
-        this.scmConfiguration = scmConfiguration;
+    @Nullable
+    private final Path reposCsvPath;
+
+    public OrganizationStructureService(ModerneConfiguration moderneConfiguration) {
+        this.scmConfiguration = moderneConfiguration.getScm();
+        this.reposCsvPath = moderneConfiguration.getReposCsvPath();
         repositoryMapper = new RepositoryMapper(scmConfiguration);
     }
 
@@ -39,7 +42,18 @@ public class OrganizationStructureService {
 
         final Map<String, String> idToNameMapping = readIdToNameMapping();
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
+        InputStream inputStream;
+        try {
+            if (reposCsvPath == null) {
+                inputStream = new ClassPathResource(DEFAULT_REPOS_CSV).getInputStream();
+            } else {
+                inputStream = new FileInputStream(reposCsvPath.toFile());
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             reader.readLine(); // skip header
             reader.lines()
                     .forEach(line -> {
