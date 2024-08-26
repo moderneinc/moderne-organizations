@@ -2,17 +2,15 @@ package io.moderne.organizations;
 
 import org.jspecify.annotations.Nullable;
 import org.openrewrite.GitRemote.Service;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-@ConfigurationProperties(prefix = "moderne.scm")
-class ScmConfiguration {
-    private boolean allowMissingScmOrigins;
+public class ScmConfiguration {
     private List<ScmRepository> repositories;
+    private boolean allowMissingScmOrigins;
 
     public List<ScmRepository> getRepositories() {
         return repositories;
@@ -30,7 +28,7 @@ class ScmConfiguration {
         this.allowMissingScmOrigins = allowMissingScmOrigins;
     }
 
-    static class ScmRepository {
+    public static class ScmRepository {
         private Service type;
         private URI baseUrl;
 

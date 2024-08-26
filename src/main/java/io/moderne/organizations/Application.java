@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-@EnableConfigurationProperties(ScmConfiguration.class)
+@EnableConfigurationProperties(ModerneConfiguration.class)
 @SpringBootApplication
 public class Application {
 

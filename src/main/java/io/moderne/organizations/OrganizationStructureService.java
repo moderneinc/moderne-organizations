@@ -3,14 +3,14 @@ package io.moderne.organizations;
 import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
 import org.openrewrite.GitRemote;
+import org.openrewrite.internal.lang.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -18,16 +18,20 @@ import java.util.*;
  */
 @Service
 public class OrganizationStructureService {
-    private static final String REPOS_CSV = "repos.csv";
+    private static final String DEFAULT_REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
 
     private final ScmConfiguration scmConfiguration;
     private final GitRemote.Parser gitRemoteParser;
 
-    OrganizationStructureService(ScmConfiguration scmConfiguration, GitRemote.Parser gitRemoteParser) {
-        this.scmConfiguration = scmConfiguration;
+    @Nullable
+    private final Path reposCsvPath;
+
+    public OrganizationStructureService(ModerneConfiguration moderneConfiguration, GitRemote.Parser gitRemoteParser) {
         this.gitRemoteParser = gitRemoteParser;
+        this.scmConfiguration = moderneConfiguration.getScm();
+        this.reposCsvPath = moderneConfiguration.getReposCsvPath();
     }
 
     public Map<String, OrganizationRepositories> readOrganizationStructure() {
@@ -36,7 +40,18 @@ public class OrganizationStructureService {
 
         final Map<String, String> idToNameMapping = readIdToNameMapping();
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(REPOS_CSV).getInputStream()))) {
+        InputStream inputStream;
+        try {
+            if (reposCsvPath == null) {
+                inputStream = new ClassPathResource(DEFAULT_REPOS_CSV).getInputStream();
+            } else {
+                inputStream = new FileInputStream(reposCsvPath.toFile());
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             reader.readLine(); // skip header
             reader.lines()
                     .forEach(line -> {
