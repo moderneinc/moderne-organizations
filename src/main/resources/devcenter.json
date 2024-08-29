@@ -204,7 +204,7 @@
                   },
                   {
                     "name": "version",
-                    "value": "3-3.1"
+                    "value": "3-3.2"
                   }
                 ]
               }
@@ -224,7 +224,27 @@
                   },
                   {
                     "name": "version",
-                    "value": "3.2-3.2.2"
+                    "value": "3.3-3.3.2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Completed",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.springframework.boot"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "spring-boot"
+                  },
+                  {
+                    "name": "version",
+                    "value": "3.3.3-3.3.x"
                   }
                 ]
               }
@@ -272,6 +292,18 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "Java 21+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "21-100"
+                  }
+                ]
+              }
             }
           ],
           "fix": {
@@ -289,6 +321,18 @@
                   {
                     "name": "annotationPattern",
                     "value": "@org.junit.Test"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "JUnit 5",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.FindAnnotations",
+                "options": [
+                  {
+                    "name": "annotationPattern",
+                    "value": "@org.junit.jupiter.api.Test"
                   }
                 ]
               }
@@ -372,6 +416,26 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "Version 41+",
+              "recipe": {
+                "recipeId": "org.openrewrite.maven.search.ParentPomInsight",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.apache.maven.shared"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "maven-shared-components"
+                  },
+                  {
+                    "name": "version",
+                    "value": "41-100"
+                  }
+                ]
+              }
             }
           ],
           "fix": {
@@ -438,6 +502,26 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "Version 41+",
+              "recipe": {
+                "recipeId": "org.openrewrite.maven.search.ParentPomInsight",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.apache.maven.plugins"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "maven-plugins"
+                  },
+                  {
+                    "name": "version",
+                    "value": "41-100"
+                  }
+                ]
+              }
             }
           ],
           "fix": {
@@ -497,6 +581,18 @@
                   {
                     "name": "version",
                     "value": "17-20"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Java 21+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "21-100"
                   }
                 ]
               }
