@@ -1,41 +1,18 @@
 package io.moderne.organizations;
 
-import java.util.ArrayList;
+import org.jspecify.annotations.Nullable;
+import org.openrewrite.GitRemote.Service;
+
+import java.net.URI;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ScmConfiguration {
     private List<ScmRepository> repositories;
     private boolean allowMissingScmOrigins;
 
-    public static class ScmRepository {
-        String origin;
-        Type type;
-
-        public String getOrigin() {
-            return origin;
-        }
-
-        public void setOrigin(String origin) {
-            this.origin = origin;
-        }
-
-        public Type getType() {
-            return type;
-        }
-
-        public void setType(Type type) {
-            this.type = type;
-        }
-
-        public enum Type {
-            GITHUB, BITBUCKET_CLOUD, GITLAB, BITBUCKET, AZURE_DEVOPS
-        }
-    }
-
     public List<ScmRepository> getRepositories() {
-        if (repositories == null) {
-            repositories = new ArrayList<>();
-        }
         return repositories;
     }
 
@@ -49,5 +26,37 @@ public class ScmConfiguration {
 
     public void setAllowMissingScmOrigins(boolean allowMissingScmOrigins) {
         this.allowMissingScmOrigins = allowMissingScmOrigins;
+    }
+
+    public static class ScmRepository {
+        private Service type;
+        private URI baseUrl;
+
+        @Nullable
+        private List<URI> alternativeUrls;
+
+        public List<URI> getAlternativeUrls() {
+            return Objects.requireNonNullElse(alternativeUrls, Collections.emptyList());
+        }
+
+        public URI getBaseUrl() {
+            return baseUrl;
+        }
+
+        public void setAlternativeUrls(@Nullable List<URI> alternativeUrls) {
+            this.alternativeUrls = alternativeUrls;
+        }
+
+        public void setBaseUrl(@Nullable URI baseUrl) {
+            this.baseUrl = baseUrl;
+        }
+
+        public Service getType() {
+            return type;
+        }
+
+        public void setType(@Nullable Service type) {
+            this.type = type;
+        }
     }
 }
