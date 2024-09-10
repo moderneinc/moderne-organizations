@@ -1,8 +1,8 @@
-cloneUrl,branch,org1,org2,org3
-https://github.com/openrewrite/rewrite-recipe-bom,main,,Default,ALL
-https://github.com/openrewrite/rewrite-recommendations,main,,Default,ALL
-https://github.com/Netflix/eureka,master,,Default,ALL
-https://github.com/WebGoat/WebGoat,main,,Default,ALL
+cloneUrl,branch,org1,org2,org3,org4
+https://github.com/openrewrite/rewrite-recipe-bom,main,Default,ALL
+https://github.com/openrewrite/rewrite-recommendations,main,Default,ALL
+https://github.com/Netflix/eureka,master,Default,ALL
+https://github.com/WebGoat/WebGoat,main,Default,ALL
 https://github.com/openrewrite/rewrite,main,OpenRewrite,Open source,ALL
 https://github.com/openrewrite/rewrite-cucumber-jvm,main,OpenRewrite,Open source,ALL
 https://github.com/openrewrite/rewrite-hibernate,main,OpenRewrite,Open source,ALL

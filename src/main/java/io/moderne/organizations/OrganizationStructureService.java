@@ -1,5 +1,8 @@
 package io.moderne.organizations;
 
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
 import org.openrewrite.GitRemote;
@@ -40,6 +43,11 @@ public class OrganizationStructureService {
 
         final Map<String, String> idToNameMapping = readIdToNameMapping();
 
+        CsvMapper csvMapper = new CsvMapper();
+        CsvSchema bootstrapSchema = CsvSchema.emptySchema()
+                .withComments()
+                .withHeader();
+
         InputStream inputStream;
         try {
             if (reposCsvPath == null) {
@@ -51,56 +59,53 @@ public class OrganizationStructureService {
             throw new UncheckedIOException(e);
         }
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            reader.readLine(); // skip header
-            reader.lines()
-                    .forEach(line -> {
-                        String[] fields = line.split(",", Integer.MAX_VALUE);
-                        if (fields.length < 3) {
-                            throw new IllegalStateException("repos.csv lines should have at least 1 organization");
-                        }
-                        String cloneUrl = fields[0].trim();
-                        String branch = fields[1].trim();
-                        RepositoryInput repository = determineRepository(cloneUrl, branch);
-                        if (repository == null) {
-                            if (scmConfiguration.isAllowMissingScmOrigins()) {
-                                log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
-                                return;
-                            } else {
-                                throw new IllegalStateException("No scm origin found for %s. Add it to moderne.scm.repositories or set moderne.scm.allow-missing-scm-origins to true in application.yaml".formatted(cloneUrl));
-                            }
-                        }
-                        allRepositories.add(repository);
+        try (MappingIterator<ReposCsvRow> iterator = csvMapper.readerFor(ReposCsvRow.class)
+                .with(bootstrapSchema)
+                .readValues(inputStream)) {
+            while (iterator.hasNextValue()) {
+                ReposCsvRow row = iterator.nextValue();
+                String cloneUrl = row.getCloneUrl();
+                RepositoryInput repository = determineRepository(cloneUrl, row.getBranch());
+                if (repository == null) {
+                    if (scmConfiguration.isAllowMissingScmOrigins()) {
+                        log.warn("No scm origin found for %s. Consider adding it to scm-origins.txt".formatted(cloneUrl));
+                        continue;
+                    } else {
+                        throw new IllegalStateException("No scm origin found for %s. Add it to moderne.scm.repositories or set moderne.scm.allow-missing-scm-origins to true in application.yaml".formatted(cloneUrl));
+                    }
+                }
 
-                        OrganizationRepositories first = null;
-                        for (int i = fields.length - 1; i > 1; i--) {
-                            String organization = fields[i].trim();
-                            if (organization.isEmpty()) {
-                                break;
-                            }
-                            String parent = fields.length > i + 1 ? fields[i + 1].trim() : null;
-                            first = organizations.compute(organization, (k, v) -> {
-                                if (v == null) {
-                                    String name = organization;
-                                    if (idToNameMapping.containsKey(organization)) {
-                                        name = idToNameMapping.get(organization);
-                                    }
-                                    v = new OrganizationRepositories(
-                                            organization,
-                                            name,
-                                            new LinkedHashSet<>(),
-                                            List.of(CommitOption.values()), parent);
-                                }
-                                if (!Objects.equals(v.parent(), parent)) {
-                                    throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
-                                }
-                                return v;
-                            });
+                Queue<String> orgNames = new LinkedList<>(row.getOrganizations());
+                if (orgNames.isEmpty()) {
+                    throw new IllegalStateException("repos.csv lines should have at least 1 organization");
+                } else if (orgNames.contains("")) {
+                    throw new IllegalStateException("Invalid organization \"\" for %s".formatted(cloneUrl));
+                }
+
+                boolean first = true;
+                do {
+                    String organization = orgNames.poll();
+                    String parent = orgNames.peek();
+                    OrganizationRepositories organizationRepositories = organizations.compute(organization, (k, v) -> {
+                        String name = organization;
+                        if (idToNameMapping.containsKey(organization)) {
+                            name = idToNameMapping.get(organization);
                         }
-                        if (first != null) {
-                            first.repositories().add(repository);
+                        if (v == null) {
+                            v = new OrganizationRepositories(organization, name, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
                         }
+                        if (!Objects.equals(v.parent(), parent)) {
+                            throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
+                        }
+
+                        return v;
                     });
+                    if (first) {
+                        first = false;
+                        organizationRepositories.repositories().add(repository);
+                    }
+                } while (!orgNames.isEmpty());
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
