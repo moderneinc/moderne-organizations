@@ -87,6 +87,10 @@ type DevCenter {
     Security recipes to run for this organization.
     """
     security: [DevCenterRecipe!]
+    """
+    A version number for the DevCenter API to use the latest features (without breaking the old)
+    """
+    version: Int!
 }
 
 type DevCenterVisualizationCard {

@@ -21,14 +21,21 @@ public class DevCenter {
    */
   private List<DevCenterRecipe> security;
 
+  /**
+   * A version number for the DevCenter API to use the latest features (without breaking the old)
+   */
+  private int version;
+
   public DevCenter() {
   }
 
   public DevCenter(List<DevCenterRecipeCard> upgradesAndMigrations,
-      List<DevCenterVisualizationCard> visualizations, List<DevCenterRecipe> security) {
+      List<DevCenterVisualizationCard> visualizations, List<DevCenterRecipe> security,
+      int version) {
     this.upgradesAndMigrations = upgradesAndMigrations;
     this.visualizations = visualizations;
     this.security = security;
+    this.version = version;
   }
 
   /**
@@ -64,9 +71,20 @@ public class DevCenter {
     this.security = security;
   }
 
+  /**
+   * A version number for the DevCenter API to use the latest features (without breaking the old)
+   */
+  public int getVersion() {
+    return version;
+  }
+
+  public void setVersion(int version) {
+    this.version = version;
+  }
+
   @Override
   public String toString() {
-    return "DevCenter{" + "upgradesAndMigrations='" + upgradesAndMigrations + "'," +"visualizations='" + visualizations + "'," +"security='" + security + "'" +"}";
+    return "DevCenter{" + "upgradesAndMigrations='" + upgradesAndMigrations + "'," +"visualizations='" + visualizations + "'," +"security='" + security + "'," +"version='" + version + "'" +"}";
   }
 
   @Override
@@ -76,12 +94,13 @@ public class DevCenter {
         DevCenter that = (DevCenter) o;
         return java.util.Objects.equals(upgradesAndMigrations, that.upgradesAndMigrations) &&
                             java.util.Objects.equals(visualizations, that.visualizations) &&
-                            java.util.Objects.equals(security, that.security);
+                            java.util.Objects.equals(security, that.security) &&
+                            version == that.version;
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(upgradesAndMigrations, visualizations, security);
+    return java.util.Objects.hash(upgradesAndMigrations, visualizations, security, version);
   }
 
   public static io.moderne.organizations.types.DevCenter.Builder newBuilder() {
@@ -104,11 +123,17 @@ public class DevCenter {
      */
     private List<DevCenterRecipe> security;
 
+    /**
+     * A version number for the DevCenter API to use the latest features (without breaking the old)
+     */
+    private int version;
+
     public DevCenter build() {
                   io.moderne.organizations.types.DevCenter result = new io.moderne.organizations.types.DevCenter();
                       result.upgradesAndMigrations = this.upgradesAndMigrations;
           result.visualizations = this.visualizations;
           result.security = this.security;
+          result.version = this.version;
                       return result;
     }
 
@@ -136,6 +161,14 @@ public class DevCenter {
     public io.moderne.organizations.types.DevCenter.Builder security(
         List<DevCenterRecipe> security) {
       this.security = security;
+      return this;
+    }
+
+    /**
+     * A version number for the DevCenter API to use the latest features (without breaking the old)
+     */
+    public io.moderne.organizations.types.DevCenter.Builder version(int version) {
+      this.version = version;
       return this;
     }
   }

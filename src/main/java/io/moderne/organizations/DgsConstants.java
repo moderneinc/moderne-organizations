@@ -99,6 +99,8 @@ public class DgsConstants {
     public static final String Visualizations = "visualizations";
 
     public static final String Security = "security";
+
+    public static final String Version = "version";
   }
 
   public static class DEVCENTERVISUALIZATIONCARD {
