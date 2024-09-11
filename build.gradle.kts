@@ -59,6 +59,8 @@ configurations {
 }
 
 dependencies {
+    annotationProcessor("org.projectlombok:lombok:latest.release")
+    
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.100.Final"))
@@ -67,6 +69,7 @@ dependencies {
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
     implementation("io.github.classgraph:classgraph:latest.release")
+    implementation("org.projectlombok:lombok:latest.release")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.micrometer:micrometer-core:latest.release")
