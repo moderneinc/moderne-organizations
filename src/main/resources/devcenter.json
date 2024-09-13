@@ -1,6 +1,7 @@
 [
   {
     "devCenter": {
+      "version" : 1,
       "upgradesAndMigrations": [
         {
           "title": "Spring boot 3.2",
@@ -165,6 +166,7 @@
   },
   {
     "devCenter": {
+      "version" : 1,
       "upgradesAndMigrations": [
         {
           "title": "Spring boot 3.2",
@@ -373,6 +375,7 @@
   },
   {
     "devCenter": {
+      "version" : 1,
       "upgradesAndMigrations": [
         {
           "title": "Maven shared components",
