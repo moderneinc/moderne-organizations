@@ -4,172 +4,7 @@
       "version" : 1,
       "upgradesAndMigrations": [
         {
-          "title": "Spring boot 3.2",
-          "measures": [
-            {
-              "name": "Major",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
-                "options": [
-                  {
-                    "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
-                  },
-                  {
-                    "name": "artifactIdPattern",
-                    "value": "spring-boot"
-                  },
-                  {
-                    "name": "version",
-                    "value": "1-2"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Minor",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
-                "options": [
-                  {
-                    "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
-                  },
-                  {
-                    "name": "artifactIdPattern",
-                    "value": "spring-boot"
-                  },
-                  {
-                    "name": "version",
-                    "value": "3-3.1"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Patch",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
-                "options": [
-                  {
-                    "name": "groupIdPattern",
-                    "value": "org.springframework.boot"
-                  },
-                  {
-                    "name": "artifactIdPattern",
-                    "value": "spring-boot"
-                  },
-                  {
-                    "name": "version",
-                    "value": "3.2-3.2.2"
-                  }
-                ]
-              }
-            }
-          ],
-          "fix": {
-            "recipeId": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
-          }
-        },
-        {
-          "title": "Java 21",
-          "measures": [
-            {
-              "name": "Java 8+",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
-                "options": [
-                  {
-                    "name": "version",
-                    "value": "8-10"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Java 11+",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
-                "options": [
-                  {
-                    "name": "version",
-                    "value": "11-16"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "Java 17+",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
-                "options": [
-                  {
-                    "name": "version",
-                    "value": "17-20"
-                  }
-                ]
-              }
-            }
-          ],
-          "fix": {
-            "recipeId": "org.openrewrite.java.migrate.UpgradeToJava21"
-          }
-        },
-        {
-          "title": "JUnit 5",
-          "measures": [
-            {
-              "name": "JUnit 4",
-              "recipe": {
-                "recipeId": "org.openrewrite.java.search.FindAnnotations",
-                "options": [
-                  {
-                    "name": "annotationPattern",
-                    "value": "@org.junit.Test"
-                  }
-                ]
-              }
-            }
-          ],
-          "fix": {
-            "recipeId": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
-          }
-        }
-      ],
-      "visualizations": [
-        {
-          "visualizationId": "io.moderne.DependencyUsageViolin"
-        },
-        {
-          "visualizationId": "io.moderne.LanguageComposition"
-        },
-        {
-          "visualizationId": "io.moderne.SqlCrud"
-        }
-      ],
-      "security": [
-        { "recipeId": "org.openrewrite.java.security.OwaspA01" },
-        { "recipeId": "org.openrewrite.java.security.OwaspA02" },
-        { "recipeId": "org.openrewrite.java.security.OwaspA03" },
-        { "recipeId": "org.openrewrite.java.security.OwaspA05" },
-        { "recipeId": "org.openrewrite.java.security.OwaspA06" },
-        { "recipeId": "org.openrewrite.java.security.OwaspA08" },
-        {
-          "recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"
-        },
-        { "recipeId": "org.openrewrite.java.security.secrets.FindSecrets" },
-        { "recipeId": "org.openrewrite.java.security.ZipSlip" },
-        { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
-      ]
-    },
-    "organizations": ["Default"]
-  },
-  {
-    "devCenter": {
-      "version" : 1,
-      "upgradesAndMigrations": [
-        {
-          "title": "Spring boot 3.2",
+          "title": "Spring boot",
           "measures": [
             {
               "name": "Major",
@@ -246,7 +81,216 @@
                   },
                   {
                     "name": "version",
-                    "value": "3.3.3-3.3.x"
+                    "value": "3.3.3-4.0.0"
+                  }
+                ]
+              }
+            }
+          ],
+          "fix": {
+            "recipeId": "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2"
+          }
+        },
+        {
+          "title": "Java 21",
+          "measures": [
+            {
+              "name": "Java 8+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "8-10"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Java 11+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "11-16"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Java 17+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "17-20"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Java 21+",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.HasMinimumJavaVersion",
+                "options": [
+                  {
+                    "name": "version",
+                    "value": "21-100"
+                  }
+                ]
+              }
+            }
+          ],
+          "fix": {
+            "recipeId": "org.openrewrite.java.migrate.UpgradeToJava21"
+          }
+        },
+        {
+          "title": "JUnit 5",
+          "measures": [
+            {
+              "name": "JUnit 4",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.FindAnnotations",
+                "options": [
+                  {
+                    "name": "annotationPattern",
+                    "value": "@org.junit.Test"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "JUnit 5",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.search.FindAnnotations",
+                "options": [
+                  {
+                    "name": "annotationPattern",
+                    "value": "@org.junit.jupiter.api.Test"
+                  }
+                ]
+              }
+            }
+          ],
+          "fix": {
+            "recipeId": "org.openrewrite.java.testing.junit5.JUnit4to5Migration"
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "visualizationId": "io.moderne.DependencyUsageViolin"
+        },
+        {
+          "visualizationId": "io.moderne.LanguageComposition"
+        },
+        {
+          "visualizationId": "io.moderne.SqlCrud"
+        }
+      ],
+      "security": [
+        { "recipeId": "org.openrewrite.java.security.OwaspA01" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA02" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA03" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA05" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA06" },
+        { "recipeId": "org.openrewrite.java.security.OwaspA08" },
+        {
+          "recipeId": "org.openrewrite.java.security.RegularExpressionDenialOfService"
+        },
+        { "recipeId": "org.openrewrite.java.security.secrets.FindSecrets" },
+        { "recipeId": "org.openrewrite.java.security.ZipSlip" },
+        { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
+      ]
+    },
+    "organizations": ["Default"]
+  },
+  {
+    "devCenter": {
+      "version" : 1,
+      "upgradesAndMigrations": [
+        {
+          "title": "Spring boot",
+          "measures": [
+            {
+              "name": "Major",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.springframework.boot"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "spring-boot"
+                  },
+                  {
+                    "name": "version",
+                    "value": "1-2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Minor",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.springframework.boot"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "spring-boot"
+                  },
+                  {
+                    "name": "version",
+                    "value": "3-3.2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Patch",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.springframework.boot"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "spring-boot"
+                  },
+                  {
+                    "name": "version",
+                    "value": "3.3-3.3.2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Completed",
+              "recipe": {
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumDependencyVersion",
+                "options": [
+                  {
+                    "name": "groupIdPattern",
+                    "value": "org.springframework.boot"
+                  },
+                  {
+                    "name": "artifactIdPattern",
+                    "value": "spring-boot"
+                  },
+                  {
+                    "name": "version",
+                    "value": "3.3.3-4.0.0"
                   }
                 ]
               }
