@@ -32,7 +32,6 @@ public class OrganizationDataFetcher {
                 .map(this::mapOrganization);
     }
 
-
     @DgsQuery
     Mono<Connection<Organization>> organizationsPages(DataFetchingEnvironment dfe) {
         return Mono.fromCallable(() -> {
