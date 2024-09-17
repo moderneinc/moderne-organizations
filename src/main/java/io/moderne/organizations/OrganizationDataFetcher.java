@@ -33,6 +33,17 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
+    Mono<Connection<Organization>> organizationsPages(DataFetchingEnvironment dfe) {
+        return Mono.fromCallable(() -> {
+            List<Organization> allOrganizations = organizations.all()
+                    .stream()
+                    .map(this::mapOrganization)
+                    .toList();
+            return new SimpleListConnection<>(allOrganizations).get(dfe);
+        });
+    }
+
+    @DgsQuery
     Mono<Organization> organization(@InputArgument String id) {
         return Mono.justOrEmpty(organizations.findOrganization(id))
                 .map(this::mapOrganization);
@@ -42,18 +53,30 @@ public class OrganizationDataFetcher {
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
         // Here we need to return at least the top level organizations that a user has access too.
         // A user automatically gets access to all the children of the organizations returned here.
-        List<OrganizationRepositories> allAccessibleOrgs = new ArrayList<>();
+        List<Organization> allAccessibleOrgs = new ArrayList<>();
         for (OrganizationRepositories org : organizations.roots()) {
             allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user, at));
         }
-        return Flux.fromIterable(allAccessibleOrgs).map(this::mapOrganization);
+        return Flux.fromIterable(allAccessibleOrgs);
     }
 
-    Collection<OrganizationRepositories> findAccessibleRootOrganizations(OrganizationRepositories root, User user, OffsetDateTime at) {
-        if (allowAccess(user, at, root.name())) {
-            return List.of(root);
-        }
+    @DgsQuery
+    Mono<Connection<Organization>> userOrganizationsPages(@InputArgument User user, @InputArgument OffsetDateTime at, DataFetchingEnvironment dfe) {
+        return Mono.fromCallable(() -> {
+            // Here we need to return at least the top level organizations that a user has access too.
+            // A user automatically gets access to all the children of the organizations returned here.
+            List<Organization> allAccessibleOrgs = new ArrayList<>();
+            for (OrganizationRepositories org : organizations.roots()) {
+                allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user, at));
+            }
+            return new SimpleListConnection<>(allAccessibleOrgs).get(dfe);
+        });
+    }
 
+    Collection<Organization> findAccessibleRootOrganizations(OrganizationRepositories root, User user, OffsetDateTime at) {
+        if (allowAccess(user, at, root.name())) {
+            return List.of(mapOrganization(root));
+        }
         return organizations.findChildren(root.id()).stream()
                 .flatMap(child -> findAccessibleRootOrganizations(child, user, at).stream())
                 .toList();
