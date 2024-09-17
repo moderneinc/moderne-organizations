@@ -17,7 +17,6 @@ class OrganizationTree {
             if (node.getParentId() != null) {
                 Node parent = nodeMap.get(node.getParentId());
                 parent.children.add(node);
-                precomputeAncestors(node, parent);
             } else {
                 roots.add(node.organization);
             }
@@ -81,11 +80,6 @@ class OrganizationTree {
         }
     }
 
-    private void precomputeAncestors(Node node, Node parent) {
-        node.ancestors.addAll(parent.ancestors);
-        node.ancestors.add(parent.organization);
-    }
-
     public Map<String, OrganizationRepositories> asMap() {
         // Instead of recomputing the map we extract values on the fly in a view of the original NodeMap
         return new AbstractMap<>() {
@@ -122,7 +116,6 @@ class OrganizationTree {
     private static class Node {
         OrganizationRepositories organization;
         List<Node> children = new ArrayList<>();
-        List<OrganizationRepositories> ancestors = new ArrayList<>();
 
         Node(OrganizationRepositories organization) {
             this.organization = organization;
