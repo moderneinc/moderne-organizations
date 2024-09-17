@@ -79,7 +79,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    implementation("com.netflix.graphql.dgs:graphql-dgs-webflux-starter")
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
 
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
