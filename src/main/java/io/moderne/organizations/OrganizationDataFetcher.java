@@ -13,13 +13,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @DgsComponent
 public class OrganizationDataFetcher {
-    Map<String, OrganizationRepositories> organizations;
+    OrganizationTree organizations;
 
     public OrganizationDataFetcher(OrganizationStructureService organizationStructureService) {
         this.organizations = organizationStructureService.readOrganizationStructure();
@@ -27,23 +28,35 @@ public class OrganizationDataFetcher {
 
     @DgsQuery
     Flux<Organization> allOrganizations() {
-        return Flux.fromIterable(organizations.values())
+        return Flux.fromIterable(organizations.all())
                 .map(this::mapOrganization);
     }
 
     @DgsQuery
     Mono<Organization> organization(@InputArgument String id) {
-        return Mono.justOrEmpty(organizations.get(id))
+        return Mono.justOrEmpty(organizations.findOrganization(id))
                 .map(this::mapOrganization);
     }
 
     @DgsQuery
     Flux<Organization> userOrganizations(@InputArgument User user, @InputArgument OffsetDateTime at) {
-        // everybody belongs to every organization, and the "default" organization is listed
-        // first in the repos.csv that this list is based on, so it will be selected by default in the UI
-        return Flux.fromIterable(organizations.values())
-                .filter(org -> allowAccess(user, at, org.name()))
-                .map(this::mapOrganization);
+        // Here we need to return at least the top level organizations that a user has access too.
+        // A user automatically gets access to all the children of the organizations returned here.
+        List<OrganizationRepositories> allAccessibleOrgs = new ArrayList<>();
+        for (OrganizationRepositories org : organizations.roots()) {
+            allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user, at));
+        }
+        return Flux.fromIterable(allAccessibleOrgs).map(this::mapOrganization);
+    }
+
+    Collection<OrganizationRepositories> findAccessibleRootOrganizations(OrganizationRepositories root, User user, OffsetDateTime at) {
+        if (allowAccess(user, at, root.name())) {
+            return List.of(root);
+        }
+
+        return organizations.findChildren(root.id()).stream()
+                .flatMap(child -> findAccessibleRootOrganizations(child, user, at).stream())
+                .toList();
     }
 
     private boolean allowAccess(User user, OffsetDateTime at, String orgName) {
@@ -65,9 +78,13 @@ public class OrganizationDataFetcher {
     @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
     public Mono<Connection<Repository>> repositories(DataFetchingEnvironment dfe) {
         Organization organization = dfe.getSource();
+        if (organization == null) {
+            return Mono.empty();
+        }
         return Mono.fromCallable(() -> {
-            if (organizations.containsKey(organization.getName())) {
-                List<Repository> repositories = organizations.get(organization.getName())
+            OrganizationRepositories org = organizations.findOrganization(organization.getName());
+            if (org != null) {
+                List<Repository> repositories = org
                         .repositories()
                         .stream()
                         .map(this::mapRepository)
@@ -88,7 +105,7 @@ public class OrganizationDataFetcher {
 
     @Nullable
     private Organization getOrganizationByName(String name) {
-        OrganizationRepositories org = organizations.get(name);
+        OrganizationRepositories org = organizations.findOrganization(name);
         if (org == null) {
             return null;
         }

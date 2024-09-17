@@ -37,7 +37,7 @@ public class OrganizationStructureService {
         this.reposCsvPath = moderneConfiguration.getReposCsvPath();
     }
 
-    public Map<String, OrganizationRepositories> readOrganizationStructure() {
+    OrganizationTree readOrganizationStructure() {
         LinkedHashMap<String, OrganizationRepositories> organizations = new LinkedHashMap<>();
         Set<RepositoryInput> allRepositories = new LinkedHashSet<>();
 
@@ -111,7 +111,7 @@ public class OrganizationStructureService {
         }
         organizations.put("ALL", new OrganizationRepositories("ALL", "ALL", allRepositories, List.of(CommitOption.values()), null));
         logStructure(organizations);
-        return organizations;
+        return new OrganizationTree(organizations.values());
     }
 
     private static Map<String, String> readIdToNameMapping() {
