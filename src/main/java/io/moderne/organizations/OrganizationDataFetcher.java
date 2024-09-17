@@ -11,7 +11,6 @@ import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -37,13 +36,12 @@ public class OrganizationDataFetcher {
     @DgsQuery
     Mono<Connection<Organization>> organizationsPages(DataFetchingEnvironment dfe) {
         return Mono.fromCallable(() -> {
-                    List<Organization> allOrganizations = organizations.all()
-                            .stream()
-                            .map(this::mapOrganization)
-                            .toList();
-                    return new SimpleListConnection<>(allOrganizations).get(dfe);
-                })
-                .subscribeOn(Schedulers.boundedElastic());
+            List<Organization> allOrganizations = organizations.all()
+                    .stream()
+                    .map(this::mapOrganization)
+                    .toList();
+            return new SimpleListConnection<>(allOrganizations).get(dfe);
+        });
     }
 
     @DgsQuery
