@@ -22,14 +22,22 @@ platform, they should supply organizational hierarchy to help developers action 
 
 ```graphql
 query testOrgService {
-  allOrganizations {
-    ...Org
+  organizationsPages {
+      edges {
+          node {
+              ...Org       
+          }
+      }
   }
-  userOrganizations(user: {email: "example@foo.com"}) {
-    ...Org
-    parent {
-      ...Org
-    }
+  userOrganizationsPages(user: {email: "example@foo.com"}) {
+      edges {
+          node {
+              ...Org
+              parent {
+                  ...Org
+              }
+          }
+      }
   }
 }
 
