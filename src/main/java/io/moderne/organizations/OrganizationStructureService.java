@@ -50,10 +50,10 @@ public class OrganizationStructureService {
 
         InputStream inputStream;
         try {
-            if (reposCsvPath == null) {
-                inputStream = new ClassPathResource(DEFAULT_REPOS_CSV).getInputStream();
-            } else {
+            if (reposCsvPath != null && reposCsvPath.toFile().exists()) {
                 inputStream = new FileInputStream(reposCsvPath.toFile());
+            } else {
+                inputStream = new ClassPathResource(reposCsvPath != null ? reposCsvPath.toString() : DEFAULT_REPOS_CSV).getInputStream();
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
