@@ -79,7 +79,7 @@ public class OrganizationStructureService {
                 if (orgNames.isEmpty()) {
                     throw new IllegalStateException("repos.csv lines should have at least 1 organization");
                 } else if (orgNames.contains("")) {
-                    throw new IllegalStateException("Invalid organization \"\" for %s".formatted(cloneUrl));
+                    throw new IllegalStateException("Invalid organization \"\" for %s. \nCheck your repos.csv for extra commas, e.g. ,,,ALL or lines ending in ,".formatted(cloneUrl));
                 }
 
                 boolean first = true;
