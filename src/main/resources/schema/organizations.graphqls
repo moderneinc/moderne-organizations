@@ -41,6 +41,16 @@ type Query {
     A single organization by id.
     """
     organization(id: ID!): Organization
+
+    """
+    Return a commit message for this repository given an input commit message.
+
+    This is useful for if you need to supply, for example, a ticket number in each commit.
+    """
+    commitMessage(
+        commitMessage: String!
+        repository: RepositoryInput!
+    ): String!
 }
 
 input User {

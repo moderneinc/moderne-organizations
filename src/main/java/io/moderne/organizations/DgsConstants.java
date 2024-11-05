@@ -10,9 +10,25 @@ public class DgsConstants {
 
     public static final String AllOrganizations = "allOrganizations";
 
+    public static final String OrganizationsPages = "organizationsPages";
+
     public static final String UserOrganizations = "userOrganizations";
 
+    public static final String UserOrganizationsPages = "userOrganizationsPages";
+
     public static final String Organization = "organization";
+
+    public static final String CommitMessage = "commitMessage";
+
+    public static class ORGANIZATIONSPAGES_INPUT_ARGUMENT {
+      public static final String After = "after";
+
+      public static final String First = "first";
+
+      public static final String Before = "before";
+
+      public static final String Last = "last";
+    }
 
     public static class USERORGANIZATIONS_INPUT_ARGUMENT {
       public static final String User = "user";
@@ -20,8 +36,28 @@ public class DgsConstants {
       public static final String At = "at";
     }
 
+    public static class USERORGANIZATIONSPAGES_INPUT_ARGUMENT {
+      public static final String User = "user";
+
+      public static final String At = "at";
+
+      public static final String After = "after";
+
+      public static final String First = "first";
+
+      public static final String Before = "before";
+
+      public static final String Last = "last";
+    }
+
     public static class ORGANIZATION_INPUT_ARGUMENT {
       public static final String Id = "id";
+    }
+
+    public static class COMMITMESSAGE_INPUT_ARGUMENT {
+      public static final String CommitMessage = "commitMessage";
+
+      public static final String Repository = "repository";
     }
   }
 
@@ -49,6 +85,24 @@ public class DgsConstants {
 
       public static final String Last = "last";
     }
+  }
+
+  public static class ORGANIZATIONCONNECTION {
+    public static final String TYPE_NAME = "OrganizationConnection";
+
+    public static final String Edges = "edges";
+
+    public static final String PageInfo = "pageInfo";
+
+    public static final String Count = "count";
+  }
+
+  public static class ORGANIZATIONEDGE {
+    public static final String TYPE_NAME = "OrganizationEdge";
+
+    public static final String Node = "node";
+
+    public static final String Cursor = "cursor";
   }
 
   public static class REPOSITORYCONNECTION {
