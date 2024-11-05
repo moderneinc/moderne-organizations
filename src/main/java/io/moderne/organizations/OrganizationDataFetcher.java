@@ -44,11 +44,14 @@ public class OrganizationDataFetcher {
     }
 
     @DgsQuery
-    Mono<String> commitMessage(@InputArgument String commitMessage,
+    Mono<Commit> commitMessage(@InputArgument CommitInput commitInput,
                                @InputArgument RepositoryInput repository) {
         return Mono.fromCallable(() -> {
             // here is where you would put custom logic to reach out to, e.g. JIRA
-            return commitMessage;
+            return new Commit(
+                    commitInput.getMessage(),
+                    commitInput.getExtendedMessage()
+            );
         });
     }
 

@@ -48,9 +48,14 @@ type Query {
     This is useful for if you need to supply, for example, a ticket number in each commit.
     """
     commitMessage(
-        commitMessage: String!
+        commitInput: CommitInput!
         repository: RepositoryInput!
-    ): String!
+    ): Commit!
+}
+
+input CommitInput {
+    message: String!
+    extendedMessage: String
 }
 
 input User {
@@ -74,6 +79,11 @@ type Organization {
         first: Int = 100,
         before: String,
         last: Int): RepositoryConnection!
+}
+
+type Commit {
+    message: String!
+    extendedMessage: String
 }
 
 type OrganizationConnection {

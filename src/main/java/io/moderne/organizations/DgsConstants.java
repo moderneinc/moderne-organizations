@@ -55,10 +55,18 @@ public class DgsConstants {
     }
 
     public static class COMMITMESSAGE_INPUT_ARGUMENT {
-      public static final String CommitMessage = "commitMessage";
+      public static final String CommitInput = "commitInput";
 
       public static final String Repository = "repository";
     }
+  }
+
+  public static class COMMIT {
+    public static final String TYPE_NAME = "Commit";
+
+    public static final String Message = "message";
+
+    public static final String ExtendedMessage = "extendedMessage";
   }
 
   public static class ORGANIZATION {
@@ -199,6 +207,14 @@ public class DgsConstants {
     public static final String Name = "name";
 
     public static final String Value = "value";
+  }
+
+  public static class COMMITINPUT {
+    public static final String TYPE_NAME = "CommitInput";
+
+    public static final String Message = "message";
+
+    public static final String ExtendedMessage = "extendedMessage";
   }
 
   public static class USER {
