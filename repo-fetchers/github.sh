@@ -16,4 +16,4 @@ organization=$1
 # GH CLI
 gh repo list "$organization" \
     --json url,defaultBranchRef \
-    --template '{{"cloneUrl,branch\n"}}{{range .}}{{.url}}{{","}}{{.defaultBranchRef.name}}{{","}}{{"'$organization'"}}{{"\n"}}{{end}}'
+    --template '{{"cloneUrl,branch,org\n"}}{{range .}}{{.url}}{{","}}{{.defaultBranchRef.name}}{{","}}{{"'$organization'"}}{{"\n"}}{{end}}'
