@@ -7,8 +7,10 @@ import com.netflix.graphql.dgs.DgsData;
 import graphql.schema.DataFetchingEnvironment;
 import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
+import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
