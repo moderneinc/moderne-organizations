@@ -23,6 +23,7 @@ import java.util.*;
 public class OrganizationStructureService {
     private static final String DEFAULT_REPOS_CSV = "repos.csv";
     private static final String NAME_MAPPING = "id-mapping.txt";
+    private static final String COMMIT_OPTIONS = "commitOptions.txt";
     private static final Logger log = LoggerFactory.getLogger(OrganizationStructureService.class.getName());
 
     private final ScmConfiguration scmConfiguration;
@@ -48,17 +49,7 @@ public class OrganizationStructureService {
                 .withComments()
                 .withHeader();
 
-        InputStream inputStream;
-        try {
-            if (reposCsvPath != null && reposCsvPath.toFile().exists()) {
-                inputStream = new FileInputStream(reposCsvPath.toFile());
-            } else {
-                inputStream = new ClassPathResource(reposCsvPath != null ? reposCsvPath.toString() : DEFAULT_REPOS_CSV).getInputStream();
-            }
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-
+        InputStream inputStream = getReposCsvInputStream();
         try (MappingIterator<ReposCsvRow> iterator = csvMapper.readerFor(ReposCsvRow.class)
                 .with(bootstrapSchema)
                 .readValues(inputStream)) {
@@ -114,9 +105,29 @@ public class OrganizationStructureService {
         return new OrganizationTree(organizations.values());
     }
 
+    public InputStream getReposCsvInputStream() {
+        try {
+            if (reposCsvPath != null && reposCsvPath.toFile().exists()) {
+                return new FileInputStream(reposCsvPath.toFile());
+            } else {
+                return new ClassPathResource(reposCsvPath != null ? reposCsvPath.toString() : DEFAULT_REPOS_CSV).getInputStream();
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    public static InputStream getNameMappingInputStream() throws IOException {
+        return new ClassPathResource(NAME_MAPPING).getInputStream();
+    }
+
+    public InputStream getCommitOptionsInputStream() throws IOException {
+        return new ClassPathResource(COMMIT_OPTIONS).getInputStream();
+    }
+
     private static Map<String, String> readIdToNameMapping() {
         Map<String, String> idToNameMapping = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ClassPathResource(NAME_MAPPING).getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getNameMappingInputStream()))) {
             reader.lines()
                     .forEach(line -> {
                         String[] fields = line.split("=", 2);
