@@ -15,7 +15,6 @@ import java.io.InputStream;
 
 @RestController
 public class OrganizationController {
-    private static final String DEV_CENTER_JSON = "/devcenter.json";
     OrganizationStructureService organizationStructureService;
 
     public OrganizationController(OrganizationStructureService organizationStructureService) {
@@ -27,7 +26,7 @@ public class OrganizationController {
         response.getHeaders().setContentType(MediaType.TEXT_PLAIN);
         response.getHeaders().add("Content-Disposition", "attachment; filename=repos.csv");
 
-        return DataBufferUtils.readInputStream(() -> organizationStructureService.getReposCsvInputStream(), new DefaultDataBufferFactory(), 4096);
+        return DataBufferUtils.readInputStream(() -> organizationStructureService.loadReposCsvInputStream(), new DefaultDataBufferFactory(), 4096);
     }
 
     @GetMapping("/commit-options")
@@ -35,21 +34,13 @@ public class OrganizationController {
         response.getHeaders().setContentType(MediaType.TEXT_PLAIN);
         response.getHeaders().add("Content-Disposition", "attachment; filename=commitOptions.txt");
 
-        return DataBufferUtils.readInputStream(() -> organizationStructureService.getCommitOptionsInputStream(), new DefaultDataBufferFactory(), 4096);
+        return DataBufferUtils.readInputStream(() -> organizationStructureService.loadCommitOptionsInputStream(), new DefaultDataBufferFactory(), 4096);
     }
 
     @GetMapping("/id-mapping")
     Flux<DataBuffer> getIdMapping(ServerHttpResponse response) {
         response.getHeaders().setContentType(MediaType.TEXT_PLAIN);
         response.getHeaders().add("Content-Disposition", "attachment; filename=id-mapping.txt");
-        return DataBufferUtils.readInputStream(OrganizationStructureService::getNameMappingInputStream, new DefaultDataBufferFactory(), 4096);
-    }
-
-    @GetMapping("/devcenter")
-    Flux<DataBuffer> getDevCenter(ServerHttpResponse response) throws IOException {
-        response.getHeaders().setContentType(MediaType.TEXT_PLAIN);
-        response.getHeaders().add("Content-Disposition", "attachment; filename=devcenter.json");
-        InputStream inputStream = new ClassPathResource(DEV_CENTER_JSON).getInputStream();
-        return DataBufferUtils.readInputStream(() -> inputStream, new DefaultDataBufferFactory(), 4096);
+        return DataBufferUtils.readInputStream(OrganizationStructureService::loadNameMappingInputStream, new DefaultDataBufferFactory(), 4096);
     }
 }
