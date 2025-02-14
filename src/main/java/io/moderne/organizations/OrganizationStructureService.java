@@ -3,10 +3,9 @@ package io.moderne.organizations;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import io.moderne.organizations.types.CommitOption;
 import io.moderne.organizations.types.RepositoryInput;
+import org.jspecify.annotations.Nullable;
 import org.openrewrite.GitRemote;
-import org.openrewrite.internal.lang.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -49,10 +48,12 @@ public class OrganizationStructureService {
                 .withComments()
                 .withHeader();
 
-        InputStream inputStream = getReposCsvInputStream();
-        try (MappingIterator<ReposCsvRow> iterator = csvMapper.readerFor(ReposCsvRow.class)
-                .with(bootstrapSchema)
-                .readValues(inputStream)) {
+        try (InputStream reposCsvInputStream = loadReposCsvInputStream();
+             InputStream commitOptionsInputStream = loadCommitOptionsInputStream();
+             MappingIterator<ReposCsvRow> iterator = csvMapper.readerFor(ReposCsvRow.class)
+                     .with(bootstrapSchema)
+                     .readValues(reposCsvInputStream)) {
+            CommitOptions commitOptions = CommitOptions.fromInputStream(commitOptionsInputStream);
             while (iterator.hasNextValue()) {
                 ReposCsvRow row = iterator.nextValue();
                 String cloneUrl = row.getCloneUrl();
@@ -83,7 +84,7 @@ public class OrganizationStructureService {
                             name = idToNameMapping.get(organization);
                         }
                         if (v == null) {
-                            v = new OrganizationRepositories(organization, name, new LinkedHashSet<>(), List.of(CommitOption.values()), parent);
+                            v = new OrganizationRepositories(organization, name, new LinkedHashSet<>(), commitOptions.find(organization), parent);
                         }
                         if (!Objects.equals(v.parent(), parent)) {
                             throw new IllegalStateException("An organization parent must be the same for each repository. %s has parent %s and %s".formatted(organization, v.parent(), parent));
@@ -97,15 +98,16 @@ public class OrganizationStructureService {
                     }
                 } while (!orgNames.isEmpty());
             }
+            organizations.put("ALL", new OrganizationRepositories("ALL", "ALL", allRepositories, commitOptions.find("ALL"), null));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        organizations.put("ALL", new OrganizationRepositories("ALL", "ALL", allRepositories, List.of(CommitOption.values()), null));
+
         logStructure(organizations);
         return new OrganizationTree(organizations.values());
     }
 
-    public InputStream getReposCsvInputStream() {
+    public InputStream loadReposCsvInputStream() {
         try {
             if (reposCsvPath != null && reposCsvPath.toFile().exists()) {
                 return new FileInputStream(reposCsvPath.toFile());
@@ -117,17 +119,25 @@ public class OrganizationStructureService {
         }
     }
 
-    public static InputStream getNameMappingInputStream() throws IOException {
-        return new ClassPathResource(NAME_MAPPING).getInputStream();
+    public static InputStream loadNameMappingInputStream() {
+        try {
+            return new ClassPathResource(NAME_MAPPING).getInputStream();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
-    public InputStream getCommitOptionsInputStream() throws IOException {
-        return new ClassPathResource(COMMIT_OPTIONS).getInputStream();
+    public InputStream loadCommitOptionsInputStream() {
+        try {
+            return new ClassPathResource(COMMIT_OPTIONS).getInputStream();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     private static Map<String, String> readIdToNameMapping() {
         Map<String, String> idToNameMapping = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getNameMappingInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(loadNameMappingInputStream()))) {
             reader.lines()
                     .forEach(line -> {
                         String[] fields = line.split("=", 2);
