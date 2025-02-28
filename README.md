@@ -56,7 +56,9 @@ You are free to customize the implementation in any way as long as the API contr
 
 Use [repo-fetchers](repo-fetchers/README.md) to generate a (partial) repos.csv and add your organization structure.
 
-The org structure is represented in a series of columns `org1..orgN` where `N` is the deepest organization structure. Not every repository needs to have the same depth of organizational structure. To make the resultant CSV renderable in GitHub, you can right-align org structure to `orgN` as shown in the image below:
+The org structure is represented in a series of columns `org1..orgN` where `N` is the deepest organization structure. Not every repository needs to have the same depth of organizational structure. To make the resultant CSV renderable in GitHub, you can right-align org structure to `orgN` as shown in the image below.
+
+Note: When doing this, please do not put spaces in your `repos.csv` file (for example, do this: `https://some-clone-url,,Default,ALL` instead of: `https://some-clone-url, ,Default,ALL`)
 
 <img width="771" alt="image" src="https://github.com/moderneinc/moderne-organizations-dx/assets/1697736/d0d8cd92-47ea-488c-8256-52117636bcae">
 
