@@ -7,13 +7,11 @@ import com.netflix.graphql.dgs.DgsData;
 import graphql.schema.DataFetchingEnvironment;
 import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UncheckedIOException;
+import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 
@@ -21,12 +19,8 @@ import static java.util.Objects.requireNonNull;
 public class DevCenterDataFetcher {
     private final Map<String, DevCenter> devCenters;
 
-    public DevCenterDataFetcher(ObjectMapper mapper) throws IOException {
-        List<DevCenterAndOrganizations> devCenterAndOrganizationsList = mapper.readValue(
-                getClass().getResourceAsStream("/devcenter.json"),
-                new TypeReference<>() {
-                }
-        );
+    public DevCenterDataFetcher(ObjectMapper mapper) {
+        List<DevCenterAndOrganizations> devCenterAndOrganizationsList = parseDevCenters(getClass().getResourceAsStream("/devcenter.json"), mapper);
         this.devCenters = new HashMap<>();
         if (devCenterAndOrganizationsList != null) {
             for (DevCenterAndOrganizations devCenterAndOrganization : devCenterAndOrganizationsList) {
@@ -66,6 +60,18 @@ public class DevCenterDataFetcher {
         }
     }
 
+    static List<DevCenterDataFetcher.DevCenterAndOrganizations> parseDevCenters(InputStream inputStream, ObjectMapper mapper) {
+        try {
+            List<DevCenterDataFetcher.DevCenterAndOrganizations> devCenterAndOrganizations = mapper.readValue(inputStream,
+                    new TypeReference<>() {
+                    }
+            );
+            return Objects.requireNonNullElse(devCenterAndOrganizations, Collections.emptyList());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
     @Nullable
     public DevCenter devCenter(DataFetchingEnvironment dfe) {
@@ -73,7 +79,7 @@ public class DevCenterDataFetcher {
         return devCenters.get(organization.getId());
     }
 
-    private record DevCenterAndOrganizations(DevCenter devCenter, List<String> organizations) {
+     record DevCenterAndOrganizations(DevCenter devCenter, List<String> organizations) {
     }
 
 }
