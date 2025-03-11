@@ -22,10 +22,10 @@ public class OrganizationController {
     OrganizationStructureService organizationStructureService;
     private final Map<String, DevCenterDataFetcher.DevCenterAndOrganizations> devCenters;
 
-    public OrganizationController(OrganizationStructureService organizationStructureService) {
+    public OrganizationController(OrganizationStructureService organizationStructureService, ObjectMapper mapper) {
         this.organizationStructureService = organizationStructureService;
-        List<DevCenterDataFetcher.DevCenterAndOrganizations> devCenterAndOrganizations = parseDevCenters(DevCenterDataFetcher.class.getResourceAsStream(DEV_CENTER_JSON), new ObjectMapper());
-        devCenters = new HashMap<>();
+        List<DevCenterDataFetcher.DevCenterAndOrganizations> devCenterAndOrganizations = parseDevCenters(DevCenterDataFetcher.class.getResourceAsStream(DEV_CENTER_JSON), mapper);
+        devCenters = new LinkedHashMap<>();
 
         for (DevCenterDataFetcher.DevCenterAndOrganizations devCenterAndOrganization : devCenterAndOrganizations) {
             for (String organization : devCenterAndOrganization.organizations()) {
@@ -58,8 +58,7 @@ public class OrganizationController {
     }
 
     @PostMapping("/devcenters")
-    public Flux<DevCenterDataFetcher.DevCenterAndOrganizations> retrieveDevCenter(@RequestBody List<String> organizationIds
-    ) {
+    public Flux<DevCenterDataFetcher.DevCenterAndOrganizations> retrieveDevCenter(@RequestBody List<String> organizationIds) {
         Set<DevCenterDataFetcher.DevCenterAndOrganizations> requestedDevCenters = new LinkedHashSet<>();
         for (String organizationId : organizationIds) {
             DevCenterDataFetcher.DevCenterAndOrganizations devCenter = devCenters.get(organizationId);

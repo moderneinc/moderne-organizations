@@ -79,7 +79,7 @@ public class DevCenterDataFetcher {
         return devCenters.get(organization.getId());
     }
 
-    public record DevCenterAndOrganizations(DevCenter devCenter, List<String> organizations) {
+     record DevCenterAndOrganizations(DevCenter devCenter, List<String> organizations) {
     }
 
 }
