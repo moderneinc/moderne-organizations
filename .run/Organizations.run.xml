@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Organizations" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="moderne-organizations.main" />
+    <option name="PROGRAM_PARAMETERS" value="--logging.level.io.moderne=DEBUG" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="io.moderne.organizations.Application" />
+    <option name="VM_PARAMETERS" value="-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5009" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
