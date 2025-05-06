@@ -153,23 +153,23 @@
             {
               "name": "JUnit 4",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.FindAnnotations",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumJUnitVersion",
                 "options": [
                   {
-                    "name": "annotationPattern",
-                    "value": "@org.junit.Test"
+                    "name": "minimumVersion",
+                    "value": "4"
                   }
                 ]
               }
             },
             {
-              "name": "JUnit 5",
+              "name": "Completed",
               "recipe": {
-                "recipeId": "org.openrewrite.java.search.FindAnnotations",
+                "recipeId": "org.openrewrite.java.dependencies.search.FindMinimumJUnitVersion",
                 "options": [
                   {
-                    "name": "annotationPattern",
-                    "value": "@org.junit.jupiter.api.Test"
+                    "name": "minimumVersion",
+                    "value": "5"
                   }
                 ]
               }
