@@ -7,6 +7,7 @@ import com.netflix.graphql.dgs.InputArgument;
 import graphql.relay.Connection;
 import graphql.relay.SimpleListConnection;
 import graphql.schema.DataFetchingEnvironment;
+import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.*;
 import org.openrewrite.internal.lang.Nullable;
 import reactor.core.publisher.Flux;
