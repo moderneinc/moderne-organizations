@@ -64,6 +64,7 @@ dependencies {
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.100.Final"))
+
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
@@ -84,6 +85,8 @@ dependencies {
 
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
     implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
+
+    implementation("io.moderne:moderne-organizations-format:latest.integration")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))

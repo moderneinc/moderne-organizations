@@ -21,44 +21,44 @@ public class OrganizationDataFetcherTest {
         StepVerifier
                 .create(organizationDataFetcher.allOrganizations())
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Default");
-                    assertThat(next.getName()).isEqualTo("Default Organization");
-                    assertThat(next.getParent().getId()).isEqualTo("ALL");
-                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.Branch,CommitOption.PullRequest);
-                })
-                .assertNext(next -> {
                     assertThat(next.getId()).isEqualTo("ALL");
                     assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
                     assertThat(next.getParent()).isNull();
                 })
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("OpenRewrite");
-                    assertThat(next.getParent().getId()).isEqualTo("Open source");
-                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.PullRequest,CommitOption.Branch,CommitOption.Direct);
-                })
-                .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Open source");
-                    assertThat(next.getParent().getId()).isEqualTo("ALL");
-                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.Fork,CommitOption.ForkAndPullRequest);
-                })
-                .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("WebGoat");
-                    assertThat(next.getParent().getId()).isEqualTo("Test");
-                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
-                })
-                .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Test");
+                    assertThat(next.getId()).isEqualTo("ALL/Default");
+                    assertThat(next.getName()).isEqualTo("Default");
                     assertThat(next.getParent().getId()).isEqualTo("ALL");
                     assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
                 })
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Netflix");
-                    assertThat(next.getParent().getId()).isEqualTo("Open source");
+                    assertThat(next.getId()).isEqualTo("ALL/Open source");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL");
                     assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
                 })
                 .assertNext(next -> {
-                    assertThat(next.getId()).isEqualTo("Bitbucket");
-                    assertThat(next.getParent().getId()).isEqualTo("OpenRewrite");
+                    assertThat(next.getId()).isEqualTo("ALL/Open source/Netflix");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL/Open source");
+                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("ALL/Open source/OpenRewrite");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL/Open source");
+                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("ALL/Open source/OpenRewrite/Bitbucket");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL/Open source/OpenRewrite");
+                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("ALL/Test");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL");
+                    assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
+                })
+                .assertNext(next -> {
+                    assertThat(next.getId()).isEqualTo("ALL/Test/WebGoat");
+                    assertThat(next.getParent().getId()).isEqualTo("ALL/Test");
                     assertThat(next.getCommitOptions()).containsExactly(CommitOption.values());
                 })
                 .verifyComplete();

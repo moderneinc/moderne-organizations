@@ -1,3 +1,0 @@
-Default=Branch,PullRequest
-OpenRewrite=PullRequest,Branch,Direct
-Open source=Fork,ForkAndPullRequest
