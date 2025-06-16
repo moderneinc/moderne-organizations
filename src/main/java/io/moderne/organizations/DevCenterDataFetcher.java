@@ -3,10 +3,7 @@ package io.moderne.organizations;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
-import graphql.schema.DataFetchingEnvironment;
 import io.moderne.organizations.types.*;
-import org.openrewrite.internal.lang.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,13 +67,6 @@ public class DevCenterDataFetcher {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-    }
-
-    @DgsData(parentType = DgsConstants.ORGANIZATION.TYPE_NAME)
-    @Nullable
-    public DevCenter devCenter(DataFetchingEnvironment dfe) {
-        Organization organization = dfe.getSource();
-        return devCenters.get(organization.getId());
     }
 
      record DevCenterAndOrganizations(DevCenter devCenter, List<String> organizations) {
