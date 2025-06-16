@@ -60,7 +60,7 @@ configurations {
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:latest.release")
     
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
@@ -70,10 +70,10 @@ dependencies {
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
     implementation("io.github.classgraph:classgraph:latest.release")
-    implementation("org.projectlombok:lombok:1.18.38")
+    implementation("org.projectlombok:lombok:latest.release")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("io.micrometer:micrometer-core:1.13.15")
+    implementation("io.micrometer:micrometer-core:latest.release")
 
     implementation("com.graphql-java:graphql-java")
     implementation("com.graphql-java:graphql-java-extended-scalars")
@@ -83,8 +83,8 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
 
-    implementation("io.micrometer:micrometer-registry-prometheus:1.13.15")
-    implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:1.13.15")
+    implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
+    implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
