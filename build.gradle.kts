@@ -1,4 +1,5 @@
-@file:Suppress("GradlePackageUpdate")import java.nio.file.Path
+@file:Suppress("GradlePackageUpdate")
+import java.nio.file.Path
 
 import com.netflix.graphql.dgs.codegen.CodeGen
 import com.netflix.graphql.dgs.codegen.CodeGenConfig
