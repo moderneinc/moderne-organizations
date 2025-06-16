@@ -1,8 +1,9 @@
-@file:Suppress("GradlePackageUpdate")
+@file:Suppress("GradlePackageUpdate")import java.nio.file.Path
 
 import com.netflix.graphql.dgs.codegen.CodeGen
 import com.netflix.graphql.dgs.codegen.CodeGenConfig
-import java.nio.file.Paths
+
+
 
 
 buildscript {
@@ -14,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.2.10"
+    id("org.springframework.boot") version "3.5.0"
     java
     id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
@@ -59,20 +60,20 @@ configurations {
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok:latest.release")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
     
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.3"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.100.Final"))
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
     implementation("io.github.classgraph:classgraph:latest.release")
-    implementation("org.projectlombok:lombok:latest.release")
+    implementation("org.projectlombok:lombok:1.18.38")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("io.micrometer:micrometer-core:latest.release")
+    implementation("io.micrometer:micrometer-core:1.13.15")
 
     implementation("com.graphql-java:graphql-java")
     implementation("com.graphql-java:graphql-java-extended-scalars")
@@ -82,8 +83,8 @@ dependencies {
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-micrometer")
 
-    implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
-    implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.13.15")
+    implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:1.13.15")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
@@ -114,7 +115,7 @@ open class GraphqlGenerationTask : DefaultTask() {
         val config = CodeGenConfig(
                 schemaFiles = setOf(project.file("${project.projectDir}/src/main/resources/schema")),
                 outputDir = project.file("${project.buildDir}/generated").toPath(),
-                examplesOutputDir = Paths.get("${project.buildDir}/generated-examples"),
+                examplesOutputDir = Path.of("${project.buildDir}/generated-examples"),
                 writeToFiles = true,
                 packageName = "io.moderne.organizations",
                 generateClientApi = false
