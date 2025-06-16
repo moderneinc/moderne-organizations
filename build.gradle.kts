@@ -4,8 +4,6 @@ import com.netflix.graphql.dgs.codegen.CodeGen
 import com.netflix.graphql.dgs.codegen.CodeGenConfig
 
 
-
-
 buildscript {
     repositories {
         maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
