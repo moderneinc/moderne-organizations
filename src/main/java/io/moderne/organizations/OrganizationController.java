@@ -12,26 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import java.util.*;
-
-import static io.moderne.organizations.DevCenterDataFetcher.parseDevCenters;
-
 @RestController
 public class OrganizationController {
     private static final String DEV_CENTER_JSON = "/devcenter.json";
     OrganizationStructureService organizationStructureService;
-    private final Map<String, DevCenterDataFetcher.DevCenterAndOrganizations> devCenters;
 
     public OrganizationController(OrganizationStructureService organizationStructureService, ObjectMapper mapper) {
         this.organizationStructureService = organizationStructureService;
-        List<DevCenterDataFetcher.DevCenterAndOrganizations> devCenterAndOrganizations = parseDevCenters(DevCenterDataFetcher.class.getResourceAsStream(DEV_CENTER_JSON), mapper);
-        devCenters = new LinkedHashMap<>();
-
-        for (DevCenterDataFetcher.DevCenterAndOrganizations devCenterAndOrganization : devCenterAndOrganizations) {
-            for (String organization : devCenterAndOrganization.organizations()) {
-                devCenters.put(organization, devCenterAndOrganization);
-            }
-        }
     }
 
     @GetMapping("/organizations")
