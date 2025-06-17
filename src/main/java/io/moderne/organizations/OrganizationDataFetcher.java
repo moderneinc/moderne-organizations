@@ -17,10 +17,10 @@ import java.util.List;
 
 @DgsComponent
 public class OrganizationDataFetcher {
-    OrganizationTree organizations;
+    OrganizationTree organizationTree;
 
     public OrganizationDataFetcher(OrganizationStructureService organizationStructureService) {
-        this.organizations = organizationStructureService.readOrganizationStructure();
+        this.organizationTree = organizationStructureService.readOrganizationStructure();
     }
 
     @DgsQuery
@@ -40,30 +40,33 @@ public class OrganizationDataFetcher {
             // Here we need to return at least the top level organizations that a user has access too.
             // A user automatically gets access to all the children of the organizations returned here.
             List<Organization> allAccessibleOrgs = new ArrayList<>();
-            for (OrganizationRepositories org : organizations.roots()) {
+            for (io.moderne.organizations.Organization<?> org : organizationTree.roots()) {
                 allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user, at));
             }
             return new SimpleListConnection<>(allAccessibleOrgs).get(dfe);
         });
     }
 
-    Collection<Organization> findAccessibleRootOrganizations(OrganizationRepositories root, User user, OffsetDateTime at) {
-        if (allowAccess(user, at, root.name())) {
+    private Collection<Organization> findAccessibleRootOrganizations(
+            io.moderne.organizations.Organization<?> root,
+            User user,
+            OffsetDateTime at ) {
+        if (allowAccess(user, at, root.getId())) {
             return List.of(mapOrganization(root));
         }
-        return organizations.findChildren(root.id()).stream()
+        return organizationTree.findChildren(root.getId()).stream()
                 .flatMap(child -> findAccessibleRootOrganizations(child, user, at).stream())
                 .toList();
     }
 
-    private boolean allowAccess(User user, OffsetDateTime at, String orgName) {
+    private boolean allowAccess(User user, OffsetDateTime at, String orgId) {
         // Determine if a user should have access to the organization
         return true;
     }
 
-    private Organization mapOrganization(OrganizationRepositories org) {
+    private Organization mapOrganization(io.moderne.organizations.Organization<?> org) {
         return Organization.newBuilder()
-                .id(org.id())
+                .id(org.getId())
                 .build();
     }
 }
