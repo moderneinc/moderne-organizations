@@ -1,28 +1,5 @@
 type Query {
     """
-    The list of all possible organizations
-    """
-    allOrganizations: [Organization!]!
-
-    """
-    The paginated list of all possible organizations
-    """
-    organizationsPages(
-        after: String
-        first: Int = 100
-        before: String
-        last: Int
-    ): OrganizationConnection!
-
-    """
-    The list of organizations that a user belongs to. If it is possible to
-    determine the organizations that a user belonged to at a given time, use the `at`
-    parameter. The "default" organization that is selected for a user is the first organization
-    returned.
-    """
-    userOrganizations(user: User!, at: DateTime): [Organization!]!
-
-    """
     The paginated list of organizations that a user belongs to. If it is possible to
     determine the organizations that a user belonged to at a given time, use the `at`
     parameter. The "default" organization that is selected for a user is the first organization
@@ -36,11 +13,6 @@ type Query {
         before: String
         last: Int
     ): OrganizationConnection!
-
-    """
-    A single organization by id.
-    """
-    organization(id: ID!): Organization
 
     """
     Return a commit message for this repository given an input commit message.
@@ -64,21 +36,6 @@ input User {
 
 type Organization {
     id: ID!
-    name: String!
-
-    """
-    Ordered list of commit options as they should appear in the UI.
-    """
-    commitOptions: [CommitOption!]!
-
-    parent: Organization
-
-    devCenter: DevCenter
-
-    repositories(after: String,
-        first: Int = 100,
-        before: String,
-        last: Int): RepositoryConnection!
 }
 
 type Commit {
@@ -97,17 +54,6 @@ type OrganizationEdge {
     cursor: String
 }
 
-type RepositoryConnection {
-    edges: [RepositoryEdge]
-    pageInfo: PageInfo
-    count: Int
-}
-
-type RepositoryEdge {
-    node: Repository
-    cursor: String
-}
-
 # Pagination Type - Generic
 type PageInfo {
     hasPreviousPage: Boolean!
@@ -116,81 +62,10 @@ type PageInfo {
     endCursor: String
 }
 
-type Repository {
-    path: String!
-    origin: String
-    branch: String
-}
-
 input RepositoryInput {
     path: String!
     origin: String
     branch: String
-}
-
-type DevCenter {
-    """
-    Available/recommended upgrades and migrations.
-    """
-    upgradesAndMigrations: [DevCenterRecipeCard!]
-
-    """
-    Recommended visualizations to run on this organization.
-    """
-    visualizations: [DevCenterVisualizationCard!]
-
-    """
-    Security recipes to run for this organization.
-    """
-    security: [DevCenterRecipe!]
-    """
-    A version number for the DevCenter API to use the latest features (without breaking the old)
-    """
-    version: Int!
-}
-
-type DevCenterVisualizationCard {
-    visualizationId: String!
-    visualizationOptions: [Option!]!
-}
-
-type Measure {
-    name: String!
-    recipe: DevCenterRecipe!
-}
-
-type DevCenterRecipeCard {
-    title: String!
-    measures: [Measure!]!
-    fix: DevCenterRecipe!
-}
-
-type DevCenterRecipe {
-    """
-    Optional name used for displaying on the DevCenter. Defaults to the recipe display name.
-    """
-    name: String
-    recipeId: String!
-    options: [Option!]!
-}
-
-type Option {
-    """
-    Example: `methodPattern`
-    """
-    name: String!
-    """
-    Example: `java.util.List add(..)`
-    """
-    value: Object!
-}
-
-enum CommitOption {
-    Direct
-    Branch
-    Fork
-    PullRequest
-    ForkAndPullRequest
 }
 
 scalar DateTime

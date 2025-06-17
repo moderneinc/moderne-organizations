@@ -1,8 +1,8 @@
 @file:Suppress("GradlePackageUpdate")
+import java.nio.file.Path
 
 import com.netflix.graphql.dgs.codegen.CodeGen
 import com.netflix.graphql.dgs.codegen.CodeGenConfig
-import java.nio.file.Paths
 
 
 buildscript {
@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.2.10"
+    id("org.springframework.boot") version "3.5.0"
     java
     id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
@@ -62,8 +62,9 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:latest.release")
     
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2023.0.3"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.100.Final"))
+
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
@@ -84,6 +85,8 @@ dependencies {
 
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
     implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
+
+    implementation("io.moderne:moderne-organizations-format:latest.integration")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
@@ -114,7 +117,7 @@ open class GraphqlGenerationTask : DefaultTask() {
         val config = CodeGenConfig(
                 schemaFiles = setOf(project.file("${project.projectDir}/src/main/resources/schema")),
                 outputDir = project.file("${project.buildDir}/generated").toPath(),
-                examplesOutputDir = Paths.get("${project.buildDir}/generated-examples"),
+                examplesOutputDir = Path.of("${project.buildDir}/generated-examples"),
                 writeToFiles = true,
                 packageName = "io.moderne.organizations",
                 generateClientApi = false

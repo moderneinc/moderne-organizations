@@ -206,7 +206,7 @@
         { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
       ]
     },
-    "organizations": ["Default"]
+    "organizations": ["ALL/Default"]
   },
   {
     "devCenter": {
@@ -415,7 +415,7 @@
         { "recipeId": "org.openrewrite.java.security.SecureTempFileCreation" }
       ]
     },
-    "organizations": ["WebGoat","ALL"]
+    "organizations": ["ALL/Open source/WebGoat","ALL"]
   },
   {
     "devCenter": {
@@ -662,6 +662,6 @@
         }
       ]
     },
-    "organizations": ["Apache Maven"]
+    "organizations": ["ALL/Open source/Apache Maven"]
   }
 ]
