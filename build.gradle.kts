@@ -86,7 +86,7 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus:latest.release")
     implementation("io.micrometer:micrometer-registry-prometheus-simpleclient:latest.release")
 
-    implementation("io.moderne:moderne-organizations-format:latest.integration")
+    implementation("io.moderne:moderne-organizations-format:latest.release")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
