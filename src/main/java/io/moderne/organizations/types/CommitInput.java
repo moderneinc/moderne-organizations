@@ -40,8 +40,12 @@ public class CommitInput {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         CommitInput that = (CommitInput) o;
         return java.util.Objects.equals(message, that.message) &&
                             java.util.Objects.equals(extendedMessage, that.extendedMessage);
