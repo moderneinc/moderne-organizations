@@ -29,6 +29,9 @@ configure<nebula.plugin.release.git.base.ReleasePluginExtension> {
 
 dependencyCheck {
     analyzers.assemblyEnabled = false
+    analyzers.centralEnabled = System.getenv("CENTRAL_ANALYZER_ENABLED").toBoolean()
+    analyzers.ossIndex.username = System.getenv("OSSINDEX_USERNAME")
+    analyzers.ossIndex.password = System.getenv("OSSINDEX_PASSWORD")
     failBuildOnCVSS = 9.0F
     suppressionFile = "suppressions.xml"
     format = project.properties["dependencyCheckFormat"] as String? ?: "HTML"
