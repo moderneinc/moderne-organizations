@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.5.0"
+    id("org.springframework.boot") version "3.5.6"
     java
     id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
@@ -66,7 +66,7 @@ dependencies {
     
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
-    implementation(platform("io.netty:netty-bom:4.1.100.Final"))
+    implementation(platform("io.netty:netty-bom:4.1.127.Final"))
 
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
 
