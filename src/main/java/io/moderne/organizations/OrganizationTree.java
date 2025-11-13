@@ -44,7 +44,7 @@ class OrganizationTree {
     public Collection<Organization<?>> findChildren(String orgId) {
         List<Organization<?>> subTree = findSubtree(orgId);
         if (!subTree.isEmpty()) {
-            subTree.remove(0);
+            subTree.removeFirst();
         }
         return subTree;
     }

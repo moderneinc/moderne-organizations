@@ -36,7 +36,7 @@ public class OrganizationDataFetcherTest {
                 .create(organizationDataFetcher.userOrganizationsPages(user, currentDateTime, mockEnvironment))
                 .assertNext(connection -> {
                     assertThat(connection.getEdges()).hasSize(1);
-                    assertThat(connection.getEdges().get(0).getNode().getId()).isEqualTo("ALL");
+                    assertThat(connection.getEdges().getFirst().getNode().getId()).isEqualTo("ALL");
                 })
                 .verifyComplete();
     }
