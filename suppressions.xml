@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- CVE-2022-37734 is a ReDoS vulnerability in graphql-java, fixed in version 19.0+.
+         This project uses graphql-java 25.0 via DGS Platform, so these are false positives. -->
+    <suppress>
+        <notes>False positive: CVE-2022-37734 affects graphql-java &lt; 19.0, but this project uses graphql-java 25.0 via DGS Platform.</notes>
+        <packageUrl regex="true">^pkg:maven/com\.apollographql\.federation/federation\-graphql\-java\-support@.*$</packageUrl>
+        <cve>CVE-2022-37734</cve>
+    </suppress>
+    <suppress>
+        <notes>False positive: CVE-2022-37734 affects graphql-java &lt; 19.0, but this project uses graphql-java 25.0 via DGS Platform.</notes>
+        <packageUrl regex="true">^pkg:maven/com\.graphql\-java/java\-dataloader@.*$</packageUrl>
+        <cve>CVE-2022-37734</cve>
+    </suppress>
 </suppressions>
