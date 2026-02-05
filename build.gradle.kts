@@ -91,6 +91,7 @@ dependencies {
 
     implementation("io.moderne:moderne-organizations-format:latest.release")
 
+    testImplementation("org.assertj:assertj-core:3.27.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation(platform("org.junit:junit-bom:latest.release"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
