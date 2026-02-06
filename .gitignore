@@ -43,3 +43,7 @@ gradle.properties
 log.txt
 # Ignore generated credentials from google-github-actions/auth
 gha-creds-*.json
+
+# Moderne CLI
+.moderne/*
+!.moderne/context/
