@@ -1,0 +1,6 @@
+Source path,Class name,Method name,Pattern type,Exception types,Handling strategy,Logging framework,Log level
+src/main/java/io/moderne/organizations/CommitOptions.java,io.moderne.organizations.CommitOptions,fromInputStream,try-catch,IOException,wrap,,
+src/main/java/io/moderne/organizations/CustomScalarsConfiguration.java,io.moderne.organizations.CustomScalarsConfiguration$OffsetDateTimeScalar,parseValue,throws-declaration,CoercingParseValueException,propagate,,
+src/main/java/io/moderne/organizations/CustomScalarsConfiguration.java,io.moderne.organizations.CustomScalarsConfiguration$OffsetDateTimeScalar,parseLiteral,throws-declaration,CoercingParseLiteralException,propagate,,
+src/main/java/io/moderne/organizations/CustomScalarsConfiguration.java,io.moderne.organizations.CustomScalarsConfiguration$OffsetDateTimeScalar,serialize,throws-declaration,CoercingSerializeException,propagate,,
+src/main/java/io/moderne/organizations/OrganizationStructureService.java,io.moderne.organizations.OrganizationStructureService,loadReposCsvInputStream,try-catch,IOException,wrap,SLF4J,

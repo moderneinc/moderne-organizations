@@ -1,0 +1,35 @@
+{
+  "nodes" : [ {
+    "uniqueId" : "organization-controller",
+    "nodeType" : "service",
+    "name" : "OrganizationController",
+    "description" : "REST API with endpoints: GET /organizations, GET /devcenters",
+    "interfaces" : [ {
+      "uniqueId" : "organization-controller-api",
+      "protocol" : "HTTP",
+      "port" : 8080
+    } ]
+  }, {
+    "uniqueId" : "organization-metric-controller",
+    "nodeType" : "service",
+    "name" : "OrganizationMetricController",
+    "description" : "REST API with endpoints: GET /metrics/prometheus",
+    "interfaces" : [ {
+      "uniqueId" : "organization-metric-controller-api",
+      "protocol" : "HTTP",
+      "port" : 8080
+    } ]
+  }, {
+    "uniqueId" : "commit-options-data",
+    "nodeType" : "data-asset",
+    "name" : "CommitOptions",
+    "description" : "Record commit options with fields: commitOptions"
+  }, {
+    "uniqueId" : "organization-metric-controller-data",
+    "nodeType" : "data-asset",
+    "name" : "OrganizationMetricController",
+    "description" : "Record organization metric controller with fields: meterRegistry"
+  } ],
+  "relationships" : [ ],
+  "$schema" : "https://calm.finos.org/draft/2025-03/meta/calm.json"
+}
