@@ -63,7 +63,7 @@ configurations {
 
 dependencies {
     annotationProcessor("org.projectlombok:lombok:latest.release")
-    
+
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.127.Final"))
