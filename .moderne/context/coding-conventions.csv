@@ -1,0 +1,18 @@
+Convention type,Pattern,Example,Frequency,Scope
+naming,Configuration suffix for classes,CustomScalarsConfiguration,,project-wide
+naming,parse* method naming pattern,parseValue,,project-wide
+naming,UPPER_SNAKE_CASE for constants,QUERY_TYPE,,project-wide
+naming,get* method naming pattern,getReposCsvPath,,project-wide
+naming,set* method naming pattern,setReposCsvPath,,project-wide
+naming,Controller suffix for classes,OrganizationController,,project-wide
+naming,find* method naming pattern,findAccessibleRootOrganizations,,project-wide
+comments,Classes have Javadoc documentation,OrganizationStructureService,,project-wide
+naming,Service suffix for classes,OrganizationStructureService,,project-wide
+naming,load* method naming pattern,loadReposCsvInputStream,,project-wide
+naming,is* method naming pattern,isEmpty,,project-wide
+comments,Methods have Javadoc documentation,findChildren,,project-wide
+naming,Builder suffix for classes,Builder,,project-wide
+naming,has* method naming pattern,hasPreviousPage,,project-wide
+naming,Repository suffix for classes,Repository,,project-wide
+imports,Static imports from org.assertj.core.api,org.assertj.core.api.Assertions.assertThat,,project-wide
+naming,Test suffix for classes,OrganizationDataFetcherTest,,project-wide
