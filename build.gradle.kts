@@ -68,7 +68,8 @@ dependencies {
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
     implementation(platform("io.netty:netty-bom:4.1.+"))
 
-    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:latest.release"))
+    // Pinned to the 10.x line to stay on Spring Boot 3.5.x; DGS 11.x targets Spring Boot 4.x.
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:10.5.+"))
 
     implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
