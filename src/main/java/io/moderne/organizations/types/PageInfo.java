@@ -63,8 +63,12 @@ public class PageInfo {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         PageInfo that = (PageInfo) o;
         return hasPreviousPage == that.hasPreviousPage &&
                             hasNextPage == that.hasNextPage &&
