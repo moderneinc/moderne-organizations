@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.5.12"
+    id("org.springframework.boot") version "3.5.14"
     java
     id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
