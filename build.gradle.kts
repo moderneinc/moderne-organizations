@@ -66,7 +66,7 @@ dependencies {
 
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
-    implementation(platform("io.netty:netty-bom:4.1.+"))
+    implementation(platform("io.netty:netty-bom:4.2.+"))
 
     // Pinned to the 10.x line to stay on Spring Boot 3.5.x; DGS 11.x targets Spring Boot 4.x.
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:10.5.+"))
