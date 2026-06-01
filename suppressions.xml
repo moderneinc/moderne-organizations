@@ -42,4 +42,33 @@
         <cve>CVE-2026-40894</cve>
         <cve>CVE-2026-41078</cve>
     </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        file name: netty-*-4.1.134.Final.jar (io.netty:*)
+        severity: HIGH
+        reason: FALSE POSITIVE. moderne-organizations ships Netty 4.1.134.Final (via Spring Boot 3.x's
+        platform alignment to the 4.1 line). Per @shanman190 in moderne-organizations#134:
+        "Netty 4.1.133.Final and newer are also not vulnerable, so that should have been being
+        selected with the previous platform dependency declaration."
+          - CVE-2026-41417, CVE-2026-42577 through CVE-2026-42585: patched on the 4.1 line at
+            4.1.133.Final; we are on 4.1.134.Final.
+          - CVE-2026-42582 specifically affects `netty-codec-http3` (HTTP/3 QPACK, 4.2.x-only); we
+            don't ship netty-codec-http3.
+        Bumping to 4.2.x was attempted in #134 but closed because Spring Boot 3.x aligns with 4.1.x
+        and a 4.2 bump needs compatibility testing that isn't warranted (we're not vulnerable).
+        Dep-check flags this because NVD's CPE doesn't acknowledge the 4.1 patch line.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/io\.netty/netty-.*@4\.1\..*$</packageUrl>
+        <cve>CVE-2026-41417</cve>
+        <cve>CVE-2026-42577</cve>
+        <cve>CVE-2026-42578</cve>
+        <cve>CVE-2026-42579</cve>
+        <cve>CVE-2026-42580</cve>
+        <cve>CVE-2026-42581</cve>
+        <cve>CVE-2026-42582</cve>
+        <cve>CVE-2026-42583</cve>
+        <cve>CVE-2026-42584</cve>
+        <cve>CVE-2026-42585</cve>
+    </suppress>
 </suppressions>
