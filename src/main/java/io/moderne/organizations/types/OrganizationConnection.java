@@ -53,8 +53,12 @@ public class OrganizationConnection {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         OrganizationConnection that = (OrganizationConnection) o;
         return java.util.Objects.equals(edges, that.edges) &&
                             java.util.Objects.equals(pageInfo, that.pageInfo) &&
