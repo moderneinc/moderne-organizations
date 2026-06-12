@@ -25,13 +25,12 @@ public class OrganizationDataFetcher {
 
     @DgsQuery
     Mono<Commit> commitMessage(@InputArgument CommitInput commitInput, @InputArgument RepositoryInput repository) {
-        return Mono.fromCallable(() -> {
+        return Mono.fromCallable(() ->
             // here is where you would put custom logic to reach out to, e.g. JIRA
-            return new Commit(
+            new Commit(
                     commitInput.getMessage(),
                     commitInput.getExtendedMessage()
-            );
-        });
+            ));
     }
 
     @DgsQuery

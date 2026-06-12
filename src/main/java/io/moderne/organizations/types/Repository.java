@@ -51,8 +51,12 @@ public class Repository {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         Repository that = (Repository) o;
         return java.util.Objects.equals(path, that.path) &&
                             java.util.Objects.equals(origin, that.origin) &&
