@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id("org.springframework.boot") version "3.5.14"
+    id("org.springframework.boot") version "3.5.15"
     java
     id("nebula.release") version "19.0.10"
     id("nebula.maven-nebula-publish") version "18.2.0"
@@ -65,7 +65,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:latest.release")
 
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.0"))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.3"))
     implementation(platform("io.netty:netty-bom:4.1.+"))
 
     // Pinned to the 10.x line to stay on Spring Boot 3.5.x; DGS 11.x targets Spring Boot 4.x.

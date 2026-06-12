@@ -50,7 +50,7 @@
         reason: FALSE POSITIVE (version not in affected range). CVE-2026-42582 (GHSA-2c5c-chwr-9hqw)
         is an HTTP/3 QPACK decoder unbounded-allocation flaw that affects netty 4.2.0.Final through
         4.2.12.Final, fixed in 4.2.13.Final. This project uses netty 4.1.135.Final (managed
-        transitively by the Spring Boot 3.5.14 BOM via reactor-netty 1.2.17), which is on the 4.1.x
+        transitively by the Spring Boot 3.5.15 BOM via reactor-netty 1.2.18), which is on the 4.1.x
         branch and predates / does not contain the vulnerable HTTP/3 QPACK code. netty-codec-http3
         is not present on the classpath at all. No upgrade needed: 4.1.x is not affected, and the
         fix branch (4.2.x) is not managed by Spring Boot 3.5.x — it will arrive via a future Spring
