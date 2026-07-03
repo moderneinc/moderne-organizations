@@ -59,4 +59,42 @@
         <packageUrl regex="true">^pkg:maven/io\.netty/netty-.*@.*$</packageUrl>
         <cve>CVE-2026-42582</cve>
     </suppress>
+
+    <suppress until="2026-12-31Z">
+        <notes><![CDATA[
+        file name: kotlin-*-1.9.x/2.0.x/2.1.x/2.2.x/2.3.x.jar
+        severity: CRITICAL (disputed)
+        reason: Build-time-only flaw + no GA fix to bump to. CVE-2026-53914 (CWE-502) is code
+        execution via unsafe deserialization of build-cache metadata during INCREMENTAL COMPILATION.
+        NVD auto-scores it 9.8; the JetBrains CNA scores it 6.7 MEDIUM
+        (CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:C/C:H/I:L/A:L) - local, high attack complexity, high privileges,
+        requiring an actor who can already poison the local build cache. The vulnerable code lives in
+        the compiler/build-tooling modules (kotlin-compiler-embeddable, kotlin-build-tools-*,
+        kotlin-daemon-*, kotlin-scripting-compiler-*), never in the kotlin-stdlib / kotlin-reflect
+        runtime libraries this service pulls transitively (via Netflix DGS and jackson-module-kotlin) -
+        so it is a FALSE POSITIVE for runtime classpaths and non-exploitable in production. Fixed in
+        Kotlin 2.4.20, which is not yet GA (planned ~Sept 2026), so there is no release to bump to.
+        Revisit when 2.4.20 ships. Advisory: GHSA-r937-wjx7-w2jp. Ported from the moderne-build-logic
+        shared suppressions; flagged on this repo in moderneinc/dependency-vulnerability-reports#1111.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/.*@.*$</packageUrl>
+        <cve>CVE-2026-53914</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        file name: kotlin-stdlib-*.jar / kotlin-reflect-*.jar
+        severity: MEDIUM (NVD 5.3)
+        reason: FALSE POSITIVE via over-broad CPE match. CVE-2020-29582 (CWE-378/379, insecure
+        temp-file/dir permissions in kotlin.io.createTempFile/createTempDir) was fixed in
+        Kotlin 1.4.21 per NVD. Every Kotlin artifact resolved here is >= 1.9.25, well past the fix;
+        dependency-check flags them only because NVD's CPE range is over-broad. It is also a
+        code-USAGE-pattern issue (we would have to call the deprecated APIs and write secrets to the
+        temp path on a shared/multi-tenant host), which is N/A for our isolated containerized
+        services. See https://nvd.nist.gov/vuln/detail/CVE-2020-29582 . Ported from the
+        moderne-build-logic shared suppressions.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/.*@.*$</packageUrl>
+        <cve>CVE-2020-29582</cve>
+    </suppress>
 </suppressions>
