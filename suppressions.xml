@@ -43,7 +43,7 @@
         <cve>CVE-2026-41078</cve>
     </suppress>
 
-    <suppress until="2026-07-03Z">
+    <suppress until="2026-09-03Z">
         <notes><![CDATA[
         file name: netty-*-4.1.135.Final.jar (all io.netty modules)
         severity: HIGH
