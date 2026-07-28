@@ -40,8 +40,12 @@ public class OrganizationEdge {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
         OrganizationEdge that = (OrganizationEdge) o;
         return java.util.Objects.equals(node, that.node) &&
                             java.util.Objects.equals(cursor, that.cursor);
