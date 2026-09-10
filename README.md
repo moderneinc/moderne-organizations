@@ -1,4 +1,4 @@
-# Organizations service for the Moderne platform
+# Organizations service for the Moderne platform (deploy smoke test)
 
 You should create a dedicated Organizations service if you want to:
 
