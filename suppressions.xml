@@ -97,4 +97,61 @@
         <packageUrl regex="true">^pkg:maven/org\.jetbrains\.kotlin/.*@.*$</packageUrl>
         <cve>CVE-2020-29582</cve>
     </suppress>
+
+    <suppress until="2026-10-14Z">
+        <notes><![CDATA[
+        file name: spring-{aop,beans,context,context-support,core,expression,jcl,web,webflux,websocket}-6.2.19.jar
+        severity: CRITICAL
+        reason: Spring Framework August-2026 batch (published 2026-08-20). Not remediable on the OSS
+        Spring Boot 3.5 line: 6.2.19 is the last OSS 6.2.x release; the fix is 6.2.20 (Enterprise
+        Support only) or 7.0.9 (Boot 4). The headline issue (CVE-2026-47884, XsltView SSRF/RCE)
+        requires an XsltView bean and a "/**" mapping that renders a view without an explicit view
+        name; a repo-wide search found no XsltView usage and no such wildcard MVC mapping in
+        moderne-organizations, so that CVE is not reachable here. The remaining CVEs in the batch
+        (SSE stream corruption, SpEL guard bypass, DoS, header/cookie/redirect issues) were not
+        individually reachability-verified.
+        Exit: Boot 4 migration or Enterprise 6.2.20. Ported from the moderne-build-logic shared
+        suppressions (same batch, same expiry); flagged on this self-managed repo in
+        moderneinc/dependency-vulnerability-reports#1169.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.springframework/spring-[^@]+@6\.2\..*$</packageUrl>
+        <cve>CVE-2026-47883</cve>
+        <cve>CVE-2026-47884</cve>
+        <cve>CVE-2026-47885</cve>
+        <cve>CVE-2026-47886</cve>
+        <cve>CVE-2026-47887</cve>
+        <cve>CVE-2026-47888</cve>
+        <cve>CVE-2026-47889</cve>
+        <cve>CVE-2026-47890</cve>
+        <cve>CVE-2026-47891</cve>
+        <cve>CVE-2026-47892</cve>
+        <cve>CVE-2026-47893</cve>
+        <cve>CVE-2026-59280</cve>
+        <cve>CVE-2026-59281</cve>
+        <cve>CVE-2026-59282</cve>
+        <cve>CVE-2026-59283</cve>
+        <cve>CVE-2026-59313</cve>
+        <cve>CVE-2026-59314</cve>
+    </suppress>
+
+    <suppress until="2026-10-14Z">
+        <notes><![CDATA[
+        file name: spring-graphql-1.4.6.jar
+        severity: HIGH
+        reason: Spring for GraphQL August-2026 batch: CVE-2026-59286 and CVE-2026-59288 (bundled
+        GraphiQL page: CDN scripts without SRI, malicious-URL information leak), CVE-2026-59287
+        (WebSocket client keepAlive DoS), CVE-2026-59289 (Spring Data scroll/pagination arguments
+        forwarded unchecked). 1.4.6 is the last OSS 1.4.x release; the fix is 1.4.7 (Enterprise
+        Support only) or 2.0.5 (Boot 4). spring.graphql.graphiql.enabled=false mitigates the two
+        GraphiQL advisories.
+        Exit: Boot 4 migration or Enterprise 1.4.7. Ported from the moderne-build-logic shared
+        suppressions (same batch, same expiry); flagged on this self-managed repo in
+        moderneinc/dependency-vulnerability-reports#1169.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.springframework\.graphql/spring-graphql@1\.4\..*$</packageUrl>
+        <cve>CVE-2026-59286</cve>
+        <cve>CVE-2026-59287</cve>
+        <cve>CVE-2026-59288</cve>
+        <cve>CVE-2026-59289</cve>
+    </suppress>
 </suppressions>
