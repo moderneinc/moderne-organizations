@@ -7,7 +7,6 @@ import com.netflix.graphql.dgs.codegen.CodeGenConfig
 
 buildscript {
     repositories {
-        maven { url = uri("https://central.sonatype.com/repository/maven-snapshots") }
         mavenCentral()
         maven { url = uri("https://plugins.gradle.org/m2") }
     }
