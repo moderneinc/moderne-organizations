@@ -10,7 +10,6 @@ import io.moderne.organizations.types.Organization;
 import io.moderne.organizations.types.*;
 import reactor.core.publisher.Mono;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -27,21 +26,18 @@ public class OrganizationDataFetcher {
     Mono<Commit> commitMessage(@InputArgument CommitInput commitInput, @InputArgument RepositoryInput repository) {
         return Mono.fromCallable(() -> {
             // here is where you would put custom logic to reach out to, e.g. JIRA
-            return new Commit(
-                    commitInput.getMessage(),
-                    commitInput.getExtendedMessage()
-            );
+            return new Commit(commitInput.getMessage());
         });
     }
 
     @DgsQuery
-    Mono<Connection<Organization>> userOrganizationsPages(@InputArgument User user, @InputArgument OffsetDateTime at, DataFetchingEnvironment dfe) {
+    Mono<Connection<Organization>> userOrganizationsPages(@InputArgument User user, DataFetchingEnvironment dfe) {
         return Mono.fromCallable(() -> {
             // Here we need to return at least the top level organizations that a user has access too.
             // A user automatically gets access to all the children of the organizations returned here.
             List<Organization> allAccessibleOrgs = new ArrayList<>();
             for (io.moderne.organizations.Organization<?> org : organizationTree.roots()) {
-                allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user, at));
+                allAccessibleOrgs.addAll(findAccessibleRootOrganizations(org, user));
             }
             return new SimpleListConnection<>(allAccessibleOrgs).get(dfe);
         });
@@ -49,17 +45,16 @@ public class OrganizationDataFetcher {
 
     private Collection<Organization> findAccessibleRootOrganizations(
             io.moderne.organizations.Organization<?> root,
-            User user,
-            OffsetDateTime at ) {
-        if (allowAccess(user, at, root.getId())) {
+            User user) {
+        if (allowAccess(user, root.getId())) {
             return List.of(mapOrganization(root));
         }
         return organizationTree.findChildren(root.getId()).stream()
-                .flatMap(child -> findAccessibleRootOrganizations(child, user, at).stream())
+                .flatMap(child -> findAccessibleRootOrganizations(child, user).stream())
                 .toList();
     }
 
-    private boolean allowAccess(User user, OffsetDateTime at, String orgId) {
+    private boolean allowAccess(User user, String orgId) {
         // Determine if a user should have access to the organization
         return true;
     }

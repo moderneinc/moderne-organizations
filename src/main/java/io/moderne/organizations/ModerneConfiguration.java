@@ -1,6 +1,6 @@
 package io.moderne.organizations;
 
-import org.openrewrite.internal.lang.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.nio.file.Path;

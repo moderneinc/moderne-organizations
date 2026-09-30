@@ -60,8 +60,6 @@ configurations {
 }
 
 dependencies {
-    annotationProcessor("org.projectlombok:lombok:latest.release")
-
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:2025.0.3"))
     implementation(platform("io.netty:netty-bom:4.1.+"))
@@ -69,16 +67,12 @@ dependencies {
     // Pinned to the 10.x line to stay on Spring Boot 3.5.x; DGS 11.x targets Spring Boot 4.x.
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform:10.5.+"))
 
-    implementation("org.openrewrite:rewrite-core:latest.release")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv")
-    implementation("io.github.classgraph:classgraph:latest.release")
-    implementation("org.projectlombok:lombok:latest.release")
 
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.micrometer:micrometer-core:latest.release")
 
     implementation("com.graphql-java:graphql-java")
-    implementation("com.graphql-java:graphql-java-extended-scalars")
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 

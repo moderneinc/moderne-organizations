@@ -7,14 +7,11 @@ import java.lang.String;
 public class CommitInput {
   private String message;
 
-  private String extendedMessage;
-
   public CommitInput() {
   }
 
-  public CommitInput(String message, String extendedMessage) {
+  public CommitInput(String message) {
     this.message = message;
-    this.extendedMessage = extendedMessage;
   }
 
   public String getMessage() {
@@ -25,17 +22,9 @@ public class CommitInput {
     this.message = message;
   }
 
-  public String getExtendedMessage() {
-    return extendedMessage;
-  }
-
-  public void setExtendedMessage(String extendedMessage) {
-    this.extendedMessage = extendedMessage;
-  }
-
   @Override
   public String toString() {
-    return "CommitInput{" + "message='" + message + "'," +"extendedMessage='" + extendedMessage + "'" +"}";
+    return "CommitInput{" + "message='" + message + "'" +"}";
   }
 
   @Override
@@ -43,13 +32,12 @@ public class CommitInput {
     if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommitInput that = (CommitInput) o;
-        return java.util.Objects.equals(message, that.message) &&
-                            java.util.Objects.equals(extendedMessage, that.extendedMessage);
+        return java.util.Objects.equals(message, that.message);
   }
 
   @Override
   public int hashCode() {
-    return java.util.Objects.hash(message, extendedMessage);
+    return java.util.Objects.hash(message);
   }
 
   public static io.moderne.organizations.types.CommitInput.Builder newBuilder() {
@@ -59,23 +47,14 @@ public class CommitInput {
   public static class Builder {
     private String message;
 
-    private String extendedMessage;
-
     public CommitInput build() {
-                  io.moderne.organizations.types.CommitInput result = new io.moderne.organizations.types.CommitInput();
-                      result.message = this.message;
-          result.extendedMessage = this.extendedMessage;
-                      return result;
+      io.moderne.organizations.types.CommitInput result = new io.moderne.organizations.types.CommitInput();
+          result.message = this.message;
+          return result;
     }
 
     public io.moderne.organizations.types.CommitInput.Builder message(String message) {
       this.message = message;
-      return this;
-    }
-
-    public io.moderne.organizations.types.CommitInput.Builder extendedMessage(
-        String extendedMessage) {
-      this.extendedMessage = extendedMessage;
       return this;
     }
   }

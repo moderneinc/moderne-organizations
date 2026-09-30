@@ -1,13 +1,3 @@
 management.endpoints.web.exposure.include: prometheus,health
 management.endpoint.prometheus.access: read-only
 management.endpoint.health.access: read-only
-moderne:
-  scm:
-    allowMissingScmOrigins: true
-    repositories:
-      - baseUrl: https://bitbucket.example.com/stash
-        type: Bitbucket
-        alternativeUrls:
-          - http://bitbucket.example.com:8080/stash
-          - ssh://bitbucket.example.com/stash
-          - ssh://bitbucket.example.com:7999/stash
