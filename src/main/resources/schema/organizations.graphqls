@@ -1,13 +1,11 @@
 type Query {
     """
-    The paginated list of organizations that a user belongs to. If it is possible to
-    determine the organizations that a user belonged to at a given time, use the `at`
-    parameter. The "default" organization that is selected for a user is the first organization
-    returned.
+    The paginated list of organizations that a user has access to. Access to an organization
+    includes all of its descendants, so returning the top-most accessible organizations is enough.
+    Moderne presents the organizations in the order they are returned.
     """
     userOrganizationsPages(
         user: User!
-        at: DateTime
         after: String
         first: Int = 100
         before: String
@@ -27,7 +25,6 @@ type Query {
 
 input CommitInput {
     message: String!
-    extendedMessage: String
 }
 
 input User {
@@ -40,13 +37,11 @@ type Organization {
 
 type Commit {
     message: String!
-    extendedMessage: String
 }
 
 type OrganizationConnection {
     edges: [OrganizationEdge]
     pageInfo: PageInfo
-    count: Int
 }
 
 type OrganizationEdge {
@@ -67,9 +62,3 @@ input RepositoryInput {
     origin: String
     branch: String
 }
-
-scalar DateTime
-"""
-Objects are generic types that serialize to JSON as `string`, `number`, or `boolean`.
-"""
-scalar Object
